@@ -6,6 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.loc.newsapp.auth.domain.user.UserRole
+import kotlinx.coroutines.launch
 
 
 class LoginViewModel(
@@ -21,15 +24,10 @@ class LoginViewModel(
         }
     }
 
-    private fun loadUser(userId: String) {
-       // implemented function...
-        // TODO SHOULD USER GET USER USE CASE
-    }
-
     fun onAction(action: LoginAction) {
         when(action) {
             LoginAction.TogglePasswordVisibility -> togglePasswordVisibility()
-            LoginAction.GoBack -> goBack()
+            LoginAction.ChangeUserRole -> changeUserRole()
             else -> Unit
         }
     }
@@ -38,7 +36,19 @@ class LoginViewModel(
         // implemented function...
     }
 
-    private fun goBack() {
-        // implemented function...
+    private fun changeUserRole() {
+        state.user?.let {
+            state = state.copy(
+                user = it.copy(role = UserRole.USER)
+            )
+        }
+    }
+
+    private fun loadUser(userId: String) {
+        viewModelScope.launch {
+            // isLoading = true
+            // user = repository.loadUser(userId)
+            // isLoading = false
+        }
     }
 }

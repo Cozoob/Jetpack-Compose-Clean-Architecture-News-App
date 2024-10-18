@@ -17,7 +17,13 @@ fun LoginScreenRoot(
 ) {
     LoginScreen(
         state = viewModel.state,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when(action) { // just in case we want some actions to be handle by other "controller" for example the navigator :) if it is not necessary we can just write onAction = viewModel::onAction
+                is LoginAction.GoBack -> navController.navigateUp()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
