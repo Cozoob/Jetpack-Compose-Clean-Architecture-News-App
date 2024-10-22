@@ -3,7 +3,6 @@ accompanistSystemuicontroller = "0.31.4-beta"
 agp = "8.5.2"
 androidLibrary = "8.5.2"
 androidxHiltCompiler = "1.2.0"
-androidxHiltLifecycle = "1.0.0-alpha03"
 androidxHiltNavigationCompose = "1.2.0"
 appcompat = "1.7.0"
 coilCompose = "2.4.0"
@@ -37,7 +36,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidxHiltCompiler" }
-androidx-hilt-lifecycle = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "androidxHiltLifecycle" }
+#androidx-hilt-lifecycle = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "androidxHiltLifecycle" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose" }
