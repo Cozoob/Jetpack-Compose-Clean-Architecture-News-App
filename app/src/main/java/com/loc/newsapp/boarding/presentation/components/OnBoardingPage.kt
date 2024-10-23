@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
-import com.loc.newsapp.core.presentation.Dimensions.MediumPadding1
-import com.loc.newsapp.core.presentation.Dimensions.MediumPadding2
+import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
+import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding2
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable

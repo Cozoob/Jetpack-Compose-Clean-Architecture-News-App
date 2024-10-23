@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.loc.newsapp.boarding.domain.model.OrderType
 import com.loc.newsapp.boarding.domain.model.PageOrder
 import com.loc.newsapp.boarding.domain.use_case.PageUseCases
+import com.loc.newsapp.core.domain.use_case.LocalDataUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val pageUseCases: PageUseCases
+    private val pageUseCases: PageUseCases,
+    private val localDataUseCases: LocalDataUseCases
 ): ViewModel() {
     var state by mutableStateOf(OnBoardingState())
         private set
@@ -26,22 +28,14 @@ class OnBoardingViewModel @Inject constructor(
 
     fun onAction(action: OnBoardingAction) {
         when(action) {
-            is OnBoardingAction.NextPage -> nextPage()
-            is OnBoardingAction.PreviousPage -> previousPage()
-            is OnBoardingAction.RefreshData -> refreshData()
+            is OnBoardingAction.LogFirstAppEntry -> logFirstEntry()
         }
     }
 
-    private fun nextPage() {
-        // TODO? Not needed?
-    }
-
-    private fun previousPage() {
-        // TODO? Not needed?
-    }
-
-    private fun refreshData() {
-        loadPages(OrderType.Descending)
+    private fun logFirstEntry() {
+        viewModelScope.launch {
+            localDataUseCases.writeAppEntry()
+        }
     }
 
     private fun loadPages(orderType: OrderType = OrderType.Ascending) {

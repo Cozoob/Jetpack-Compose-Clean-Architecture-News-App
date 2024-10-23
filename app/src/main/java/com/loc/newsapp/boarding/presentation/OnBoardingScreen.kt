@@ -23,10 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loc.newsapp.boarding.presentation.components.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.components.PageIndicator
-import com.loc.newsapp.core.presentation.Dimensions.MediumPadding2
-import com.loc.newsapp.core.presentation.Dimensions.PageIndicatorWidth
 import com.loc.newsapp.core.presentation.NewsButton
 import com.loc.newsapp.core.presentation.NewsTextButton
+import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding2
+import com.loc.newsapp.core.presentation.constants.Dimensions.PageIndicatorWidth
 import kotlinx.coroutines.launch
 
 @Composable
@@ -109,7 +109,10 @@ fun OnBoardingScreen(
                         text = nextButtonMessage,
                         onClick = {
                             coroutineScope.launch {
-                                if (pagerState.currentPage == 3) {
+                                val isLastPage = pagerState.currentPage == state.pages.size - 1
+
+                                if (isLastPage) {
+                                    onAction.invoke(OnBoardingAction.LogFirstAppEntry)
                                     // TODO: Navigate to Home Screen
                                 } else {
                                     pagerState.animateScrollToPage(

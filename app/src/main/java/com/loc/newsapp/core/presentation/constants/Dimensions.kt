@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation
+package com.loc.newsapp.core.presentation.constants
 
 import androidx.compose.ui.unit.dp
 
