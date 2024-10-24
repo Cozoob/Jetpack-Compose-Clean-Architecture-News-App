@@ -1,5 +1,6 @@
 package com.loc.newsapp.boarding.presentation
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,13 +21,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.loc.newsapp.R
+import com.loc.newsapp.boarding.domain.model.Page
 import com.loc.newsapp.boarding.presentation.components.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.components.PageIndicator
 import com.loc.newsapp.core.presentation.NewsButton
 import com.loc.newsapp.core.presentation.NewsTextButton
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.PageIndicatorWidth
+import com.loc.newsapp.ui.theme.NewsAppTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -51,7 +57,7 @@ fun OnBoardingScreen(
     }
     val buttonState = remember {
         derivedStateOf {
-            when(pagerState.currentPage) {
+            when (pagerState.currentPage) {
                 0 -> listOf("", "Next")
                 1 -> listOf("Back", "Next")
                 2 -> listOf("Back", "Get Started")
@@ -61,7 +67,7 @@ fun OnBoardingScreen(
     }
     val coroutineScope = rememberCoroutineScope()
 
-    if(state.isLoading) {
+    if (state.isLoading) {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
@@ -92,7 +98,7 @@ fun OnBoardingScreen(
                     val nextButtonMessage = buttonState.value[1]
                     val isBackButtonShown = backButtonMessage.isNotEmpty()
 
-                    if(isBackButtonShown) {
+                    if (isBackButtonShown) {
                         NewsTextButton(
                             text = backButtonMessage,
                             onClick = {
@@ -125,6 +131,61 @@ fun OnBoardingScreen(
                 }
             }
             Spacer(modifier = Modifier.weight(0.5f))
+        }
+    }
+}
+
+
+@Preview(name = "On Boarding Screen, 3 pages, light mode", group="Pages", showBackground = true)
+@Preview(name = "On Boarding Screen, 3 pages, dark mode", group="Pages", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@PreviewScreenSizes
+@Composable
+private fun OnBoardingScreenPreviewWithPages() {
+    NewsAppTheme {
+        Surface {
+            OnBoardingScreen(
+                state = OnBoardingState(
+                    pages = listOf(
+                        Page(
+                            title = "Stay Informed, Anytime, Anywhere",
+                            description = "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                            image = R.drawable.onboarding1
+                        ),
+                        Page(
+                            title = "Stay Informed, Anytime, Anywhere",
+                            description = "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                            image = R.drawable.onboarding1
+                        ),
+                        Page(
+                            title = "Stay Informed, Anytime, Anywhere",
+                            description = "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                            image = R.drawable.onboarding1
+                        )
+                    ),
+                    pageIndex = 0,
+                    isLoading = false,
+                ),
+                onAction = {}
+            )
+        }
+    }
+}
+
+@Preview(name = "On Boarding Screen, loading data, light mode", group="Loading", showBackground = true)
+@Preview(name = "On Boarding Screen, loading data, dark mode", group="Loading", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@PreviewScreenSizes
+@Composable
+private fun OnBoardingScreenPreviewWithLoading() {
+    NewsAppTheme {
+        Surface {
+            OnBoardingScreen(
+                state = OnBoardingState(
+                    pages = emptyList(),
+                    pageIndex = 0,
+                    isLoading = true,
+                ),
+                onAction = {}
+            )
         }
     }
 }

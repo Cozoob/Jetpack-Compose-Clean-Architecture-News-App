@@ -56,8 +56,8 @@ fun OnBoardingPage(
     }
 }
 
-@Preview(showBackground = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "On Boarding Page, light mode", showBackground = true)
+@Preview(name = "On Boarding Page, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 private fun OnBoardingPagePreview() {
     NewsAppTheme {

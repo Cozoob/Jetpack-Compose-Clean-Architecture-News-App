@@ -38,8 +38,8 @@ fun NewsButton(
     }
 }
 
-@Preview(showBackground = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "News Button, light mode", showBackground = true)
+@Preview(name = "News Button, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 private fun NewsButtonPreview() {
     NewsAppTheme {
