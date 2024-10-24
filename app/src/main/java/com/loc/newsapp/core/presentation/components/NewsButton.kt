@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation
+package com.loc.newsapp.core.presentation.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.shape.RoundedCornerShape

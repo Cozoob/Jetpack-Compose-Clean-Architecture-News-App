@@ -1,11 +1,11 @@
-package com.loc.newsapp
+package com.loc.newsapp.core.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.Surface
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import com.loc.newsapp.boarding.presentation.OnBoardingScreenRoot
 import com.loc.newsapp.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,9 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             NewsAppTheme {
-                OnBoardingScreenRoot()
+                Surface {
+                    InitialLoadingScreenRoot()
+                }
             }
         }
     }

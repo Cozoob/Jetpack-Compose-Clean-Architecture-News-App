@@ -1,6 +1,6 @@
 package com.loc.newsapp.boarding.presentation
 
-import android.content.res.Configuration
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,8 +28,8 @@ import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
 import com.loc.newsapp.boarding.presentation.components.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.components.PageIndicator
-import com.loc.newsapp.core.presentation.NewsButton
-import com.loc.newsapp.core.presentation.NewsTextButton
+import com.loc.newsapp.core.presentation.components.NewsButton
+import com.loc.newsapp.core.presentation.components.NewsTextButton
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.PageIndicatorWidth
 import com.loc.newsapp.ui.theme.NewsAppTheme
@@ -39,12 +39,10 @@ import kotlinx.coroutines.launch
 fun OnBoardingScreenRoot(
     viewModel: OnBoardingViewModel = hiltViewModel()
 ) {
-    Surface {
-        OnBoardingScreen(
-            state = viewModel.state,
-            onAction = viewModel::onAction
-        )
-    }
+    OnBoardingScreen(
+        state = viewModel.state,
+        onAction = viewModel::onAction
+    )
 }
 
 @Composable
@@ -137,7 +135,7 @@ fun OnBoardingScreen(
 
 
 @Preview(name = "On Boarding Screen, 3 pages, light mode", group="Pages", showBackground = true)
-@Preview(name = "On Boarding Screen, 3 pages, dark mode", group="Pages", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "On Boarding Screen, 3 pages, dark mode", group="Pages", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 @PreviewScreenSizes
 @Composable
 private fun OnBoardingScreenPreviewWithPages() {
@@ -172,7 +170,7 @@ private fun OnBoardingScreenPreviewWithPages() {
 }
 
 @Preview(name = "On Boarding Screen, loading data, light mode", group="Loading", showBackground = true)
-@Preview(name = "On Boarding Screen, loading data, dark mode", group="Loading", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "On Boarding Screen, loading data, dark mode", group="Loading", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 @PreviewScreenSizes
 @Composable
 private fun OnBoardingScreenPreviewWithLoading() {
