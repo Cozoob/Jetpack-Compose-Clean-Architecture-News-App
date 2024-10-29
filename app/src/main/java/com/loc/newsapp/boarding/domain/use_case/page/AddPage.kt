@@ -1,4 +1,4 @@
-package com.loc.newsapp.boarding.domain.use_case
+package com.loc.newsapp.boarding.domain.use_case.page
 
 import com.loc.newsapp.boarding.domain.IPageRepository
 import com.loc.newsapp.boarding.domain.InvalidPageException

@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.domain
+package com.loc.newsapp.core.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 

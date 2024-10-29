@@ -6,11 +6,15 @@ import com.loc.newsapp.boarding.data.data_source.IPageDAO
 import com.loc.newsapp.boarding.data.data_source.PageService
 import com.loc.newsapp.boarding.data.data_source.PageStaticService
 import com.loc.newsapp.boarding.domain.IPageRepository
-import com.loc.newsapp.boarding.domain.use_case.AddPage
-import com.loc.newsapp.boarding.domain.use_case.DeletePage
-import com.loc.newsapp.boarding.domain.use_case.GetPage
-import com.loc.newsapp.boarding.domain.use_case.GetPages
-import com.loc.newsapp.boarding.domain.use_case.PageUseCases
+import com.loc.newsapp.boarding.domain.use_case.app_entry.AppEntryUseCases
+import com.loc.newsapp.boarding.domain.use_case.app_entry.ReadAppEntry
+import com.loc.newsapp.boarding.domain.use_case.app_entry.WriteAppEntry
+import com.loc.newsapp.boarding.domain.use_case.page.AddPage
+import com.loc.newsapp.boarding.domain.use_case.page.DeletePage
+import com.loc.newsapp.boarding.domain.use_case.page.GetPage
+import com.loc.newsapp.boarding.domain.use_case.page.GetPages
+import com.loc.newsapp.boarding.domain.use_case.page.PageUseCases
+import com.loc.newsapp.core.domain.repository.ILocalDataRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,6 +53,15 @@ object BoardingModule {
             getPage = GetPage(repository),
             deletePage = DeletePage(repository),
             addPage = AddPage(repository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppEntryUseCases(repository: ILocalDataRepository) : AppEntryUseCases {
+        return AppEntryUseCases(
+            readAppEntry = ReadAppEntry(repository),
+            writeAppEntry = WriteAppEntry(repository)
         )
     }
 }

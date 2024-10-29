@@ -100,6 +100,7 @@ fun OnBoardingScreen(
                         NewsTextButton(
                             text = backButtonMessage,
                             onClick = {
+                                // TODO Can i move it to view model?
                                 coroutineScope.launch {
                                     pagerState.animateScrollToPage(
                                         page = pagerState.currentPage - 1
@@ -112,6 +113,7 @@ fun OnBoardingScreen(
                     NewsButton(
                         text = nextButtonMessage,
                         onClick = {
+                            // TODO Can i move it to view model?
                             coroutineScope.launch {
                                 val isLastPage = pagerState.currentPage == state.pages.size - 1
 

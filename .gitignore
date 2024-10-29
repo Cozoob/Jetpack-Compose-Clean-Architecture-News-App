@@ -34,3 +34,6 @@ build
 
 # daemon
 daemon
+
+# secrets file
+secrets.properties

@@ -1,6 +1,6 @@
-package com.loc.newsapp.core.domain.use_case
+package com.loc.newsapp.boarding.domain.use_case.app_entry
 
-import com.loc.newsapp.core.domain.ILocalDataRepository
+import com.loc.newsapp.core.domain.repository.ILocalDataRepository
 import kotlinx.coroutines.flow.Flow
 
 class ReadAppEntry (

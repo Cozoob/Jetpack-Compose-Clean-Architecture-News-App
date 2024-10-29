@@ -7,14 +7,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun HomeScreenRoot() {
-    HomeScreen()
+fun HomeScreenRoot(
+    viewModel: HomeViewModel= hiltViewModel()
+) {
+    HomeScreen(
+        state = viewModel.state,
+        onAction = viewModel::onAction
+    )
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    state: HomeState,
+    onAction: (HomeAction) -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
