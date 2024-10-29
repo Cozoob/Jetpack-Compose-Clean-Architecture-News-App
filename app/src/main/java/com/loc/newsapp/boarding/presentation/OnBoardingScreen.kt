@@ -46,7 +46,7 @@ fun OnBoardingScreenRoot(
 }
 
 @Composable
-fun OnBoardingScreen(
+private fun OnBoardingScreen(
     state: OnBoardingState,
     onAction: (OnBoardingAction) -> Unit
 ) {
