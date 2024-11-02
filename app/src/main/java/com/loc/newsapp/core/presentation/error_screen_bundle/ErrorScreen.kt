@@ -33,8 +33,10 @@ import java.net.SocketTimeoutException
 
 @Composable
 fun ErrorScreenRoot(
-    viewModel: ErrorViewModel = ErrorViewModel()
+    error: LoadState.Error? = null
 ) {
+    val viewModel = ErrorViewModel(error = error)
+
     ErrorScreen(
         state = viewModel.state,
         onAction = viewModel::onAction
@@ -88,10 +90,8 @@ private fun EmptyScreenPreviewServerError() {
     NewsAppTheme {
         Surface {
             ErrorScreenRoot(
-                viewModel = ErrorViewModel(
-                    error =  LoadState.Error(
-                        error = SocketTimeoutException()
-                    )
+                error =  LoadState.Error(
+                    error = SocketTimeoutException()
                 )
             )
         }
@@ -105,10 +105,8 @@ private fun EmptyScreenPreviewInternetError() {
     NewsAppTheme {
         Surface {
             ErrorScreenRoot(
-                viewModel = ErrorViewModel(
-                    error =  LoadState.Error(
-                        error = ConnectException()
-                    )
+                error =  LoadState.Error(
+                    error = ConnectException()
                 )
             )
         }
@@ -122,10 +120,8 @@ private fun EmptyScreenPreviewUnknownError() {
     NewsAppTheme {
         Surface {
             ErrorScreenRoot(
-                viewModel = ErrorViewModel(
-                    error =  LoadState.Error(
-                        error = Exception()
-                    )
+                error =  LoadState.Error(
+                    error = Exception()
                 )
             )
         }
@@ -138,9 +134,7 @@ private fun EmptyScreenPreviewUnknownError() {
 private fun EmptyScreenPreviewNoError() {
     NewsAppTheme {
         Surface {
-            ErrorScreenRoot(
-                viewModel = ErrorViewModel()
-            )
+            ErrorScreenRoot(error = null)
         }
     }
 }

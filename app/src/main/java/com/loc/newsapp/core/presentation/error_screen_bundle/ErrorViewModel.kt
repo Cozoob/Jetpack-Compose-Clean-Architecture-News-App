@@ -1,6 +1,5 @@
 package com.loc.newsapp.core.presentation.error_screen_bundle
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -19,7 +18,6 @@ class ErrorViewModel(
         private set
 
     init {
-        Log.d("test", "halo1")
         initState()
     }
 
@@ -30,14 +28,12 @@ class ErrorViewModel(
     }
 
     private fun initState() {
-        Log.d("test", "halo1")
         viewModelScope.launch { // todo init not working
             state = state.copy(
                 message = getErrorMessage(),
                 icon = getIcon(),
                 startAnimation = true
             )
-            Log.d("test", "halo2")
         }
     }
 
