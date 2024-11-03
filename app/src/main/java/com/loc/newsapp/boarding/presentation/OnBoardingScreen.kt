@@ -2,7 +2,6 @@ package com.loc.newsapp.boarding.presentation
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -29,6 +27,7 @@ import com.loc.newsapp.boarding.domain.model.Page
 import com.loc.newsapp.boarding.presentation.components.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.components.PageIndicator
 import com.loc.newsapp.core.presentation.components.NewsButton
+import com.loc.newsapp.core.presentation.components.NewsCircularProgressIndicator
 import com.loc.newsapp.core.presentation.components.NewsTextButton
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.PageIndicatorWidth
@@ -66,12 +65,7 @@ private fun OnBoardingScreen(
     val coroutineScope = rememberCoroutineScope()
 
     if (state.isLoading) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
+        NewsCircularProgressIndicator()
     } else {
         Column(modifier = Modifier.fillMaxSize()) {
             HorizontalPager(state = pagerState) { index ->

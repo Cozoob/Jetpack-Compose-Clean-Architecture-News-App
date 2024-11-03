@@ -1,13 +1,9 @@
 package com.loc.newsapp.core.presentation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loc.newsapp.NavigationNewsApp
+import com.loc.newsapp.core.presentation.components.NewsCircularProgressIndicator
 
 @Composable
 fun InitialLoadingScreenRoot(
@@ -21,12 +17,7 @@ fun InitialLoadingScreen(
     state: InitialLoadingState
 ) {
     if(state.isLoading) {
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
+        NewsCircularProgressIndicator()
     } else {
         NavigationNewsApp(startRoute = state.startRoute)
     }
