@@ -29,7 +29,7 @@ fun NavigationNewsApp(startRoute: IRoute) {
             HomeScreenRoot(navController = navController)
         }
         composable<SearchScreenRoute> {
-            SearchScreenRoot()
+            SearchScreenRoot(navController = navController)
         }
         composable<ArticleDetailsRoute> {
             ArticleDetailsScreenRoot()

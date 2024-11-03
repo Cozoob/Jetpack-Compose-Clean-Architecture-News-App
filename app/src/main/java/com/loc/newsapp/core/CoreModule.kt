@@ -9,6 +9,7 @@ import com.loc.newsapp.core.domain.repository.ILocalDataRepository
 import com.loc.newsapp.core.domain.repository.INewsRepository
 import com.loc.newsapp.core.domain.use_case.news.GetNews
 import com.loc.newsapp.core.domain.use_case.news.NewsUseCases
+import com.loc.newsapp.core.domain.use_case.news.SearchNews
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,7 +47,8 @@ object CoreModule {
     @Singleton
     fun provideNewsUseCases(repository: INewsRepository) : NewsUseCases {
         return NewsUseCases(
-            getNews = GetNews(repository)
+            getNews = GetNews(repository),
+            searchNews = SearchNews(repository)
         )
     }
 }

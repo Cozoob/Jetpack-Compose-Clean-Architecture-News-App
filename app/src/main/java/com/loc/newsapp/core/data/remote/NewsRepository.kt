@@ -21,4 +21,17 @@ class NewsRepository(
             }
         ).flow
     }
+
+    override fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = {
+                SearchNewsPagingSource(
+                    api = newsApi,
+                    searchQuery = searchQuery,
+                    sources = sources.joinToString(separator = ",")
+                )
+            }
+        ).flow
+    }
 }

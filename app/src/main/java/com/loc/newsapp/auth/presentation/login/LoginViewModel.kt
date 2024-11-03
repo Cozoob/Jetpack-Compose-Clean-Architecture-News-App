@@ -26,8 +26,8 @@ class LoginViewModel(
 
     fun onAction(action: LoginAction) {
         when(action) {
-            LoginAction.TogglePasswordVisibility -> togglePasswordVisibility()
-            LoginAction.ChangeUserRole -> changeUserRole()
+            is LoginAction.TogglePasswordVisibility -> togglePasswordVisibility()
+            is LoginAction.ChangeUserRole -> changeUserRole()
             else -> Unit
         }
     }
