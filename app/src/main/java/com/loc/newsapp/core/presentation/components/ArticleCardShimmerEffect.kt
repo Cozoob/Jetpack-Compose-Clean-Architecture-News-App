@@ -18,9 +18,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.core.presentation.constants.Dimensions.ArticleCardSize
+import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding1
+import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
-// TODO ADD CONSTANTS for dps
 @Composable
 fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
     Row(modifier = modifier) {
@@ -33,14 +34,14 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
-                .padding(horizontal = 2.dp)
+                .padding(horizontal = ExtraSmallPadding2)
                 .height(ArticleCardSize)
         ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(30.dp)
-                    .padding(horizontal = 2.dp)
+                    .padding(horizontal = ExtraSmallPadding1)
                     .clip(MaterialTheme.shapes.extraSmall)
                     .shimmerEffect()
             )
@@ -49,7 +50,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxWidth(0.6f)
                         .height(15.dp)
-                        .padding(horizontal = 2.dp)
+                        .padding(horizontal = ExtraSmallPadding1)
                         .clip(MaterialTheme.shapes.extraSmall)
                         .shimmerEffect()
                 )

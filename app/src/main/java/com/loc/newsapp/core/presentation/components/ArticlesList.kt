@@ -11,10 +11,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.loc.newsapp.core.domain.model.Article
+import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding1
 import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 import com.loc.newsapp.ui.theme.NewsAppTheme
@@ -71,10 +71,10 @@ fun handlePagingResult(articles: LazyPagingItems<Article>) : Boolean {
 
 @Composable
 private fun ShimmerEffect(modifier: Modifier = Modifier) {
-    Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(MediumPadding1)) {
         repeat(10) {
             ArticleCardShimmerEffect(
-                modifier = Modifier.padding(horizontal = 24.dp)
+                modifier = Modifier.padding(horizontal = ExtraSmallPadding1)
             )
         }
     }
