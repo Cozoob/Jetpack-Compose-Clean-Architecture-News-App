@@ -27,7 +27,9 @@ fun SearchScreenRoot(
         state = viewModel.state,
         onAction = { action ->
             when(action) {
-                is SearchScreenAction.NavigateToArticleDetailsScreen -> navController.navigate(ArticleDetailsRoute)
+                is SearchScreenAction.NavigateToArticleDetailsScreen -> navController.navigate(
+                    ArticleDetailsRoute(article = action.article)
+                )
                 else -> Unit
             }
 
@@ -65,12 +67,12 @@ private fun SearchScreen(
         )
         Spacer(modifier = Modifier.height(MediumPadding1))
 
-        state.articles?.let {
+        state.articles?.let { it ->
             val articles = it.collectAsLazyPagingItems()
             ArticlesList(
                 articles = articles,
                 onClick = {
-                    onAction.invoke(SearchScreenAction.NavigateToArticleDetailsScreen)
+                    onAction.invoke(SearchScreenAction.NavigateToArticleDetailsScreen(article = it))
                 }
             )
         }

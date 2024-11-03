@@ -42,7 +42,7 @@ fun HomeScreenRoot(
         onAction = { action ->
             when(action) {
                 is HomeAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
-                is HomeAction.NavigateToArticleDetails -> navController.navigate(ArticleDetailsRoute)
+                is HomeAction.NavigateToArticleDetails -> navController.navigate(ArticleDetailsRoute(article = action.article))
                 else -> Unit
             }
 
@@ -119,7 +119,7 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = MediumPadding1),
                 articles = articles,
                 onClick = {
-                    onAction.invoke(HomeAction.NavigateToArticleDetails)
+                    onAction.invoke(HomeAction.NavigateToArticleDetails(article = it))
                 }
             )
         }

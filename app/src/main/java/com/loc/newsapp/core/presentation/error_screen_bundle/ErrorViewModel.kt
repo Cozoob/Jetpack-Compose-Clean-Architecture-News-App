@@ -12,7 +12,7 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 class ErrorViewModel(
-    private val error: LoadState.Error? = null
+    error: LoadState.Error? = null
 ) : ViewModel() {
     var state by mutableStateOf(ErrorState(error = error))
         private set
