@@ -7,8 +7,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.loc.newsapp.article_details.presentation.ArticleDetailsScreenRoot
 import com.loc.newsapp.boarding.presentation.OnBoardingScreenRoot
+import com.loc.newsapp.bookmark.presentation.BookmarkScreenRoot
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.routes.ArticleDetailsRoute
+import com.loc.newsapp.core.domain.routes.BookmarkScreenRoute
 import com.loc.newsapp.core.domain.routes.HomeScreenRoute
 import com.loc.newsapp.core.domain.routes.IRoute
 import com.loc.newsapp.core.domain.routes.OnBoardingScreenRoute
@@ -44,6 +46,9 @@ fun NavigationNewsApp(startRoute: IRoute) {
                 navController = navController,
                 article =  args.article
             )
+        }
+        composable<BookmarkScreenRoute> {
+            BookmarkScreenRoot(navController = navController)
         }
     }
 }

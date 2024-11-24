@@ -1,11 +1,7 @@
 package com.loc.newsapp.core
 
 import android.app.Application
-import androidx.room.Room
-import com.loc.newsapp.core.data.local.LocalDatabase
 import com.loc.newsapp.core.data.local.LocalLiteDataRepository
-import com.loc.newsapp.core.data.local.NewsTypeConvertor
-import com.loc.newsapp.core.data.local.dao.ArticleDao
 import com.loc.newsapp.core.data.remote.INewsApi
 import com.loc.newsapp.core.data.remote.NewsRepository
 import com.loc.newsapp.core.domain.Constants.BASE_URL
@@ -55,24 +51,4 @@ object CoreModule {
             searchNews = SearchNews(repository)
         )
     }
-
-    @Provides
-    @Singleton
-    fun provideLocalDatabase(
-        application: Application
-    ): LocalDatabase {
-        return Room.databaseBuilder(
-            context = application,
-            klass = LocalDatabase::class.java,
-            name = "local_db"
-        ).addTypeConverter(NewsTypeConvertor())
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideArticleDao(
-        newsDatabase: LocalDatabase
-    ): ArticleDao = newsDatabase.articleDao()
 }
