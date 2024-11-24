@@ -6,9 +6,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.loc.newsapp.core.domain.model.Article
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface ArticleDao {
+interface IArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(article: Article)
 
@@ -16,11 +17,11 @@ interface ArticleDao {
     suspend fun delete(article: Article)
 
     @Query("SELECT * FROM Article")
-    fun getAll(): List<Article>
+    fun getAll(): Flow<List<Article>>
 
     @Query("SELECT * FROM Article WHERE url IN (:urls)")
-    fun findByUrls(urls: List<String>): List<Article>
+    fun findByUrls(urls: List<String>): Flow<List<Article>>
 
     @Query("SELECT * FROM Article WHERE title IN (:titles)")
-    fun findByTitles(titles: List<String>): List<Article>
+    fun findByTitles(titles: List<String>): Flow<List<Article>>
 }

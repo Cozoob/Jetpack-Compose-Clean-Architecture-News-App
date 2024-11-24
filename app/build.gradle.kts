@@ -30,6 +30,12 @@ android {
             useSupportLibrary = true
         }
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments.putAll(mapOf("room.schemaLocation" to "$projectDir/schemas"))
+            }
+        }
+
         buildConfigField("String", "NEWS_API_KEY", secretsProperties["NEWS_API_KEY"].toString())
     }
 
