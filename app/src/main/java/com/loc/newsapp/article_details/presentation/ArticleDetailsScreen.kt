@@ -1,5 +1,6 @@
 package com.loc.newsapp.article_details.presentation
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -63,7 +64,11 @@ private fun ArticleDetailsScreen(
             .fillMaxSize()
             .statusBarsPadding()
     ) {
+        if(state.toastMessage.isNotBlank()) {
+            Toast.makeText(LocalContext.current, state.toastMessage, Toast.LENGTH_SHORT).show()
+        }
         ArticleDetailsTopBar(
+            isBookmarked = state.isArticleBookmarked,
             onBrowsingClick = {
                 onAction.invoke(ArticleDetailsScreenAction.BrowseArticle(context = context))
             },

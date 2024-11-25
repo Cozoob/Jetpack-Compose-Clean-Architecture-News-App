@@ -30,6 +30,10 @@ class ArticleDetailsScreenViewModel @AssistedInject constructor(
     var state by mutableStateOf(ArticleDetailsScreenState(article = article))
         private set
 
+    init {
+        checkIsArticleBookmarked()
+    }
+
     fun onAction(action: ArticleDetailsScreenAction) {
         when(action) {
             is ArticleDetailsScreenAction.SaveArticle -> saveArticle()
@@ -54,10 +58,18 @@ class ArticleDetailsScreenViewModel @AssistedInject constructor(
 
     private suspend fun upsertArticle() {
         articlesUseCases.upsertArticle(article = article)
+        state = state.copy(
+            isArticleBookmarked = true,
+            toastMessage = "Article saved!"
+        )
     }
 
     private suspend fun deleteArticle() {
         articlesUseCases.deleteArticle(article = article)
+        state = state.copy(
+            isArticleBookmarked = false,
+            toastMessage = "Article removed!"
+        )
     }
 
     private fun shareArticle(context: Context) {
@@ -76,6 +88,17 @@ class ArticleDetailsScreenViewModel @AssistedInject constructor(
             if(it.resolveActivity(context.packageManager) != null) {
                 context.startActivity(it)
             }
+        }
+    }
+
+    private fun checkIsArticleBookmarked() {
+        viewModelScope.launch {
+            val article = articlesUseCases.findByUrlArticle(url = article.url)
+            val isFoundArticleInLocalDatabase = article != null
+
+            state = state.copy(
+                isArticleBookmarked = isFoundArticleInLocalDatabase
+            )
         }
     }
 }

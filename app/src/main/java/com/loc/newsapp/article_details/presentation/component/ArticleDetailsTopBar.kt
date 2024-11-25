@@ -23,6 +23,7 @@ import com.loc.newsapp.ui.theme.NewsAppTheme
 @Composable
 fun ArticleDetailsTopBar(
     modifier: Modifier = Modifier,
+    isBookmarked: Boolean = false,
     onBrowsingClick: () -> Unit = {},
     onShareClick: () -> Unit = {},
     onBookMarkClick: () -> Unit = {},
@@ -46,8 +47,9 @@ fun ArticleDetailsTopBar(
         },
         actions = {
             IconButton(onClick = onBookMarkClick) {
+                val bookmarkIcon = if (isBookmarked) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_border
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_bookmark),
+                    painter = painterResource(id = bookmarkIcon),
                     contentDescription = null
                 )
             }
@@ -67,13 +69,24 @@ fun ArticleDetailsTopBar(
     )
 }
 
-@Preview(name = "Article Details Top Bar, light mode", showBackground = true)
-@Preview(name = "Article Details Top Bar, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "Article Details Top Bar, is not bookmarked, light mode", showBackground = true)
+@Preview(name = "Article Details Top Bar, is not bookmarked, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 private fun ArticleDetailsTopBarPreview() {
     NewsAppTheme {
         Surface {
             ArticleDetailsTopBar()
+        }
+    }
+}
+
+@Preview(name = "Article Details Top Bar, is bookmarked, light mode", showBackground = true)
+@Preview(name = "Article Details Top Bar, is bookmarked, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Composable
+private fun ArticleDetailsTopBarPreviewBookmarked() {
+    NewsAppTheme {
+        Surface {
+            ArticleDetailsTopBar(isBookmarked = true)
         }
     }
 }
