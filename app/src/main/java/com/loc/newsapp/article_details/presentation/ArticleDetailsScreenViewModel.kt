@@ -6,11 +6,27 @@ import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.loc.newsapp.bookmark.domain.ArticlesUseCases
 import com.loc.newsapp.core.domain.model.Article
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 
-class ArticleDetailsScreenViewModel (
-    article: Article
-){
+@HiltViewModel(assistedFactory = ArticleDetailsScreenViewModel.ArticleDetailsScreenViewModelFactory::class)
+class ArticleDetailsScreenViewModel @AssistedInject constructor(
+    @Assisted private val article: Article,
+    private val articlesUseCases: ArticlesUseCases
+) : ViewModel() {
+
+    @AssistedFactory
+    interface ArticleDetailsScreenViewModelFactory {
+        fun create(article: Article) : ArticleDetailsScreenViewModel
+    }
+
     var state by mutableStateOf(ArticleDetailsScreenState(article = article))
         private set
 
@@ -24,7 +40,24 @@ class ArticleDetailsScreenViewModel (
     }
 
     private fun saveArticle() {
+        viewModelScope.launch {
+            val article = articlesUseCases.findByUrlArticle(url = article.url)
+            val isNotFoundArticleInLocalDatabase = article == null
 
+            if(isNotFoundArticleInLocalDatabase) {
+                upsertArticle()
+            } else {
+                deleteArticle()
+            }
+        }
+    }
+
+    private suspend fun upsertArticle() {
+        articlesUseCases.upsertArticle(article = article)
+    }
+
+    private suspend fun deleteArticle() {
+        articlesUseCases.deleteArticle(article = article)
     }
 
     private fun shareArticle(context: Context) {

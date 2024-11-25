@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.loc.newsapp.bookmark.domain.ArticlesUseCases
 import com.loc.newsapp.bookmark.domain.DeleteArticle
 import com.loc.newsapp.bookmark.domain.FindByTitlesArticles
+import com.loc.newsapp.bookmark.domain.FindByUrlArticle
 import com.loc.newsapp.bookmark.domain.FindByUrlsArticles
 import com.loc.newsapp.bookmark.domain.GetAllArticles
 import com.loc.newsapp.bookmark.domain.UpsertArticle
@@ -47,6 +48,7 @@ object BookmarkModule {
             upsertArticle = UpsertArticle(articleDao),
             deleteArticle = DeleteArticle(articleDao),
             findByUrlsArticles = FindByUrlsArticles(articleDao),
+            findByUrlArticle = FindByUrlArticle(articleDao),
             findByTitlesArticles = FindByTitlesArticles(articleDao),
             getAllArticles = GetAllArticles(articleDao)
         )

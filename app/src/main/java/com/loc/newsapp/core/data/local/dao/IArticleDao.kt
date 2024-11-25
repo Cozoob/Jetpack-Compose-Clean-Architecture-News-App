@@ -19,6 +19,9 @@ interface IArticleDao {
     @Query("SELECT * FROM Article")
     fun getAll(): Flow<List<Article>>
 
+    @Query("SELECT * FROM Article WHERE url  = :url LIMIT 1")
+    suspend fun findByUrl(url: String): Article?
+
     @Query("SELECT * FROM Article WHERE url IN (:urls)")
     fun findByUrls(urls: List<String>): Flow<List<Article>>
 
