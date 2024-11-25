@@ -1,4 +1,4 @@
-package com.loc.newsapp
+package com.loc.newsapp.navigation.domain
 
 import android.net.Uri
 import android.os.Bundle
