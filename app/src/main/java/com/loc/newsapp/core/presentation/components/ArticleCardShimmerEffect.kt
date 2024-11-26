@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.loc.newsapp.core.presentation.constants.Dimensions.ArticleCardSize
 import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding1
 import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.presentation.extensions.shimmerEffect
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable

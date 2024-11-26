@@ -18,6 +18,10 @@ class SearchScreenViewModel @Inject constructor(
     var state by mutableStateOf(SearchScreenState())
         private set
 
+    init {
+        searchNews()
+    }
+
     fun onAction(action: SearchScreenAction) {
         when(action) {
             is SearchScreenAction.UpdateSearchQuery -> updateSearchQuery(action)

@@ -25,7 +25,7 @@ class BookmarkScreenViewModel @Inject constructor(
     private fun loadArticles() {
         articlesUseCases.getAllArticles().onEach {
             state = state.copy(
-                articles = it
+                articles = it.asReversed()
             )
         }.launchIn(viewModelScope)
     }

@@ -17,6 +17,7 @@ import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding1
 import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
+import com.loc.newsapp.core.presentation.extensions.noItems
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
@@ -52,17 +53,21 @@ fun ArticlesList(
     val handlePagingResult = handlePagingResult(articles = articles)
 
     if(handlePagingResult) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(MediumPadding1),
-            contentPadding = PaddingValues(all = ExtraSmallPadding2)
-        ) {
-            items(count = articles.itemCount) { index ->
-                articles[index]?.let { article ->
-                    ArticleCard(
-                        article = article,
-                        onClick = { onClick(article) }
-                    )
+        if(articles.noItems) {
+            EmptyContent()
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+                contentPadding = PaddingValues(all = ExtraSmallPadding2)
+            ) {
+                items(count = articles.itemCount) { index ->
+                    articles[index]?.let { article ->
+                        ArticleCard(
+                            article = article,
+                            onClick = { onClick(article) }
+                        )
+                    }
                 }
             }
         }
