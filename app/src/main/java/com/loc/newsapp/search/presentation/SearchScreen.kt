@@ -58,6 +58,7 @@ private fun SearchScreen(
                 .padding(horizontal = ExtraSmallPadding2),
             text = state.searchQuery,
             readOnly = false,
+            focusSearchOnStart = true,
             onValueChange = {
                 onAction.invoke(SearchScreenAction.UpdateSearchQuery(it))
             },

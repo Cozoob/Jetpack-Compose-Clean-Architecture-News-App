@@ -1,7 +1,6 @@
 package com.loc.newsapp.core.presentation.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -20,15 +19,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
 import com.loc.newsapp.core.presentation.constants.Dimensions.IconSize
+import com.loc.newsapp.core.presentation.extensions.searchBar
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
@@ -36,10 +36,15 @@ fun NewsSearchBar(
     modifier: Modifier = Modifier,
     text: String,
     readOnly: Boolean,
+    focusSearchOnStart: Boolean = false,
     onClick: (() -> Unit)? = null,
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit
 ) {
+    val focusRequester = remember {
+        FocusRequester()
+    }
+
     val interactionSource = remember {
         MutableInteractionSource()
     }
@@ -53,9 +58,16 @@ fun NewsSearchBar(
         }
     }
 
+    if(focusSearchOnStart) {
+        LaunchedEffect(key1 = focusSearchOnStart) {
+            focusRequester.requestFocus()
+        }
+    }
+
     Box(modifier = modifier) {
         TextField(
             modifier = Modifier
+                .focusRequester(focusRequester)
                 .fillMaxWidth()
                 .searchBar(),
             value = text,
@@ -98,18 +110,6 @@ fun NewsSearchBar(
             textStyle = MaterialTheme.typography.bodySmall,
             interactionSource = interactionSource
         )
-    }
-}
-
-private fun Modifier.searchBar(): Modifier = composed {
-    if (!isSystemInDarkTheme()) {
-        border(
-            width = 1.dp,
-            color = Color.Black,
-            shape = MaterialTheme.shapes.medium
-        )
-    } else {
-        this
     }
 }
 
