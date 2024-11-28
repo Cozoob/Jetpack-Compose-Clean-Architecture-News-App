@@ -4,9 +4,10 @@ set -e
 
 # Gradle ktfmt task (replace with the actual task name if different)
 GRADLE_TASK="ktfmtPrecommit"
+MODULE_NAME="app"
 
 # Step 1: Get staged Kotlin files and strip the leading 'app/'
-STAGED_KOTLIN_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.kt$' | sed 's|^app/||')
+STAGED_KOTLIN_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.kt$' | sed "s|^$MODULE_NAME/||")
 
 # Step 2: Concatenate file paths into a colon-separated string
 FORMATTED_FILES=$(echo "$STAGED_KOTLIN_FILES" | paste -sd ":" -)
@@ -18,6 +19,10 @@ if [ -n "$FORMATTED_FILES" ]; then
 else
     echo "No staged Kotlin files to format."
 fi
+
+for file in $STAGED_KOTLIN_FILES; do
+    git add "$MODULE_NAME/$file"
+done
 
 echo "Pre-commit hook completed successfully."
 
