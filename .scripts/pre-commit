@@ -1,0 +1,24 @@
+#!/bin/bash
+# Ensure the script stops if any command fails
+set -e
+
+# Gradle ktfmt task (replace with the actual task name if different)
+GRADLE_TASK="ktfmtPrecommit"
+
+# Step 1: Get staged Kotlin files and strip the leading 'app/'
+STAGED_KOTLIN_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.kt$' | sed 's|^app/||')
+
+# Step 2: Concatenate file paths into a colon-separated string
+FORMATTED_FILES=$(echo "$STAGED_KOTLIN_FILES" | paste -sd ":" -)
+
+# Step 3: Pass the formatted files to Gradle task
+if [ -n "$FORMATTED_FILES" ]; then
+    echo "Running Gradle task for files: $FORMATTED_FILES"
+    ./gradlew $GRADLE_TASK --include-only="$FORMATTED_FILES"
+else
+    echo "No staged Kotlin files to format."
+fi
+
+echo "Pre-commit hook completed successfully."
+
+exit 0

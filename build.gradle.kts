@@ -8,3 +8,11 @@ plugins {
     alias(libs.plugins.google.ksp) apply false
     alias(libs.plugins.hilt.android) apply false
 }
+
+task("addPreCommitGitHookOnBuild") {
+    println("⚈ ⚈ ⚈ Running Add Pre Commit Git Hook Script on Build ⚈ ⚈ ⚈")
+    exec {
+        commandLine("cp", "./.scripts/pre-commit", "./.git/hooks")
+    }
+    println("✅ Added Pre Commit Git Hook Script.")
+}
