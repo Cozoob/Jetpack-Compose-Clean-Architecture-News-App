@@ -10,45 +10,41 @@ import com.loc.newsapp.boarding.domain.model.PageOrder
 import com.loc.newsapp.boarding.domain.use_case.app_entry.AppEntryUseCases
 import com.loc.newsapp.boarding.domain.use_case.page.PageUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class OnBoardingViewModel @Inject constructor(
+class OnBoardingViewModel
+@Inject
+constructor(
     private val pageUseCases: PageUseCases,
     private val appEntryUseCases: AppEntryUseCases
-): ViewModel() {
-    var state by mutableStateOf(OnBoardingState())
-        private set
+) : ViewModel() {
+  var state by mutableStateOf(OnBoardingState())
+    private set
 
-    init {
-        loadPages()
-    }
+  init {
+    loadPages()
+  }
 
-    fun onAction(action: OnBoardingAction) {
-        when(action) {
-            is OnBoardingAction.LogFirstAppEntry -> logFirstEntry()
-        }
+  fun onAction(action: OnBoardingAction) {
+    when (action) {
+      is OnBoardingAction.LogFirstAppEntry -> logFirstEntry()
     }
+  }
 
-    private fun logFirstEntry() {
-        viewModelScope.launch {
-            appEntryUseCases.writeAppEntry()
-        }
-    }
+  private fun logFirstEntry() {
+    viewModelScope.launch { appEntryUseCases.writeAppEntry() }
+  }
 
-    private fun loadPages(orderType: OrderType = OrderType.Ascending) {
-        viewModelScope.launch {
-            state = state.copy(isLoading = true)
-            // Fake delay to show loading state :)
-            delay(5000)
-            val result = pageUseCases.getPages(PageOrder.Title(orderType))
-            state = state.copy(
-                pageIndex = 0,
-                pages = result,
-                isLoading = false
-            )
-        }
+  private fun loadPages(orderType: OrderType = OrderType.Ascending) {
+    viewModelScope.launch {
+      state = state.copy(isLoading = true)
+      // Fake delay to show loading state :)
+      delay(5000)
+      val result = pageUseCases.getPages(PageOrder.Title(orderType))
+      state = state.copy(pageIndex = 0, pages = result, isLoading = false)
     }
+  }
 }

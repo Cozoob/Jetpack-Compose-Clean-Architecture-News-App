@@ -35,151 +35,137 @@ import com.loc.newsapp.ui.theme.NewsAppTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnBoardingScreenRoot(
-    viewModel: OnBoardingViewModel = hiltViewModel()
-) {
-    OnBoardingScreen(
-        state = viewModel.state,
-        onAction = viewModel::onAction
-    )
+fun OnBoardingScreenRoot(viewModel: OnBoardingViewModel = hiltViewModel()) {
+  OnBoardingScreen(state = viewModel.state, onAction = viewModel::onAction)
 }
 
 @Composable
-private fun OnBoardingScreen(
-    state: OnBoardingState,
-    onAction: (OnBoardingAction) -> Unit
-) {
-    val pagerState = rememberPagerState(initialPage = state.pageIndex) {
-        state.pages.size
+private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction) -> Unit) {
+  val pagerState = rememberPagerState(initialPage = state.pageIndex) { state.pages.size }
+  val buttonState = remember {
+    derivedStateOf {
+      when (pagerState.currentPage) {
+        0 -> listOf("", "Next")
+        1 -> listOf("Back", "Next")
+        2 -> listOf("Back", "Get Started")
+        else -> listOf("", "")
+      }
     }
-    val buttonState = remember {
-        derivedStateOf {
-            when (pagerState.currentPage) {
-                0 -> listOf("", "Next")
-                1 -> listOf("Back", "Next")
-                2 -> listOf("Back", "Get Started")
-                else -> listOf("", "")
-            }
-        }
-    }
-    val coroutineScope = rememberCoroutineScope()
+  }
+  val coroutineScope = rememberCoroutineScope()
 
-    if (state.isLoading) {
-        NewsCircularProgressIndicator()
-    } else {
-        Column(modifier = Modifier.fillMaxSize()) {
-            HorizontalPager(state = pagerState) { index ->
-                OnBoardingPage(page = state.pages[index])
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = MediumPadding2)
-                    .navigationBarsPadding(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                PageIndicator(
-                    modifier = Modifier.width(PageIndicatorWidth),
-                    numberOfPages = state.pages.size,
-                    selectedPageIndex = pagerState.currentPage
-                )
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    val backButtonMessage = buttonState.value[0]
-                    val nextButtonMessage = buttonState.value[1]
-                    val isBackButtonShown = backButtonMessage.isNotEmpty()
+  if (state.isLoading) {
+    NewsCircularProgressIndicator()
+  } else {
+    Column(modifier = Modifier.fillMaxSize()) {
+      HorizontalPager(state = pagerState) { index -> OnBoardingPage(page = state.pages[index]) }
+      Spacer(modifier = Modifier.weight(1f))
+      Row(
+          modifier =
+              Modifier.fillMaxWidth().padding(horizontal = MediumPadding2).navigationBarsPadding(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically) {
+            PageIndicator(
+                modifier = Modifier.width(PageIndicatorWidth),
+                numberOfPages = state.pages.size,
+                selectedPageIndex = pagerState.currentPage)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+              val backButtonMessage = buttonState.value[0]
+              val nextButtonMessage = buttonState.value[1]
+              val isBackButtonShown = backButtonMessage.isNotEmpty()
 
-                    if (isBackButtonShown) {
-                        NewsTextButton(
-                            text = backButtonMessage,
-                            onClick = {
-                                // TODO Can i move it to view model?
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(
-                                        page = pagerState.currentPage - 1
-                                    )
-                                }
-                            }
-                        )
+              if (isBackButtonShown) {
+                NewsTextButton(
+                    text = backButtonMessage,
+                    onClick = {
+                      // TODO Can i move it to view model?
+                      coroutineScope.launch {
+                        pagerState.animateScrollToPage(page = pagerState.currentPage - 1)
+                      }
+                    })
+              }
+
+              NewsButton(
+                  text = nextButtonMessage,
+                  onClick = {
+                    // TODO Can i move it to view model?
+                    coroutineScope.launch {
+                      val isLastPage = pagerState.currentPage == state.pages.size - 1
+
+                      if (isLastPage) {
+                        onAction.invoke(OnBoardingAction.LogFirstAppEntry)
+                        // TODO: Navigate to Home Screen
+                      } else {
+                        pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
+                      }
                     }
-
-                    NewsButton(
-                        text = nextButtonMessage,
-                        onClick = {
-                            // TODO Can i move it to view model?
-                            coroutineScope.launch {
-                                val isLastPage = pagerState.currentPage == state.pages.size - 1
-
-                                if (isLastPage) {
-                                    onAction.invoke(OnBoardingAction.LogFirstAppEntry)
-                                    // TODO: Navigate to Home Screen
-                                } else {
-                                    pagerState.animateScrollToPage(
-                                        page = pagerState.currentPage + 1
-                                    )
-                                }
-                            }
-                        }
-                    )
-                }
+                  })
             }
-            Spacer(modifier = Modifier.weight(0.5f))
-        }
+          }
+      Spacer(modifier = Modifier.weight(0.5f))
     }
+  }
 }
 
-
-@Preview(name = "On Boarding Screen, 3 pages, light mode", group="Pages", showBackground = true)
-@Preview(name = "On Boarding Screen, 3 pages, dark mode", group="Pages", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "On Boarding Screen, 3 pages, light mode", group = "Pages", showBackground = true)
+@Preview(
+    name = "On Boarding Screen, 3 pages, dark mode",
+    group = "Pages",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @PreviewScreenSizes
 @Composable
 private fun OnBoardingScreenPreviewWithPages() {
-    NewsAppTheme {
-        Surface {
-            OnBoardingScreen(
-                state = OnBoardingState(
-                    pages = listOf(
-                        Page(
-                            title = "Stay Informed, Anytime, Anywhere",
-                            description = "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
-                            image = R.drawable.onboarding1
-                        ),
-                        Page(
-                            title = "Stay Informed, Anytime, Anywhere",
-                            description = "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
-                            image = R.drawable.onboarding1
-                        ),
-                        Page(
-                            title = "Stay Informed, Anytime, Anywhere",
-                            description = "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
-                            image = R.drawable.onboarding1
-                        )
-                    ),
-                    pageIndex = 0,
-                    isLoading = false,
-                ),
-                onAction = {}
-            )
-        }
+  NewsAppTheme {
+    Surface {
+      OnBoardingScreen(
+          state =
+              OnBoardingState(
+                  pages =
+                      listOf(
+                          Page(
+                              title = "Stay Informed, Anytime, Anywhere",
+                              description =
+                                  "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                              image = R.drawable.onboarding1),
+                          Page(
+                              title = "Stay Informed, Anytime, Anywhere",
+                              description =
+                                  "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                              image = R.drawable.onboarding1),
+                          Page(
+                              title = "Stay Informed, Anytime, Anywhere",
+                              description =
+                                  "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                              image = R.drawable.onboarding1)),
+                  pageIndex = 0,
+                  isLoading = false,
+              ),
+          onAction = {})
     }
+  }
 }
 
-@Preview(name = "On Boarding Screen, loading data, light mode", group="Loading", showBackground = true)
-@Preview(name = "On Boarding Screen, loading data, dark mode", group="Loading", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "On Boarding Screen, loading data, light mode", group = "Loading", showBackground = true)
+@Preview(
+    name = "On Boarding Screen, loading data, dark mode",
+    group = "Loading",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @PreviewScreenSizes
 @Composable
 private fun OnBoardingScreenPreviewWithLoading() {
-    NewsAppTheme {
-        Surface {
-            OnBoardingScreen(
-                state = OnBoardingState(
-                    pages = emptyList(),
-                    pageIndex = 0,
-                    isLoading = true,
-                ),
-                onAction = {}
-            )
-        }
+  NewsAppTheme {
+    Surface {
+      OnBoardingScreen(
+          state =
+              OnBoardingState(
+                  pages = emptyList(),
+                  pageIndex = 0,
+                  isLoading = true,
+              ),
+          onAction = {})
     }
+  }
 }

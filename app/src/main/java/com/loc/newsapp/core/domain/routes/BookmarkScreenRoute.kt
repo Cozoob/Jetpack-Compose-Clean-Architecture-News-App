@@ -2,5 +2,4 @@ package com.loc.newsapp.core.domain.routes
 
 import kotlinx.serialization.Serializable
 
-@Serializable
-object BookmarkScreenRoute : IRoute
+@Serializable object BookmarkScreenRoute : IRoute

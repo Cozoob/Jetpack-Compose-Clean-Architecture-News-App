@@ -36,89 +36,61 @@ import kotlin.reflect.typeOf
 @Composable
 fun NavigationNewsApp(startRoute: IRoute) {
 
-    val bottomNavigationItems = remember {
-        listOf(
-            BottomNavigationItem(
-                icon = R.drawable.ic_home,
-                text = "Home"
-            ),
-            BottomNavigationItem(
-                icon = R.drawable.ic_search,
-                text = "Search"
-            ),
-            BottomNavigationItem(
-                icon = R.drawable.ic_bookmark,
-                text = "Bookmark"
-            )
-        )
-    }
-    val navController = rememberNavController()
-    val backStackState = navController.currentBackStackEntryAsState().value
-    var selectedItem by rememberSaveable {
-        mutableIntStateOf(0)
-    }
+  val bottomNavigationItems = remember {
+    listOf(
+        BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
+        BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
+        BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "Bookmark"))
+  }
+  val navController = rememberNavController()
+  val backStackState = navController.currentBackStackEntryAsState().value
+  var selectedItem by rememberSaveable { mutableIntStateOf(0) }
 
-    selectedItem = when (backStackState?.destination?.route) {
+  selectedItem =
+      when (backStackState?.destination?.route) {
         HomeScreenRoute.javaClass.name -> 0
         SearchScreenRoute.javaClass.name -> 1
         BookmarkScreenRoute.javaClass.name -> 2
         else -> -1
-
-    }
-    val isBottomBarVisible = remember(key1 = backStackState) {
+      }
+  val isBottomBarVisible =
+      remember(key1 = backStackState) {
         backStackState?.destination?.route == HomeScreenRoute.javaClass.name ||
-                backStackState?.destination?.route == SearchScreenRoute.javaClass.name ||
-                backStackState?.destination?.route == BookmarkScreenRoute.javaClass.name
-    }
+            backStackState?.destination?.route == SearchScreenRoute.javaClass.name ||
+            backStackState?.destination?.route == BookmarkScreenRoute.javaClass.name
+      }
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            if(isBottomBarVisible) {
-                BottomNavigation(
-                    items = bottomNavigationItems,
-                    selectedItem = selectedItem,
-                    onItemClick = { index ->
-                        when(index) {
-                            0 -> navController.navigate(HomeScreenRoute)
-                            1 -> navController.navigate(SearchScreenRoute)
-                            2 -> navController.navigate(BookmarkScreenRoute)
-                        }
-                    }
-                )
-            }
+  Scaffold(
+      modifier = Modifier.fillMaxSize(),
+      bottomBar = {
+        if (isBottomBarVisible) {
+          BottomNavigation(
+              items = bottomNavigationItems,
+              selectedItem = selectedItem,
+              onItemClick = { index ->
+                when (index) {
+                  0 -> navController.navigate(HomeScreenRoute)
+                  1 -> navController.navigate(SearchScreenRoute)
+                  2 -> navController.navigate(BookmarkScreenRoute)
+                }
+              })
         }
-    ) {
+      }) {
         val bottomPadding = it.calculateBottomPadding()
 
         NavHost(
             navController = navController,
             startDestination = startRoute,
-            modifier = Modifier.padding(bottom = bottomPadding)
-        ) {
-            composable<OnBoardingScreenRoute> {
-                OnBoardingScreenRoot()
+            modifier = Modifier.padding(bottom = bottomPadding)) {
+              composable<OnBoardingScreenRoute> { OnBoardingScreenRoot() }
+              composable<HomeScreenRoute> { HomeScreenRoot(navController = navController) }
+              composable<SearchScreenRoute> { SearchScreenRoot(navController = navController) }
+              composable<ArticleDetailsRoute>(
+                  typeMap = mapOf(typeOf<Article>() to CustomNavType.ArticleType)) {
+                    val args = it.toRoute<ArticleDetailsRoute>()
+                    ArticleDetailsScreenRoot(navController = navController, article = args.article)
+                  }
+              composable<BookmarkScreenRoute> { BookmarkScreenRoot(navController = navController) }
             }
-            composable<HomeScreenRoute> {
-                HomeScreenRoot(navController = navController)
-            }
-            composable<SearchScreenRoute> {
-                SearchScreenRoot(navController = navController)
-            }
-            composable<ArticleDetailsRoute>(
-                typeMap = mapOf(
-                    typeOf<Article>() to CustomNavType.ArticleType
-                )
-            ) {
-                val args = it.toRoute<ArticleDetailsRoute>()
-                ArticleDetailsScreenRoot(
-                    navController = navController,
-                    article =  args.article
-                )
-            }
-            composable<BookmarkScreenRoute> {
-                BookmarkScreenRoot(navController = navController)
-            }
-        }
-    }
+      }
 }

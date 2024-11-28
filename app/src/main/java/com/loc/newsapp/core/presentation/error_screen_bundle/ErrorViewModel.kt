@@ -7,58 +7,54 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import com.loc.newsapp.R
-import kotlinx.coroutines.launch
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import kotlinx.coroutines.launch
 
-class ErrorViewModel(
-    error: LoadState.Error? = null
-) : ViewModel() {
-    var state by mutableStateOf(ErrorState(error = error))
-        private set
+class ErrorViewModel(error: LoadState.Error? = null) : ViewModel() {
+  var state by mutableStateOf(ErrorState(error = error))
+    private set
 
-    init {
-        initState()
+  init {
+    initState()
+  }
+
+  fun onAction(action: ErrorAction) {
+    //        when(action) {
+    //            is ErrorAction -> dosmth()
+    //        }
+  }
+
+  private fun initState() {
+    viewModelScope.launch { // todo init not working
+      state = state.copy(message = getErrorMessage(), icon = getIcon(), startAnimation = true)
     }
+  }
 
-    fun onAction(action: ErrorAction) {
-//        when(action) {
-//            is ErrorAction -> dosmth()
-//        }
-    }
-
-    private fun initState() {
-        viewModelScope.launch { // todo init not working
-            state = state.copy(
-                message = getErrorMessage(),
-                icon = getIcon(),
-                startAnimation = true
-            )
-        }
-    }
-
-    private fun getErrorMessage(): String {
-        if(state.error != null) {
-            return when(state.error?.error) {
-                is SocketTimeoutException -> {
-                    "Server Unavailable."
-                }
-                is ConnectException -> {
-                    "Internet Unavailable."
-                }
-                else -> {
-                    "Unknown Error."
-                }
-            }
+  private fun getErrorMessage(): String {
+    if (state.error != null) {
+      return when (state.error?.error) {
+        is SocketTimeoutException -> {
+          "Server Unavailable."
         }
 
-        return "You have not saved news so far !" // TODO WHY?????? Should it be here?
+        is ConnectException -> {
+          "Internet Unavailable."
+        }
+
+        else -> {
+          "Unknown Error."
+        }
+      }
     }
 
-    private fun getIcon(): Int {
-        if(state.error == null) {
-            return R.drawable.ic_search_document;
-        }
-        return R.drawable.ic_network_error
+    return "You have not saved news so far !" // TODO WHY?????? Should it be here?
+  }
+
+  private fun getIcon(): Int {
+    if (state.error == null) {
+      return R.drawable.ic_search_document
     }
+    return R.drawable.ic_network_error
+  }
 }

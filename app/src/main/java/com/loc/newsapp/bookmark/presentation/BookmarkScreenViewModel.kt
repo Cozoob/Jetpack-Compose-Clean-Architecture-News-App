@@ -7,26 +7,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.loc.newsapp.bookmark.domain.ArticlesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import javax.inject.Inject
 
 @HiltViewModel
-class BookmarkScreenViewModel @Inject constructor(
-    private val articlesUseCases: ArticlesUseCases
-) : ViewModel() {
-    var state by mutableStateOf(BookmarkScreenState())
-        private set
+class BookmarkScreenViewModel @Inject constructor(private val articlesUseCases: ArticlesUseCases) :
+    ViewModel() {
+  var state by mutableStateOf(BookmarkScreenState())
+    private set
 
-    init {
-        loadArticles()
-    }
+  init {
+    loadArticles()
+  }
 
-    private fun loadArticles() {
-        articlesUseCases.getAllArticles().onEach {
-            state = state.copy(
-                articles = it.asReversed()
-            )
-        }.launchIn(viewModelScope)
-    }
+  private fun loadArticles() {
+    articlesUseCases
+        .getAllArticles()
+        .onEach { state = state.copy(articles = it.asReversed()) }
+        .launchIn(viewModelScope)
+  }
 }

@@ -21,36 +21,29 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object BookmarkModule {
-    @Provides
-    @Singleton
-    fun provideLocalDatabase(
-        application: Application
-    ): LocalDatabase {
-        return Room.databaseBuilder(
-            context = application,
-            klass = LocalDatabase::class.java,
-            name = "local_db"
-        ).addTypeConverter(NewsTypeConvertor())
-            .fallbackToDestructiveMigration()
-            .build()
-    }
+  @Provides
+  @Singleton
+  fun provideLocalDatabase(application: Application): LocalDatabase {
+    return Room.databaseBuilder(
+            context = application, klass = LocalDatabase::class.java, name = "local_db")
+        .addTypeConverter(NewsTypeConvertor())
+        .fallbackToDestructiveMigration()
+        .build()
+  }
 
-    @Provides
-    @Singleton
-    fun provideArticleDao(
-        newsDatabase: LocalDatabase
-    ): IArticleDao = newsDatabase.articleDao()
+  @Provides
+  @Singleton
+  fun provideArticleDao(newsDatabase: LocalDatabase): IArticleDao = newsDatabase.articleDao()
 
-    @Provides
-    @Singleton
-    fun provideArticlesUseCases(articleDao: IArticleDao): ArticlesUseCases {
-        return ArticlesUseCases(
-            upsertArticle = UpsertArticle(articleDao),
-            deleteArticle = DeleteArticle(articleDao),
-            findByUrlsArticles = FindByUrlsArticles(articleDao),
-            findByUrlArticle = FindByUrlArticle(articleDao),
-            findByTitlesArticles = FindByTitlesArticles(articleDao),
-            getAllArticles = GetAllArticles(articleDao)
-        )
-    }
+  @Provides
+  @Singleton
+  fun provideArticlesUseCases(articleDao: IArticleDao): ArticlesUseCases {
+    return ArticlesUseCases(
+        upsertArticle = UpsertArticle(articleDao),
+        deleteArticle = DeleteArticle(articleDao),
+        findByUrlsArticles = FindByUrlsArticles(articleDao),
+        findByUrlArticle = FindByUrlArticle(articleDao),
+        findByTitlesArticles = FindByTitlesArticles(articleDao),
+        getAllArticles = GetAllArticles(articleDao))
+  }
 }

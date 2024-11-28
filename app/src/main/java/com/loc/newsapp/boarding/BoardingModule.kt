@@ -25,43 +25,40 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object BoardingModule {
-    @Provides
-    @Singleton
-    @Named("PageStaticService")
-    fun providePageStaticService(app: Application): IPageDAO {
-        return PageStaticService()
-    }
+  @Provides
+  @Singleton
+  @Named("PageStaticService")
+  fun providePageStaticService(app: Application): IPageDAO {
+    return PageStaticService()
+  }
 
-    @Provides
-    @Singleton
-    @Named("PageService")
-    fun providePageService(app: Application): IPageDAO {
-        return PageService()
-    }
+  @Provides
+  @Singleton
+  @Named("PageService")
+  fun providePageService(app: Application): IPageDAO {
+    return PageService()
+  }
 
-    @Provides
-    @Singleton
-    fun providePageRepository(@Named("PageStaticService") dao: IPageDAO): IPageRepository {
-        return PageRepository(dao)
-    }
+  @Provides
+  @Singleton
+  fun providePageRepository(@Named("PageStaticService") dao: IPageDAO): IPageRepository {
+    return PageRepository(dao)
+  }
 
-    @Provides
-    @Singleton
-    fun providePageUseCases(repository: IPageRepository): PageUseCases {
-        return PageUseCases(
-            getPages = GetPages(repository),
-            getPage = GetPage(repository),
-            deletePage = DeletePage(repository),
-            addPage = AddPage(repository)
-        )
-    }
+  @Provides
+  @Singleton
+  fun providePageUseCases(repository: IPageRepository): PageUseCases {
+    return PageUseCases(
+        getPages = GetPages(repository),
+        getPage = GetPage(repository),
+        deletePage = DeletePage(repository),
+        addPage = AddPage(repository))
+  }
 
-    @Provides
-    @Singleton
-    fun provideAppEntryUseCases(repository: ILocalDataRepository) : AppEntryUseCases {
-        return AppEntryUseCases(
-            readAppEntry = ReadAppEntry(repository),
-            writeAppEntry = WriteAppEntry(repository)
-        )
-    }
+  @Provides
+  @Singleton
+  fun provideAppEntryUseCases(repository: ILocalDataRepository): AppEntryUseCases {
+    return AppEntryUseCases(
+        readAppEntry = ReadAppEntry(repository), writeAppEntry = WriteAppEntry(repository))
+  }
 }

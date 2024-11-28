@@ -41,106 +41,89 @@ fun NewsSearchBar(
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit
 ) {
-    val focusRequester = remember {
-        FocusRequester()
-    }
+  val focusRequester = remember { FocusRequester() }
 
-    val interactionSource = remember {
-        MutableInteractionSource()
-    }
+  val interactionSource = remember { MutableInteractionSource() }
 
-    val isClicked = interactionSource
-        .collectIsPressedAsState()
-        .value
-    LaunchedEffect(key1 = isClicked) {
-        if(isClicked) {
-            onClick?.invoke()
-        }
+  val isClicked = interactionSource.collectIsPressedAsState().value
+  LaunchedEffect(key1 = isClicked) {
+    if (isClicked) {
+      onClick?.invoke()
     }
+  }
 
-    if(focusSearchOnStart) {
-        LaunchedEffect(key1 = focusSearchOnStart) {
-            focusRequester.requestFocus()
-        }
-    }
+  if (focusSearchOnStart) {
+    LaunchedEffect(key1 = focusSearchOnStart) { focusRequester.requestFocus() }
+  }
 
-    Box(modifier = modifier) {
-        TextField(
-            modifier = Modifier
-                .focusRequester(focusRequester)
-                .fillMaxWidth()
-                .searchBar(),
-            value = text,
-            onValueChange = onValueChange,
-            readOnly = readOnly,
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(
-                        id = R.drawable.ic_search
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier.size(IconSize),
-                    tint = colorResource(id = R.color.body)
-                )
-            },
-            placeholder = {
-                Text(
-                    text = "Search",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = colorResource(id = R.color.placeholder)
-                )
-            },
-            shape = MaterialTheme.shapes.medium,
-            colors = TextFieldDefaults.colors(
+  Box(modifier = modifier) {
+    TextField(
+        modifier = Modifier.focusRequester(focusRequester).fillMaxWidth().searchBar(),
+        value = text,
+        onValueChange = onValueChange,
+        readOnly = readOnly,
+        leadingIcon = {
+          Icon(
+              painter = painterResource(id = R.drawable.ic_search),
+              contentDescription = null,
+              modifier = Modifier.size(IconSize),
+              tint = colorResource(id = R.color.body))
+        },
+        placeholder = {
+          Text(
+              text = "Search",
+              style = MaterialTheme.typography.bodySmall,
+              color = colorResource(id = R.color.placeholder))
+        },
+        shape = MaterialTheme.shapes.medium,
+        colors =
+            TextFieldDefaults.colors(
                 unfocusedContainerColor = colorResource(id = R.color.input_background),
                 unfocusedTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
                 cursorColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
                 disabledIndicatorColor = Color.Transparent,
                 errorIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
-            ),
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(
-                onSearch = {
-                    onSearch()
-                }
-            ),
-            textStyle = MaterialTheme.typography.bodySmall,
-            interactionSource = interactionSource
-        )
-    }
+                unfocusedIndicatorColor = Color.Transparent),
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(onSearch = { onSearch() }),
+        textStyle = MaterialTheme.typography.bodySmall,
+        interactionSource = interactionSource)
+  }
 }
 
-@Preview(name = "NewsSearchBar, no text, light mode", group="NewsSearchBarNoText", showBackground = true)
-@Preview(name = "NewsSearchBar, no text, dark mode", group="NewsSearchBarNoText", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "NewsSearchBar, no text, light mode",
+    group = "NewsSearchBarNoText",
+    showBackground = true)
+@Preview(
+    name = "NewsSearchBar, no text, dark mode",
+    group = "NewsSearchBarNoText",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun NewsSearchBarNoTextPreview() {
-    NewsAppTheme {
-        Surface {
-            NewsSearchBar(
-                text = "",
-                readOnly = false,
-                onValueChange = {},
-                onSearch = {}
-            )
-        }
-    }
+  NewsAppTheme {
+    Surface { NewsSearchBar(text = "", readOnly = false, onValueChange = {}, onSearch = {}) }
+  }
 }
 
-@Preview(name = "NewsSearchBar, with text, light mode", group="NewsSearchBarWithText", showBackground = true)
-@Preview(name = "NewsSearchBar, with text, dark mode", group="NewsSearchBarWithText", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "NewsSearchBar, with text, light mode",
+    group = "NewsSearchBarWithText",
+    showBackground = true)
+@Preview(
+    name = "NewsSearchBar, with text, dark mode",
+    group = "NewsSearchBarWithText",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun NewsSearchBarWithTextPreview() {
-    NewsAppTheme {
-        Surface {
-            NewsSearchBar(
-                text = "Lorem Ipsum Dolor Sit",
-                readOnly = false,
-                onValueChange = {},
-                onSearch = {}
-            )
-        }
+  NewsAppTheme {
+    Surface {
+      NewsSearchBar(
+          text = "Lorem Ipsum Dolor Sit", readOnly = false, onValueChange = {}, onSearch = {})
     }
+  }
 }

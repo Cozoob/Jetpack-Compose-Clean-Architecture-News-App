@@ -9,13 +9,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 fun Modifier.searchBar(): Modifier = composed {
-    if (!isSystemInDarkTheme()) {
-        border(
-            width = 1.dp,
-            color = Color.Black,
-            shape = MaterialTheme.shapes.medium
-        )
-    } else {
-        this
-    }
+  if (!isSystemInDarkTheme()) {
+    border(width = 1.dp, color = Color.Black, shape = MaterialTheme.shapes.medium)
+  } else {
+    this
+  }
 }

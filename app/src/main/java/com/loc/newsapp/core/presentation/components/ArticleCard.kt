@@ -37,89 +37,63 @@ import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
-fun ArticleCard(
-    modifier: Modifier = Modifier,
-    article: Article,
-    onClick: () -> Unit
-) {
-    val context  = LocalContext.current
+fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> Unit) {
+  val context = LocalContext.current
 
-    Row(
-        modifier = modifier.clickable {
-            onClick()
-        }
-    ) {
-        AsyncImage(
-            modifier = Modifier
-                .size(ArticleCardSize)
-                .clip(MaterialTheme.shapes.medium),
-            contentScale = ContentScale.Crop,
-            model = ImageRequest.Builder(context).data(article.urlToImage).build(),
-            contentDescription = null
-        )
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier
-                .padding(horizontal = ExtraSmallPadding2)
-                .height(ArticleCardSize)
-        ) {
+  Row(modifier = modifier.clickable { onClick() }) {
+    AsyncImage(
+        modifier = Modifier.size(ArticleCardSize).clip(MaterialTheme.shapes.medium),
+        contentScale = ContentScale.Crop,
+        model = ImageRequest.Builder(context).data(article.urlToImage).build(),
+        contentDescription = null)
+    Column(
+        verticalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier.padding(horizontal = ExtraSmallPadding2).height(ArticleCardSize)) {
+          Text(
+              text = article.title,
+              style = MaterialTheme.typography.bodyMedium,
+              color = colorResource(id = R.color.text_title),
+              maxLines = 2,
+              overflow = TextOverflow.Ellipsis)
+          Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = article.title,
-                style = MaterialTheme.typography.bodyMedium,
-                color = colorResource(
-                    id = R.color.text_title
-                ),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = article.source.name,
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                    color = colorResource(
-                        id = R.color.body
-                    )
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding1))
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_time),
-                    contentDescription = null,
-                    modifier = Modifier.size(11.dp)
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding1))
-                Text(
-                    text = article.publishedAt,
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                    color = colorResource(
-                        id = R.color.body
-                    )
-                )
-            }
+                text = article.source.name,
+                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                color = colorResource(id = R.color.body))
+            Spacer(modifier = Modifier.width(ExtraSmallPadding1))
+            Icon(
+                painter = painterResource(id = R.drawable.ic_time),
+                contentDescription = null,
+                modifier = Modifier.size(11.dp))
+            Spacer(modifier = Modifier.width(ExtraSmallPadding1))
+            Text(
+                text = article.publishedAt,
+                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                color = colorResource(id = R.color.body))
+          }
         }
-    }
+  }
 }
 
 @Preview(name = "Article Card, light mode", showBackground = true)
-@Preview(name = "Article Card, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "Article Card, dark mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun ArticleCardPreview() {
-    val article = Article(
-        author = "Joel Khalili",
-        content = "Peter Todd is standing on the upper floor of a dilapidated industrial building somewhere in Czechia, chuckling under his breath. He has just been accused on camera of being Satoshi Nakamoto, the Bitc… [+3043 chars]",
-        description = "A new HBO documentary takes a swing at uncovering the real identity of Satoshi Nakamoto, inventor of Bitcoin. But without incontrovertible proof, the myth lives on.",
-        publishedAt = "2024-10-09T01:00:00Z",
-        source = Source(id = "wired", name = "Wired"),
-        title = "Unmasking Bitcoin Creator Satoshi Nakamoto—Again",
-        url = "",
-        urlToImage = ""
-    )
+  val article =
+      Article(
+          author = "Joel Khalili",
+          content =
+              "Peter Todd is standing on the upper floor of a dilapidated industrial building somewhere in Czechia, chuckling under his breath. He has just been accused on camera of being Satoshi Nakamoto, the Bitc… [+3043 chars]",
+          description =
+              "A new HBO documentary takes a swing at uncovering the real identity of Satoshi Nakamoto, inventor of Bitcoin. But without incontrovertible proof, the myth lives on.",
+          publishedAt = "2024-10-09T01:00:00Z",
+          source = Source(id = "wired", name = "Wired"),
+          title = "Unmasking Bitcoin Creator Satoshi Nakamoto—Again",
+          url = "",
+          urlToImage = "")
 
-    NewsAppTheme {
-        Surface {
-            ArticleCard(
-                article = article,
-                onClick = { }
-            )
-        }
-    }
+  NewsAppTheme { Surface { ArticleCard(article = article, onClick = {}) } }
 }

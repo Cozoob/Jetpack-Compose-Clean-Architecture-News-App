@@ -7,31 +7,25 @@ import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.repository.INewsRepository
 import kotlinx.coroutines.flow.Flow
 
-class NewsRepository(
-    private val newsApi: INewsApi
-) : INewsRepository {
-    override fun getNews(sources: List<String>): Flow<PagingData<Article>> {
-        return Pager(
+class NewsRepository(private val newsApi: INewsApi) : INewsRepository {
+  override fun getNews(sources: List<String>): Flow<PagingData<Article>> {
+    return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
-                NewsPagingSource(
-                    newsApi = newsApi,
-                    sources = sources.joinToString(separator = ",")
-                )
-            }
-        ).flow
-    }
+              NewsPagingSource(newsApi = newsApi, sources = sources.joinToString(separator = ","))
+            })
+        .flow
+  }
 
-    override fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>> {
-        return Pager(
+  override fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>> {
+    return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
-                SearchNewsPagingSource(
-                    api = newsApi,
-                    searchQuery = searchQuery,
-                    sources = sources.joinToString(separator = ",")
-                )
-            }
-        ).flow
-    }
+              SearchNewsPagingSource(
+                  api = newsApi,
+                  searchQuery = searchQuery,
+                  sources = sources.joinToString(separator = ","))
+            })
+        .flow
+  }
 }

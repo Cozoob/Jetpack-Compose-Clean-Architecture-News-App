@@ -24,43 +24,32 @@ fun BookmarkScreenRoot(
     navController: NavController,
     viewModel: BookmarkScreenViewModel = hiltViewModel()
 ) {
-    BookmarkScreen(
-        state = viewModel.state,
-        onAction = { action ->
-            when(action) {
-                is BookmarkScreenAction.NavigateToArticleDetails -> navController.navigate(
-                    ArticleDetailsRoute(article = action.article)
-                )
-                else -> Unit
-            }
+  BookmarkScreen(
+      state = viewModel.state,
+      onAction = { action ->
+        when (action) {
+          is BookmarkScreenAction.NavigateToArticleDetails ->
+              navController.navigate(ArticleDetailsRoute(article = action.article))
+
+          else -> Unit
         }
-    )
+      })
 }
 
 @Composable
-private fun BookmarkScreen(
-    state: BookmarkScreenState,
-    onAction: (BookmarkScreenAction) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .statusBarsPadding()
-            .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)
-    ) {
+private fun BookmarkScreen(state: BookmarkScreenState, onAction: (BookmarkScreenAction) -> Unit) {
+  Column(
+      modifier =
+          Modifier.fillMaxWidth()
+              .statusBarsPadding()
+              .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)) {
         Text(
             text = "Bookmark",
             style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold),
-            color = colorResource(
-                id = R.color.text_title
-            )
-        )
+            color = colorResource(id = R.color.text_title))
         Spacer(modifier = Modifier.height(MediumPadding1))
         ArticlesList(
             articles = state.articles,
-            onClick = {
-                onAction.invoke(BookmarkScreenAction.NavigateToArticleDetails(it))
-            }
-        )
-    }
+            onClick = { onAction.invoke(BookmarkScreenAction.NavigateToArticleDetails(it)) })
+      }
 }

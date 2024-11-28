@@ -25,48 +25,37 @@ import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
 fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
-    Row(modifier = modifier) {
-        Box(
-            modifier = Modifier
-                .size(ArticleCardSize)
-                .clip(MaterialTheme.shapes.medium)
-                .shimmerEffect()
-        )
-        Column(
-            verticalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier
-                .padding(horizontal = ExtraSmallPadding2)
-                .height(ArticleCardSize)
-        ) {
+  Row(modifier = modifier) {
+    Box(modifier = Modifier.size(ArticleCardSize).clip(MaterialTheme.shapes.medium).shimmerEffect())
+    Column(
+        verticalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier.padding(horizontal = ExtraSmallPadding2).height(ArticleCardSize)) {
+          Box(
+              modifier =
+                  Modifier.fillMaxWidth()
+                      .height(30.dp)
+                      .padding(horizontal = ExtraSmallPadding1)
+                      .clip(MaterialTheme.shapes.extraSmall)
+                      .shimmerEffect())
+          Row(verticalAlignment = Alignment.CenterVertically) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(30.dp)
-                    .padding(horizontal = ExtraSmallPadding1)
-                    .clip(MaterialTheme.shapes.extraSmall)
-                    .shimmerEffect()
-            )
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(0.6f)
+                modifier =
+                    Modifier.fillMaxWidth(0.6f)
                         .height(15.dp)
                         .padding(horizontal = ExtraSmallPadding1)
                         .clip(MaterialTheme.shapes.extraSmall)
-                        .shimmerEffect()
-                )
-            }
+                        .shimmerEffect())
+          }
         }
-    }
+  }
 }
 
 @Preview(name = "Article Card Shimmer Effect, light mode", showBackground = true)
-@Preview(name = "Article Card Shimmer Effect, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "Article Card Shimmer Effect, dark mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun ArticleCardShimmerEffectPreview() {
-    NewsAppTheme {
-        Surface {
-            ArticleCardShimmerEffect()
-        }
-    }
+  NewsAppTheme { Surface { ArticleCardShimmerEffect() } }
 }

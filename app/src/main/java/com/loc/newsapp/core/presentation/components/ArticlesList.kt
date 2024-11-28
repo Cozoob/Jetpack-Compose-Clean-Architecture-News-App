@@ -26,22 +26,21 @@ fun ArticlesList(
     articles: List<Article>,
     onClick: (Article) -> Unit
 ) {
-    if (articles.isEmpty()){
-        EmptyContent()
-    }
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(MediumPadding1),
-        contentPadding = PaddingValues(all = ExtraSmallPadding2)
-    ) {
+  if (articles.isEmpty()) {
+    EmptyContent()
+  }
+  LazyColumn(
+      modifier = modifier.fillMaxSize(),
+      verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+      contentPadding = PaddingValues(all = ExtraSmallPadding2)) {
         items(
             count = articles.size,
         ) {
-            articles[it].let { article ->
-                ArticleCard(article = article, onClick = { onClick(article) })
-            }
+          articles[it].let { article ->
+            ArticleCard(article = article, onClick = { onClick(article) })
+          }
         }
-    }
+      }
 }
 
 @Composable
@@ -50,72 +49,73 @@ fun ArticlesList(
     articles: LazyPagingItems<Article>,
     onClick: (Article) -> Unit
 ) {
-    val handlePagingResult = handlePagingResult(articles = articles)
+  val handlePagingResult = handlePagingResult(articles = articles)
 
-    if(handlePagingResult) {
-        if(articles.noItems) {
-            EmptyContent()
-        } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(MediumPadding1),
-                contentPadding = PaddingValues(all = ExtraSmallPadding2)
-            ) {
-                items(count = articles.itemCount) { index ->
-                    articles[index]?.let { article ->
-                        ArticleCard(
-                            article = article,
-                            onClick = { onClick(article) }
-                        )
-                    }
-                }
+  if (handlePagingResult) {
+    if (articles.noItems) {
+      EmptyContent()
+    } else {
+      LazyColumn(
+          modifier = Modifier.fillMaxSize(),
+          verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+          contentPadding = PaddingValues(all = ExtraSmallPadding2)) {
+            items(count = articles.itemCount) { index ->
+              articles[index]?.let { article ->
+                ArticleCard(article = article, onClick = { onClick(article) })
+              }
             }
-        }
+          }
     }
+  }
 }
 
 @Composable
-fun handlePagingResult(articles: LazyPagingItems<Article>) : Boolean {
-    val loadState = articles.loadState
+fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
+  val loadState = articles.loadState
 
-    val error = when {
+  val error =
+      when {
         loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
         loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
         loadState.append is LoadState.Error -> loadState.append as LoadState.Error
         else -> null
+      }
+
+  return when {
+    loadState.refresh is LoadState.Loading -> {
+      ShimmerEffect()
+      false
     }
 
-    return when {
-        loadState.refresh is LoadState.Loading -> {
-            ShimmerEffect()
-            false
-        }
-        error != null -> {
-            false
-        } else -> {
-            return true
-        }
+    error != null -> {
+      false
     }
+
+    else -> {
+      return true
+    }
+  }
 }
 
 @Composable
 private fun ShimmerEffect(modifier: Modifier = Modifier) {
-    Column(verticalArrangement = Arrangement.spacedBy(MediumPadding1)) {
-        repeat(10) {
-            ArticleCardShimmerEffect(
-                modifier = Modifier.padding(horizontal = ExtraSmallPadding1)
-            )
-        }
+  Column(verticalArrangement = Arrangement.spacedBy(MediumPadding1)) {
+    repeat(10) {
+      ArticleCardShimmerEffect(modifier = Modifier.padding(horizontal = ExtraSmallPadding1))
     }
+  }
 }
 
 @Preview(name = "Article Card Shimmer Effect, light mode", showBackground = true)
-@Preview(name = "Article Card Shimmer Effect, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "Article Card Shimmer Effect, dark mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 fun ArticlesListPreview() {
-    NewsAppTheme {
-        Surface {
-//            ArticlesList()
-        }
+  NewsAppTheme {
+    Surface {
+      //            ArticlesList()
     }
+  }
 }

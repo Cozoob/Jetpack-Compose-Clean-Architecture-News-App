@@ -8,42 +8,30 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.loc.newsapp.core.domain.use_case.news.NewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val newsUseCases: NewsUseCases
-) : ViewModel() {
-    var state by mutableStateOf(HomeState())
-        private set
+class HomeViewModel @Inject constructor(private val newsUseCases: NewsUseCases) : ViewModel() {
+  var state by mutableStateOf(HomeState())
+    private set
 
-    init {
-        loadNews()
-    }
+  init {
+    loadNews()
+  }
 
-    fun onAction(action: HomeAction) {
-//        when(action) {
-////            is HomeAction.SomeAction -> { }
-//        }
-    }
+  fun onAction(action: HomeAction) {
+    //        when(action) {
+    ////            is HomeAction.SomeAction -> { }
+    //        }
+  }
 
-    private fun loadNews() {
-        viewModelScope.launch {
-            state = state.copy(
-                isLoading = true
-            )
-        }
+  private fun loadNews() {
+    viewModelScope.launch { state = state.copy(isLoading = true) }
 
-        val news = newsUseCases.getNews(
-            sources = listOf("bbc-news", "abc-news")
-        ).cachedIn(viewModelScope)
+    val news =
+        newsUseCases.getNews(sources = listOf("bbc-news", "abc-news")).cachedIn(viewModelScope)
 
-        viewModelScope.launch {
-            state = state.copy(
-                isLoading = false,
-                news = news
-            )
-        }
-    }
+    viewModelScope.launch { state = state.copy(isLoading = false, news = news) }
+  }
 }

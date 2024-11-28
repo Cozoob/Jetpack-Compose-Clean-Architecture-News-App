@@ -32,109 +32,91 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun ErrorScreenRoot(
-    error: LoadState.Error? = null
-) {
-    val viewModel = ErrorViewModel(error = error)
+fun ErrorScreenRoot(error: LoadState.Error? = null) {
+  val viewModel = ErrorViewModel(error = error)
 
-    ErrorScreen(
-        state = viewModel.state,
-        onAction = viewModel::onAction
-    )
+  ErrorScreen(state = viewModel.state, onAction = viewModel::onAction)
 }
 
 @Composable
-private fun ErrorScreen(
-    state: ErrorState,
-    onAction: (ErrorAction) -> Unit
-) {
-    val alphaAnimation = rememberInfiniteTransition(label = "Error Animation")
-    val alphaAnimationValue by alphaAnimation.animateFloat(
-        initialValue = 0.3f,
-        targetValue = 0f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 2000),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "Error Animation"
-    )
+private fun ErrorScreen(state: ErrorState, onAction: (ErrorAction) -> Unit) {
+  val alphaAnimation = rememberInfiniteTransition(label = "Error Animation")
+  val alphaAnimationValue by
+      alphaAnimation.animateFloat(
+          initialValue = 0.3f,
+          targetValue = 0f,
+          animationSpec =
+              infiniteRepeatable(
+                  animation = tween(durationMillis = 2000), repeatMode = RepeatMode.Reverse),
+          label = "Error Animation")
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+  Column(
+      modifier = Modifier.fillMaxSize(),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center) {
         Icon(
             painter = painterResource(id = state.icon),
             contentDescription = null,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            modifier = Modifier
-                .size(120.dp)
-                .alpha(alphaAnimationValue)
-        )
+            modifier = Modifier.size(120.dp).alpha(alphaAnimationValue))
         Text(
-            modifier = Modifier
-                .padding(10.dp)
-                .alpha(alphaAnimationValue),
+            modifier = Modifier.padding(10.dp).alpha(alphaAnimationValue),
             text = state.message,
             style = MaterialTheme.typography.bodyMedium,
             color = if (isSystemInDarkTheme()) LightGray else DarkGray,
         )
-    }
+      }
 }
 
-@Preview(name = "Error Screen, server error, light mode", group="Server Error", showBackground = true)
-@Preview(name = "Error Screen, server error, dark mode", group="Server Error", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "Error Screen, server error, light mode", group = "Server Error", showBackground = true)
+@Preview(
+    name = "Error Screen, server error, dark mode",
+    group = "Server Error",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun EmptyScreenPreviewServerError() {
-    NewsAppTheme {
-        Surface {
-            ErrorScreenRoot(
-                error =  LoadState.Error(
-                    error = SocketTimeoutException()
-                )
-            )
-        }
-    }
+  NewsAppTheme {
+    Surface { ErrorScreenRoot(error = LoadState.Error(error = SocketTimeoutException())) }
+  }
 }
 
-@Preview(name = "Error Screen, internet error, light mode", group="Internet Error", showBackground = true)
-@Preview(name = "Error Screen, internet error, dark mode", group="Internet Error", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "Error Screen, internet error, light mode",
+    group = "Internet Error",
+    showBackground = true)
+@Preview(
+    name = "Error Screen, internet error, dark mode",
+    group = "Internet Error",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun EmptyScreenPreviewInternetError() {
-    NewsAppTheme {
-        Surface {
-            ErrorScreenRoot(
-                error =  LoadState.Error(
-                    error = ConnectException()
-                )
-            )
-        }
-    }
+  NewsAppTheme { Surface { ErrorScreenRoot(error = LoadState.Error(error = ConnectException())) } }
 }
 
-@Preview(name = "Error Screen, unknown error, light mode", group="Unknown Error", showBackground = true)
-@Preview(name = "Error Screen, unknown error, dark mode", group="Unknown Error", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "Error Screen, unknown error, light mode",
+    group = "Unknown Error",
+    showBackground = true)
+@Preview(
+    name = "Error Screen, unknown error, dark mode",
+    group = "Unknown Error",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun EmptyScreenPreviewUnknownError() {
-    NewsAppTheme {
-        Surface {
-            ErrorScreenRoot(
-                error =  LoadState.Error(
-                    error = Exception()
-                )
-            )
-        }
-    }
+  NewsAppTheme { Surface { ErrorScreenRoot(error = LoadState.Error(error = Exception())) } }
 }
 
-@Preview(name = "Error Screen, no error, light mode", group="No Error", showBackground = true)
-@Preview(name = "Error Screen, no error, dark mode", group="No Error", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "Error Screen, no error, light mode", group = "No Error", showBackground = true)
+@Preview(
+    name = "Error Screen, no error, dark mode",
+    group = "No Error",
+    uiMode = UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun EmptyScreenPreviewNoError() {
-    NewsAppTheme {
-        Surface {
-            ErrorScreenRoot(error = null)
-        }
-    }
+  NewsAppTheme { Surface { ErrorScreenRoot(error = null) } }
 }

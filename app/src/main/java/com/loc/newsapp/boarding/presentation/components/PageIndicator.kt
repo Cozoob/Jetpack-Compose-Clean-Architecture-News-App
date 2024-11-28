@@ -26,33 +26,23 @@ fun PageIndicator(
     selectedColor: Color = MaterialTheme.colorScheme.primary,
     unselectedColor: Color = BlueGray
 ) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        repeat(numberOfPages) { pageIndex ->
-            val backgroundColor = if (pageIndex == selectedPageIndex) selectedColor else unselectedColor
+  Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
+    repeat(numberOfPages) { pageIndex ->
+      val backgroundColor = if (pageIndex == selectedPageIndex) selectedColor else unselectedColor
 
-            Box(
-                modifier = Modifier
-                    .size(IndicatorSize)
-                    .clip(CircleShape)
-                    .background(color = backgroundColor)
-            )
-        }
+      Box(
+          modifier =
+              Modifier.size(IndicatorSize).clip(CircleShape).background(color = backgroundColor))
     }
+  }
 }
 
 @Preview(name = "Page Indicator, light mode", showBackground = true)
-@Preview(name = "Page Indicator, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "Page Indicator, dark mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun PageIndicatorPreview() {
-    NewsAppTheme {
-        Surface {
-            PageIndicator(
-                numberOfPages = 5,
-                selectedPageIndex = 2
-            )
-        }
-    }
+  NewsAppTheme { Surface { PageIndicator(numberOfPages = 5, selectedPageIndex = 2) } }
 }

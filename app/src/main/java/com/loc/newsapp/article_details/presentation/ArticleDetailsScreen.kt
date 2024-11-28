@@ -29,27 +29,24 @@ import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 
 @Composable
-fun ArticleDetailsScreenRoot(
-    navController: NavController,
-    article: Article
-) {
-    val viewModel = hiltViewModel(
-        creationCallback = { factory: ArticleDetailsScreenViewModel.ArticleDetailsScreenViewModelFactory ->
+fun ArticleDetailsScreenRoot(navController: NavController, article: Article) {
+  val viewModel =
+      hiltViewModel(
+          creationCallback = {
+              factory: ArticleDetailsScreenViewModel.ArticleDetailsScreenViewModelFactory ->
             factory.create(article)
-        }
-    )
+          })
 
-    ArticleDetailsScreen(
-        state = viewModel.state,
-        onAction = { action ->
-            when(action) {
-                is ArticleDetailsScreenAction.NavigateUp -> navController.navigateUp()
-                else -> Unit
-            }
-
-            viewModel.onAction(action)
+  ArticleDetailsScreen(
+      state = viewModel.state,
+      onAction = { action ->
+        when (action) {
+          is ArticleDetailsScreenAction.NavigateUp -> navController.navigateUp()
+          else -> Unit
         }
-    )
+
+        viewModel.onAction(action)
+      })
 }
 
 @Composable
@@ -57,61 +54,47 @@ private fun ArticleDetailsScreen(
     state: ArticleDetailsScreenState,
     onAction: (ArticleDetailsScreenAction) -> Unit
 ) {
-    val context = LocalContext.current
+  val context = LocalContext.current
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-    ) {
-        if(state.toastMessage.isNotBlank()) {
-            Toast.makeText(LocalContext.current, state.toastMessage, Toast.LENGTH_SHORT).show()
-        }
-        ArticleDetailsTopBar(
-            isBookmarked = state.isArticleBookmarked,
-            onBrowsingClick = {
-                onAction.invoke(ArticleDetailsScreenAction.BrowseArticle(context = context))
-            },
-            onShareClick = {
-                onAction.invoke(ArticleDetailsScreenAction.ShareArticle(context = context))
-            },
-            onBookMarkClick = {
-                onAction.invoke(ArticleDetailsScreenAction.SaveArticle)
-            },
-            onBackClick = {
-                onAction.invoke(ArticleDetailsScreenAction.NavigateUp)
-            }
-        )
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(
-                top = MediumPadding1,
-                start = ExtraSmallPadding2,
-                end = ExtraSmallPadding2
-            )
-        ) {
-            item {
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
+  Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+    if (state.toastMessage.isNotBlank()) {
+      Toast.makeText(LocalContext.current, state.toastMessage, Toast.LENGTH_SHORT).show()
+    }
+    ArticleDetailsTopBar(
+        isBookmarked = state.isArticleBookmarked,
+        onBrowsingClick = {
+          onAction.invoke(ArticleDetailsScreenAction.BrowseArticle(context = context))
+        },
+        onShareClick = {
+          onAction.invoke(ArticleDetailsScreenAction.ShareArticle(context = context))
+        },
+        onBookMarkClick = { onAction.invoke(ArticleDetailsScreenAction.SaveArticle) },
+        onBackClick = { onAction.invoke(ArticleDetailsScreenAction.NavigateUp) })
+    LazyColumn(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding =
+            PaddingValues(
+                top = MediumPadding1, start = ExtraSmallPadding2, end = ExtraSmallPadding2)) {
+          item {
+            AsyncImage(
+                modifier =
+                    Modifier.fillMaxWidth()
                         .height(ArticleImageHeight)
                         .clip(MaterialTheme.shapes.medium),
-                    model = ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-                Spacer(modifier = Modifier.height(MediumPadding1))
-                Text(
-                    text = state.article.title,
-                    style = MaterialTheme.typography.displaySmall,
-                    color = colorResource(id = R.color.text_title)
-                )
-                Text(
-                    text = state.article.content,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = colorResource(id = R.color.body)
-                )
-            }
+                model =
+                    ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop)
+            Spacer(modifier = Modifier.height(MediumPadding1))
+            Text(
+                text = state.article.title,
+                style = MaterialTheme.typography.displaySmall,
+                color = colorResource(id = R.color.text_title))
+            Text(
+                text = state.article.content,
+                style = MaterialTheme.typography.bodyMedium,
+                color = colorResource(id = R.color.body))
+          }
         }
-    }
+  }
 }

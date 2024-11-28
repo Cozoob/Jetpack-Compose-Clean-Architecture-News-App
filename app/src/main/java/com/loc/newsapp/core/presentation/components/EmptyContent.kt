@@ -21,25 +21,20 @@ import com.loc.newsapp.R
 
 @Composable
 fun EmptyContent(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+  Column(
+      modifier = Modifier.fillMaxSize(),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center) {
         Icon(
             painter = painterResource(id = R.drawable.ic_logo),
             contentDescription = null,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            modifier = Modifier
-                .size(120.dp)
-                .alpha(0.3f)
-        )
+            modifier = Modifier.size(120.dp).alpha(0.3f))
         Text(
-            modifier = Modifier
-                .padding(10.dp),
+            modifier = Modifier.padding(10.dp),
             text = "No content.",
             style = MaterialTheme.typography.bodyMedium,
             color = if (isSystemInDarkTheme()) LightGray else DarkGray,
         )
-    }
+      }
 }

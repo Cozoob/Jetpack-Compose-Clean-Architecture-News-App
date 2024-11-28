@@ -10,21 +10,18 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface IArticleDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsert(article: Article)
+  @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun upsert(article: Article)
 
-    @Delete
-    suspend fun delete(article: Article)
+  @Delete suspend fun delete(article: Article)
 
-    @Query("SELECT * FROM Article")
-    fun getAll(): Flow<List<Article>>
+  @Query("SELECT * FROM Article") fun getAll(): Flow<List<Article>>
 
-    @Query("SELECT * FROM Article WHERE url  = :url LIMIT 1")
-    suspend fun findByUrl(url: String): Article?
+  @Query("SELECT * FROM Article WHERE url  = :url LIMIT 1")
+  suspend fun findByUrl(url: String): Article?
 
-    @Query("SELECT * FROM Article WHERE url IN (:urls)")
-    fun findByUrls(urls: List<String>): Flow<List<Article>>
+  @Query("SELECT * FROM Article WHERE url IN (:urls)")
+  fun findByUrls(urls: List<String>): Flow<List<Article>>
 
-    @Query("SELECT * FROM Article WHERE title IN (:titles)")
-    fun findByTitles(titles: List<String>): Flow<List<Article>>
+  @Query("SELECT * FROM Article WHERE title IN (:titles)")
+  fun findByTitles(titles: List<String>): Flow<List<Article>>
 }

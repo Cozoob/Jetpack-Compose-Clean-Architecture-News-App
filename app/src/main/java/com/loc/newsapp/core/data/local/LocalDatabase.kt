@@ -9,5 +9,5 @@ import com.loc.newsapp.core.domain.model.Article
 @Database(entities = [Article::class], version = 1)
 @TypeConverters(NewsTypeConvertor::class)
 abstract class LocalDatabase : RoomDatabase() {
-    abstract fun articleDao(): IArticleDao
+  abstract fun articleDao(): IArticleDao
 }

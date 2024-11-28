@@ -12,24 +12,21 @@ import com.loc.newsapp.core.presentation.constants.LocalData.KEY_APP_ENTRY
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class LocalLiteDataRepository(
-    private val context: Context
-): ILocalDataRepository {
-    override suspend fun saveAppEntry() {
-        context.dataStore.edit { settings ->
-            settings[PreferencesKeys.APP_ENTRY] = true
-        }
-    }
+class LocalLiteDataRepository(private val context: Context) : ILocalDataRepository {
+  override suspend fun saveAppEntry() {
+    context.dataStore.edit { settings -> settings[PreferencesKeys.APP_ENTRY] = true }
+  }
 
-    override fun readAppEntry(): Flow<Boolean> {
-        return context.dataStore.data.map { preferences ->
-            preferences[PreferencesKeys.APP_ENTRY] ?: false
-        }
+  override fun readAppEntry(): Flow<Boolean> {
+    return context.dataStore.data.map { preferences ->
+      preferences[PreferencesKeys.APP_ENTRY] ?: false
     }
+  }
 }
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
+private val Context.dataStore: DataStore<Preferences> by
+    preferencesDataStore(name = DATA_STORE_NAME)
 
 private object PreferencesKeys {
-    val APP_ENTRY = booleanPreferencesKey(name = KEY_APP_ENTRY)
+  val APP_ENTRY = booleanPreferencesKey(name = KEY_APP_ENTRY)
 }

@@ -15,29 +15,22 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(
-            window,
-            false
-        )
-        installSplashScreen()
-        setContent {
-            NewsAppTheme {
-                val isSystemInDarkMode = isSystemInDarkTheme()
-                val systemUiController = rememberSystemUiController()
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+    installSplashScreen()
+    setContent {
+      NewsAppTheme {
+        val isSystemInDarkMode = isSystemInDarkTheme()
+        val systemUiController = rememberSystemUiController()
 
-                SideEffect {
-                    systemUiController.setSystemBarsColor(
-                        color = Color.Transparent,
-                        darkIcons = !isSystemInDarkMode
-                    )
-                }
-
-                Surface {
-                    InitialLoadingScreenRoot()
-                }
-            }
+        SideEffect {
+          systemUiController.setSystemBarsColor(
+              color = Color.Transparent, darkIcons = !isSystemInDarkMode)
         }
+
+        Surface { InitialLoadingScreenRoot() }
+      }
     }
+  }
 }

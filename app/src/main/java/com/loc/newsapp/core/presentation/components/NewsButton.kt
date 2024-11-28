@@ -16,40 +16,25 @@ import androidx.compose.ui.unit.dp
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
-fun NewsButton(
-    modifier: Modifier = Modifier,
-    text: String,
-    onClick: () -> Unit
-) {
-    Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = Color.White
-        ),
-        shape = RoundedCornerShape(size = 6.dp)
-    ) {
+fun NewsButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+  Button(
+      onClick = onClick,
+      colors =
+          ButtonDefaults.buttonColors(
+              containerColor = MaterialTheme.colorScheme.primary, contentColor = Color.White),
+      shape = RoundedCornerShape(size = 6.dp)) {
         Text(
             text = text,
-            style = MaterialTheme.typography.labelMedium.copy(
-                fontWeight = FontWeight.SemiBold
-            )
-        )
-    }
+            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold))
+      }
 }
 
 @Preview(name = "News Button, light mode", showBackground = true)
-@Preview(name = "News Button, dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(
+    name = "News Button, dark mode",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true)
 @Composable
 private fun NewsButtonPreview() {
-    NewsAppTheme {
-        Surface {
-            NewsButton(
-                text = "Previous",
-                onClick = {
-                    print("Hello world :)")
-                }
-            )
-        }
-    }
+  NewsAppTheme { Surface { NewsButton(text = "Previous", onClick = { print("Hello world :)") }) } }
 }

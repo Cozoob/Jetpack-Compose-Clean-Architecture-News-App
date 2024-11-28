@@ -33,95 +33,66 @@ import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 
 @Composable
-fun HomeScreenRoot(
-    navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel()
-) {
-    HomeScreen(
-        state = viewModel.state,
-        onAction = { action ->
-            when(action) {
-                is HomeAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
-                is HomeAction.NavigateToArticleDetails -> navController.navigate(ArticleDetailsRoute(article = action.article))
-                else -> Unit
-            }
+fun HomeScreenRoot(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
+  HomeScreen(
+      state = viewModel.state,
+      onAction = { action ->
+        when (action) {
+          is HomeAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
+          is HomeAction.NavigateToArticleDetails ->
+              navController.navigate(ArticleDetailsRoute(article = action.article))
 
-            viewModel.onAction(action)
+          else -> Unit
         }
-    )
+
+        viewModel.onAction(action)
+      })
 }
 
 @Composable
-fun HomeScreen(
-    state: HomeState,
-    onAction: (HomeAction) -> Unit
-) {
-    if(state.isLoading) {
-        NewsCircularProgressIndicator()
-    } else {
-        val articles = state.news.collectAsLazyPagingItems()
+fun HomeScreen(state: HomeState, onAction: (HomeAction) -> Unit) {
+  if (state.isLoading) {
+    NewsCircularProgressIndicator()
+  } else {
+    val articles = state.news.collectAsLazyPagingItems()
 
-        val titles by remember {
-            derivedStateOf {
-                if (articles.itemCount > 10) {
-                    articles.itemSnapshotList.items
-                        .slice(IntRange(start = 0, endInclusive = 9))
-                        .joinToString(separator = " \uD83D\uDFE5 ") { it.title }
-                } else {
-                    ""
-                }
-            }
+    val titles by remember {
+      derivedStateOf {
+        if (articles.itemCount > 10) {
+          articles.itemSnapshotList.items.slice(IntRange(start = 0, endInclusive = 9)).joinToString(
+              separator = " \uD83D\uDFE5 ") {
+                it.title
+              }
+        } else {
+          ""
         }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = MediumPadding1)
-                .statusBarsPadding()
-        ) {
-            Image(
-                painter = painterResource(
-                    id = R.drawable.ic_logo
-                ),
-                contentDescription = null,
-                modifier = Modifier
-                    .width(150.dp)
-                    .height(30.dp)
-                    .padding(horizontal = MediumPadding1)
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(MediumPadding1)
-            )
-            NewsSearchBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = ExtraSmallPadding2),
-                text = "",
-                readOnly = true,
-                onValueChange = {},
-                onSearch = {},
-                onClick = {
-                    onAction.invoke(HomeAction.NavigateToSearchScreen)
-                }
-            )
-            Spacer(modifier = Modifier.height(MediumPadding1))
-            Text(
-                text = titles,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .basicMarquee(),
-                fontSize = 12.sp,
-                color = colorResource(id = R.color.placeholder)
-            )
-            Spacer(modifier = Modifier.height(MediumPadding1))
-            ArticlesList(
-                modifier = Modifier.padding(horizontal = MediumPadding1),
-                articles = articles,
-                onClick = {
-                    onAction.invoke(HomeAction.NavigateToArticleDetails(article = it))
-                }
-            )
-        }
+      }
     }
+
+    Column(modifier = Modifier.fillMaxSize().padding(top = MediumPadding1).statusBarsPadding()) {
+      Image(
+          painter = painterResource(id = R.drawable.ic_logo),
+          contentDescription = null,
+          modifier = Modifier.width(150.dp).height(30.dp).padding(horizontal = MediumPadding1))
+      Spacer(modifier = Modifier.height(MediumPadding1))
+      NewsSearchBar(
+          modifier = Modifier.fillMaxWidth().padding(horizontal = ExtraSmallPadding2),
+          text = "",
+          readOnly = true,
+          onValueChange = {},
+          onSearch = {},
+          onClick = { onAction.invoke(HomeAction.NavigateToSearchScreen) })
+      Spacer(modifier = Modifier.height(MediumPadding1))
+      Text(
+          text = titles,
+          modifier = Modifier.fillMaxWidth().basicMarquee(),
+          fontSize = 12.sp,
+          color = colorResource(id = R.color.placeholder))
+      Spacer(modifier = Modifier.height(MediumPadding1))
+      ArticlesList(
+          modifier = Modifier.padding(horizontal = MediumPadding1),
+          articles = articles,
+          onClick = { onAction.invoke(HomeAction.NavigateToArticleDetails(article = it)) })
+    }
+  }
 }
