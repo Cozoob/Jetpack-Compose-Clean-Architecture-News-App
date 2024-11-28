@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "***** Running code formating (ktfmt) ******"
+
+./gradlew ktfmtPrecommit
+
+exit 0
+# Any script that exits with anything other than exit code 0 is considered a fail.
