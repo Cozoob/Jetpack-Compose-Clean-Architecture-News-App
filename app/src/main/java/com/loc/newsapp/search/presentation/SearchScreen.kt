@@ -24,62 +24,39 @@ fun SearchScreenRoot(
     viewModel: SearchScreenViewModel = hiltViewModel()
 ) {
 
+  SearchScreen(
+      state = viewModel.state,
+      onAction = { action ->
+        when (action) {
+          is SearchScreenAction.NavigateToArticleDetailsScreen ->
+              navController.navigate(ArticleDetailsRoute(article = action.article))
 
-    
-    SearchScreen(
-        state = viewModel.state,
-        onAction = { action ->
-            when (action) {
-                is SearchScreenAction.NavigateToArticleDetailsScreen -> navController.navigate(
-                    ArticleDetailsRoute(article = action.article)
-                )
-
-                else -> Unit
-            }
-
-            viewModel.onAction(action)
+          else -> Unit
         }
-    )
+
+        viewModel.onAction(action)
+      })
 }
 
-
 @Composable
-private fun SearchScreen(
-    state: SearchScreenState,
-    onAction: (SearchScreenAction) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .padding(
-                top = MediumPadding1
-            )
-            .statusBarsPadding()
-            .fillMaxSize()
-    ) {
-        NewsSearchBar(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = ExtraSmallPadding2),
-            text = state.searchQuery,
-            readOnly = false,
-            focusSearchOnStart = true,
-            onValueChange = {
-                onAction.invoke(SearchScreenAction.UpdateSearchQuery(it))
-            },
-            onSearch = {
-                onAction.invoke(SearchScreenAction.SearchNews)
-            }
-        )
-        Spacer(modifier = Modifier.height(MediumPadding1))
+private fun SearchScreen(state: SearchScreenState, onAction: (SearchScreenAction) -> Unit) {
+  Column(modifier = Modifier.padding(top = MediumPadding1).statusBarsPadding().fillMaxSize()) {
+    NewsSearchBar(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = ExtraSmallPadding2),
+        text = state.searchQuery,
+        readOnly = false,
+        focusSearchOnStart = true,
+        onValueChange = { onAction.invoke(SearchScreenAction.UpdateSearchQuery(it)) },
+        onSearch = { onAction.invoke(SearchScreenAction.SearchNews) })
+    Spacer(modifier = Modifier.height(MediumPadding1))
 
-        state.articles.let { it ->
-            val articles = it.collectAsLazyPagingItems()
-            ArticlesList(
-                articles = articles,
-                onClick = {
-                    onAction.invoke(SearchScreenAction.NavigateToArticleDetailsScreen(article = it))
-                }
-            )
-        }
+    state.articles.let { it ->
+      val articles = it.collectAsLazyPagingItems()
+      ArticlesList(
+          articles = articles,
+          onClick = {
+            onAction.invoke(SearchScreenAction.NavigateToArticleDetailsScreen(article = it))
+          })
     }
+  }
 }
