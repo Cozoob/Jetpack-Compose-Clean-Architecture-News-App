@@ -23,6 +23,7 @@ fun SearchScreenRoot(
     navController: NavController,
     viewModel: SearchScreenViewModel = hiltViewModel()
 ) {
+    
     SearchScreen(
         state = viewModel.state,
         onAction = { action ->
