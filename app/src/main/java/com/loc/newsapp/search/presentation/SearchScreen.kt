@@ -26,10 +26,11 @@ fun SearchScreenRoot(
     SearchScreen(
         state = viewModel.state,
         onAction = { action ->
-            when(action) {
+            when (action) {
                 is SearchScreenAction.NavigateToArticleDetailsScreen -> navController.navigate(
                     ArticleDetailsRoute(article = action.article)
                 )
+
                 else -> Unit
             }
 

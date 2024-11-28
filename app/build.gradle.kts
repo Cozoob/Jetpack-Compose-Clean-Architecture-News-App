@@ -1,3 +1,4 @@
+import com.ncorti.ktfmt.gradle.tasks.KtfmtFormatTask
 import org.jetbrains.kotlin.konan.properties.Properties
 import java.io.FileInputStream
 
@@ -12,6 +13,7 @@ plugins {
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ktfmt)
 }
 
 android {
@@ -121,4 +123,9 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+}
+
+tasks.register<KtfmtFormatTask>("ktfmtPrecommit") {
+    source = project.fileTree(rootDir)
+    include("**/*.kt")
 }
