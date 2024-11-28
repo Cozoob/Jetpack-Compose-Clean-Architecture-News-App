@@ -10,6 +10,7 @@ converterGson = "2.9.0"
 coreKtx = "1.13.1"
 coreSplashscreen = "1.0.1"
 datastorePreferences = "1.1.1"
+detekt = "1.23.7"
 espressoCore = "3.6.1"
 hilt-version = "2.51.1"
 junit = "4.13.2"
@@ -76,4 +77,5 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinCompose" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
