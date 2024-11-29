@@ -30,9 +30,7 @@ fun ArticleDetailsTopBar(
     onBackClick: () -> Unit = {}
 ) {
   TopAppBar(
-      modifier = Modifier
-          .fillMaxWidth()
-          .then(modifier),
+      modifier = Modifier.fillMaxWidth().then(modifier),
       colors =
           TopAppBarDefaults.topAppBarColors(
               containerColor = Color.Transparent,
@@ -65,7 +63,7 @@ fun ArticleDetailsTopBar(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true)
 @Composable
-private fun ArticleDetailsTopBarPreview() {
+private fun ArticleDetailsTopBar_Default_Preview() {
   NewsAppTheme { Surface { ArticleDetailsTopBar() } }
 }
 
@@ -75,6 +73,6 @@ private fun ArticleDetailsTopBarPreview() {
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true)
 @Composable
-private fun ArticleDetailsTopBarPreviewBookmarked() {
+private fun ArticleDetailsTopBar_Bookmarked_Preview() {
   NewsAppTheme { Surface { ArticleDetailsTopBar(isBookmarked = true) } }
 }
