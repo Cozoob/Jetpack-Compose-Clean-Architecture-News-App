@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
-class ErrorViewModel(error: LoadState.Error? = null) : ViewModel() {
-  var state by mutableStateOf(ErrorState(error = error))
+class ErrorScreenViewModel(error: LoadState.Error? = null) : ViewModel() {
+  var state by mutableStateOf(ErrorScreenState(error = error))
     private set
 
   init {

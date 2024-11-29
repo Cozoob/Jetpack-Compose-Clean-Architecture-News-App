@@ -56,7 +56,7 @@ fun ArticlesList(
       EmptyContent()
     } else {
       LazyColumn(
-          modifier = Modifier.fillMaxSize(),
+          modifier = modifier.fillMaxSize(),
           verticalArrangement = Arrangement.spacedBy(MediumPadding1),
           contentPadding = PaddingValues(all = ExtraSmallPadding2)) {
             items(count = articles.itemCount) { index ->
@@ -70,7 +70,7 @@ fun ArticlesList(
 }
 
 @Composable
-fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
+private fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
   val loadState = articles.loadState
 
   val error =
@@ -112,7 +112,7 @@ private fun ShimmerEffect(modifier: Modifier = Modifier) {
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true)
 @Composable
-fun ArticlesListPreview() {
+private fun ArticlesListPreview() {
   NewsAppTheme {
     Surface {
       //            ArticlesList()

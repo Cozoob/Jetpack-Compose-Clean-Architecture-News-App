@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation
+package com.loc.newsapp.core.presentation.initialLoadingScreenBundle
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -6,12 +6,12 @@ import com.loc.newsapp.core.presentation.components.NewsCircularProgressIndicato
 import com.loc.newsapp.navigation.presentation.NavigationNewsApp
 
 @Composable
-fun InitialLoadingScreenRoot(viewModel: InitialLoadingViewModel = hiltViewModel()) {
-  InitialLoadingScreen(state = viewModel.state)
+fun InitialLoadingScreenView(viewModel: InitialLoadingScreenViewModel = hiltViewModel()) {
+  InitialLoadingScreenViewContent(state = viewModel.state)
 }
 
 @Composable
-fun InitialLoadingScreen(state: InitialLoadingState) {
+private fun InitialLoadingScreenViewContent(state: InitialLoadingScreenState) {
   if (state.isLoading) {
     NewsCircularProgressIndicator()
   } else {

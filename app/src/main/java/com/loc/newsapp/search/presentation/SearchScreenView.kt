@@ -19,12 +19,12 @@ import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 
 @Composable
-fun SearchScreenRoot(
+fun SearchScreenView(
     navController: NavController,
     viewModel: SearchScreenViewModel = hiltViewModel()
 ) {
 
-  SearchScreen(
+    SearchScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
@@ -39,10 +39,20 @@ fun SearchScreenRoot(
 }
 
 @Composable
-private fun SearchScreen(state: SearchScreenState, onAction: (SearchScreenAction) -> Unit) {
-  Column(modifier = Modifier.padding(top = MediumPadding1).statusBarsPadding().fillMaxSize()) {
+private fun SearchScreenViewContent(
+    state: SearchScreenState,
+    onAction: (SearchScreenAction) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .padding(top = MediumPadding1)
+            .statusBarsPadding()
+            .fillMaxSize()
+    ) {
     NewsSearchBar(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = ExtraSmallPadding2),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = ExtraSmallPadding2),
         text = state.searchQuery,
         readOnly = false,
         focusSearchOnStart = true,

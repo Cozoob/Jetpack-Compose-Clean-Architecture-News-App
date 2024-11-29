@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation
+package com.loc.newsapp.core.presentation.initialLoadingScreenBundle
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,14 +9,14 @@ import com.loc.newsapp.boarding.domain.useCase.appEntry.AppEntryUseCases
 import com.loc.newsapp.core.domain.routes.HomeScreenRoute
 import com.loc.newsapp.core.domain.routes.OnBoardingScreenRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 @HiltViewModel
-class InitialLoadingViewModel @Inject constructor(private val appEntryUseCases: AppEntryUseCases) :
+class InitialLoadingScreenViewModel @Inject constructor(private val appEntryUseCases: AppEntryUseCases) :
     ViewModel() {
-  var state by mutableStateOf(InitialLoadingState())
+    var state by mutableStateOf(InitialLoadingScreenState())
     private set
 
   init {

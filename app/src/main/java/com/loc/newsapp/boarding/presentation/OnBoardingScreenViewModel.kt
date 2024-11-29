@@ -10,27 +10,27 @@ import com.loc.newsapp.boarding.domain.model.PageOrder
 import com.loc.newsapp.boarding.domain.useCase.appEntry.AppEntryUseCases
 import com.loc.newsapp.boarding.domain.useCase.page.PageUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class OnBoardingViewModel
+class OnBoardingScreenViewModel
 @Inject
 constructor(
     private val pageUseCases: PageUseCases,
     private val appEntryUseCases: AppEntryUseCases
 ) : ViewModel() {
-  var state by mutableStateOf(OnBoardingState())
+  var state by mutableStateOf(OnBoardingScreenState())
     private set
 
   init {
     loadPages()
   }
 
-  fun onAction(action: OnBoardingAction) {
+  fun onAction(action: OnBoardingScreenAction) {
     when (action) {
-      is OnBoardingAction.LogFirstAppEntry -> logFirstEntry()
+      is OnBoardingScreenAction.LogFirstAppEntry -> logFirstEntry()
     }
   }
 

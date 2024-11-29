@@ -29,7 +29,7 @@ import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 
 @Composable
-fun ArticleDetailsScreenRoot(navController: NavController, article: Article) {
+fun ArticleDetailsScreenView(navController: NavController, article: Article) {
   val viewModel =
       hiltViewModel(
           creationCallback = {
@@ -37,7 +37,7 @@ fun ArticleDetailsScreenRoot(navController: NavController, article: Article) {
             factory.create(article)
           })
 
-  ArticleDetailsScreen(
+    ArticleDetailsScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
@@ -50,19 +50,18 @@ fun ArticleDetailsScreenRoot(navController: NavController, article: Article) {
 }
 
 @Composable
-private fun ArticleDetailsScreen(
+private fun ArticleDetailsScreenViewContent(
     state: ArticleDetailsScreenState,
     onAction: (ArticleDetailsScreenAction) -> Unit
 ) {
-  val context = LocalContext.current
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding()
     ) {
+        val context = LocalContext.current
     if (state.toastMessage.isNotBlank()) {
-      Toast.makeText(LocalContext.current, state.toastMessage, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, state.toastMessage, Toast.LENGTH_SHORT).show()
     }
     ArticleDetailsTopBar(
         isBookmarked = state.isArticleBookmarked,

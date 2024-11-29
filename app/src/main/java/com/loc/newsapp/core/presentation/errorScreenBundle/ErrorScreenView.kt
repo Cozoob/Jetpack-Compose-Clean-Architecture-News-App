@@ -32,14 +32,14 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
-fun ErrorScreenRoot(error: LoadState.Error? = null) {
-  val viewModel = ErrorViewModel(error = error)
+fun ErrorScreenView(error: LoadState.Error? = null) {
+    val viewModel = ErrorScreenViewModel(error = error)
 
-    ErrorScreen(state = viewModel.state)
+    ErrorScreenViewContent(state = viewModel.state)
 }
 
 @Composable
-private fun ErrorScreen(state: ErrorState) {
+private fun ErrorScreenViewContent(state: ErrorScreenState) {
   val alphaAnimation = rememberInfiniteTransition(label = "Error Animation")
   val alphaAnimationValue by
       alphaAnimation.animateFloat(
@@ -83,7 +83,7 @@ private fun ErrorScreen(state: ErrorState) {
 @Composable
 private fun EmptyScreenPreviewServerError() {
   NewsAppTheme {
-    Surface { ErrorScreenRoot(error = LoadState.Error(error = SocketTimeoutException())) }
+      Surface { ErrorScreenView(error = LoadState.Error(error = SocketTimeoutException())) }
   }
 }
 
@@ -98,7 +98,7 @@ private fun EmptyScreenPreviewServerError() {
     showBackground = true)
 @Composable
 private fun EmptyScreenPreviewInternetError() {
-  NewsAppTheme { Surface { ErrorScreenRoot(error = LoadState.Error(error = ConnectException())) } }
+    NewsAppTheme { Surface { ErrorScreenView(error = LoadState.Error(error = ConnectException())) } }
 }
 
 @Preview(
@@ -112,7 +112,7 @@ private fun EmptyScreenPreviewInternetError() {
     showBackground = true)
 @Composable
 private fun EmptyScreenPreviewUnknownError() {
-    NewsAppTheme { Surface { ErrorScreenRoot(error = LoadState.Error(error = Exception("UnknownError"))) } }
+    NewsAppTheme { Surface { ErrorScreenView(error = LoadState.Error(error = Exception("UnknownError"))) } }
 }
 
 @Preview(name = "Error Screen, no error, light mode", group = "No Error", showBackground = true)
@@ -123,5 +123,5 @@ private fun EmptyScreenPreviewUnknownError() {
     showBackground = true)
 @Composable
 private fun EmptyScreenPreviewNoError() {
-  NewsAppTheme { Surface { ErrorScreenRoot(error = null) } }
+    NewsAppTheme { Surface { ErrorScreenView(error = null) } }
 }

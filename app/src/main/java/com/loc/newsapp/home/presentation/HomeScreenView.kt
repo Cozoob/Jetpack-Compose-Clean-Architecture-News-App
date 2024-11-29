@@ -35,20 +35,20 @@ import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 const val MAX_ARTICLES_PER_SCREEN = 10
 
 @Composable
-fun HomeScreenRoot(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
-  HomeScreen(
+fun HomeScreenView(navController: NavController, viewModel: HomeScreenViewModel = hiltViewModel()) {
+    HomeScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
-          is HomeAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
-          is HomeAction.NavigateToArticleDetails ->
+            is HomeScreenAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
+            is HomeScreenAction.NavigateToArticleDetails ->
               navController.navigate(ArticleDetailsRoute(article = action.article))
         }
       })
 }
 
 @Composable
-fun HomeScreen(state: HomeState, onAction: (HomeAction) -> Unit) {
+private fun HomeScreenViewContent(state: HomeScreenState, onAction: (HomeScreenAction) -> Unit) {
   if (state.isLoading) {
     NewsCircularProgressIndicator()
   } else {
@@ -67,30 +67,43 @@ fun HomeScreen(state: HomeState, onAction: (HomeAction) -> Unit) {
       }
     }
 
-    Column(modifier = Modifier.fillMaxSize().padding(top = MediumPadding1).statusBarsPadding()) {
+      Column(
+          modifier = Modifier
+              .fillMaxSize()
+              .padding(top = MediumPadding1)
+              .statusBarsPadding()
+      ) {
       Image(
           painter = painterResource(id = R.drawable.ic_logo),
           contentDescription = null,
-          modifier = Modifier.width(150.dp).height(30.dp).padding(horizontal = MediumPadding1))
+          modifier = Modifier
+              .width(150.dp)
+              .height(30.dp)
+              .padding(horizontal = MediumPadding1)
+      )
       Spacer(modifier = Modifier.height(MediumPadding1))
       NewsSearchBar(
-          modifier = Modifier.fillMaxWidth().padding(horizontal = ExtraSmallPadding2),
+          modifier = Modifier
+              .fillMaxWidth()
+              .padding(horizontal = ExtraSmallPadding2),
           text = "",
           readOnly = true,
           onValueChange = {},
           onSearch = {},
-          onClick = { onAction.invoke(HomeAction.NavigateToSearchScreen) })
+          onClick = { onAction.invoke(HomeScreenAction.NavigateToSearchScreen) })
       Spacer(modifier = Modifier.height(MediumPadding1))
       Text(
           text = titles,
-          modifier = Modifier.fillMaxWidth().basicMarquee(),
+          modifier = Modifier
+              .fillMaxWidth()
+              .basicMarquee(),
           fontSize = 12.sp,
           color = colorResource(id = R.color.placeholder))
       Spacer(modifier = Modifier.height(MediumPadding1))
       ArticlesList(
           modifier = Modifier.padding(horizontal = MediumPadding1),
           articles = articles,
-          onClick = { onAction.invoke(HomeAction.NavigateToArticleDetails(article = it)) })
+          onClick = { onAction.invoke(HomeScreenAction.NavigateToArticleDetails(article = it)) })
     }
   }
 }

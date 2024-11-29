@@ -35,12 +35,15 @@ import com.loc.newsapp.ui.theme.NewsAppTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnBoardingScreenRoot(viewModel: OnBoardingViewModel = hiltViewModel()) {
-  OnBoardingScreen(state = viewModel.state, onAction = viewModel::onAction)
+fun OnBoardingScreenView(viewModel: OnBoardingScreenViewModel = hiltViewModel()) {
+    OnBoardingScreenViewContent(state = viewModel.state, onAction = viewModel::onAction)
 }
 
 @Composable
-private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction) -> Unit) {
+private fun OnBoardingScreenViewContent(
+    state: OnBoardingScreenState,
+    onAction: (OnBoardingScreenAction) -> Unit
+) {
   val pagerState = rememberPagerState(initialPage = state.pageIndex) { state.pages.size }
   val buttonState = remember {
     derivedStateOf {
@@ -62,7 +65,10 @@ private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction
       Spacer(modifier = Modifier.weight(1f))
       Row(
           modifier =
-              Modifier.fillMaxWidth().padding(horizontal = MediumPadding2).navigationBarsPadding(),
+          Modifier
+              .fillMaxWidth()
+              .padding(horizontal = MediumPadding2)
+              .navigationBarsPadding(),
           horizontalArrangement = Arrangement.SpaceBetween,
           verticalAlignment = Alignment.CenterVertically) {
             PageIndicator(
@@ -91,7 +97,7 @@ private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction
                       val isLastPage = pagerState.currentPage == state.pages.size - 1
 
                       if (isLastPage) {
-                        onAction.invoke(OnBoardingAction.LogFirstAppEntry)
+                          onAction.invoke(OnBoardingScreenAction.LogFirstAppEntry)
                       } else {
                         pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                       }
@@ -115,9 +121,9 @@ private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction
 private fun OnBoardingScreenPreviewWithPages() {
   NewsAppTheme {
     Surface {
-      OnBoardingScreen(
+        OnBoardingScreenViewContent(
           state =
-              OnBoardingState(
+          OnBoardingScreenState(
                   pages =
                       listOf(
                           Page(
@@ -161,9 +167,9 @@ private fun OnBoardingScreenPreviewWithPages() {
 private fun OnBoardingScreenPreviewWithLoading() {
   NewsAppTheme {
     Surface {
-      OnBoardingScreen(
+        OnBoardingScreenViewContent(
           state =
-              OnBoardingState(
+          OnBoardingScreenState(
                   pages = emptyList(),
                   pageIndex = 0,
                   isLoading = true,

@@ -20,29 +20,32 @@ import com.loc.newsapp.core.presentation.components.ArticlesList
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 
 @Composable
-fun BookmarkScreenRoot(
+fun BookmarkScreenView(
     navController: NavController,
     viewModel: BookmarkScreenViewModel = hiltViewModel()
 ) {
-  BookmarkScreen(
+    BookmarkScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
           is BookmarkScreenAction.NavigateToArticleDetails ->
               navController.navigate(ArticleDetailsRoute(article = action.article))
-
-          else -> Unit
         }
       })
 }
 
 @Composable
-private fun BookmarkScreen(state: BookmarkScreenState, onAction: (BookmarkScreenAction) -> Unit) {
+private fun BookmarkScreenViewContent(
+    state: BookmarkScreenState,
+    onAction: (BookmarkScreenAction) -> Unit
+) {
   Column(
       modifier =
-          Modifier.fillMaxWidth()
-              .statusBarsPadding()
-              .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)) {
+      Modifier
+          .fillMaxWidth()
+          .statusBarsPadding()
+          .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)
+  ) {
         Text(
             text = "Bookmark",
             style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold),

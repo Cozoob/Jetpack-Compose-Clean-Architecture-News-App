@@ -5,7 +5,7 @@ import com.loc.newsapp.core.domain.model.Article
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
-data class HomeState(
+data class HomeScreenState(
     val isLoading: Boolean = true,
     val news: Flow<PagingData<Article>> = emptyFlow()
 )
