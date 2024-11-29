@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.domain.routes
+package com.loc.newsapp.core.domain.route
 
 import com.loc.newsapp.core.domain.model.Article
 import kotlinx.serialization.Serializable

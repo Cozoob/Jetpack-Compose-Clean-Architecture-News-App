@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation.components
+package com.loc.newsapp.core.presentation.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,7 +9,9 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun NewsCircularProgressIndicator(modifier: Modifier = Modifier) {
-  Box(modifier = Modifier.fillMaxSize().then(modifier), contentAlignment = Alignment.Center) {
+  Box(modifier = Modifier
+    .fillMaxSize()
+    .then(modifier), contentAlignment = Alignment.Center) {
     CircularProgressIndicator()
   }
 }

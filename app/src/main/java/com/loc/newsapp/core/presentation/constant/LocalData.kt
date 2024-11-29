@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation.constants
+package com.loc.newsapp.core.presentation.constant
 
 // TODO MOVE AND RENAME?
 object LocalData {

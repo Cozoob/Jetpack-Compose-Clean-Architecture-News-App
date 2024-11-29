@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation.extensions
+package com.loc.newsapp.core.presentation.extension
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme

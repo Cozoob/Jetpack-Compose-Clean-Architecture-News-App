@@ -7,8 +7,8 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import com.loc.newsapp.core.domain.repository.ILocalDataRepository
-import com.loc.newsapp.core.presentation.constants.LocalData.DATA_STORE_NAME
-import com.loc.newsapp.core.presentation.constants.LocalData.KEY_APP_ENTRY
+import com.loc.newsapp.core.presentation.constant.LocalData.DATA_STORE_NAME
+import com.loc.newsapp.core.presentation.constant.LocalData.KEY_APP_ENTRY
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

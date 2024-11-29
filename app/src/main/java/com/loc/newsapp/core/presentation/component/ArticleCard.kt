@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation.components
+package com.loc.newsapp.core.presentation.component
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
@@ -31,9 +31,9 @@ import coil.request.ImageRequest
 import com.loc.newsapp.R
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source
-import com.loc.newsapp.core.presentation.constants.Dimensions.ArticleCardSize
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding1
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.ArticleCardSize
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding1
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
@@ -42,13 +42,17 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
 
   Row(modifier = modifier.clickable { onClick() }) {
     AsyncImage(
-        modifier = Modifier.size(ArticleCardSize).clip(MaterialTheme.shapes.medium),
+        modifier = Modifier
+            .size(ArticleCardSize)
+            .clip(MaterialTheme.shapes.medium),
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(context).data(article.urlToImage).build(),
         contentDescription = null)
     Column(
         verticalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier.padding(horizontal = ExtraSmallPadding2).height(ArticleCardSize)) {
+        modifier = Modifier
+            .padding(horizontal = ExtraSmallPadding2)
+            .height(ArticleCardSize)) {
           Text(
               text = article.title,
               style = MaterialTheme.typography.bodyMedium,

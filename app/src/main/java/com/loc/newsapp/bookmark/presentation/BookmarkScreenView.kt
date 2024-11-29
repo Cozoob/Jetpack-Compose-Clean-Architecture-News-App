@@ -15,16 +15,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.loc.newsapp.R
-import com.loc.newsapp.core.domain.routes.ArticleDetailsRoute
-import com.loc.newsapp.core.presentation.components.ArticlesList
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
+import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
+import com.loc.newsapp.core.presentation.component.ArticlesList
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 
 @Composable
 fun BookmarkScreenView(
     navController: NavController,
     viewModel: BookmarkScreenViewModel = hiltViewModel()
 ) {
-    BookmarkScreenViewContent(
+  BookmarkScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
@@ -41,11 +41,9 @@ private fun BookmarkScreenViewContent(
 ) {
   Column(
       modifier =
-      Modifier
-          .fillMaxWidth()
-          .statusBarsPadding()
-          .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)
-  ) {
+          Modifier.fillMaxWidth()
+              .statusBarsPadding()
+              .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)) {
         Text(
             text = "Bookmark",
             style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold),

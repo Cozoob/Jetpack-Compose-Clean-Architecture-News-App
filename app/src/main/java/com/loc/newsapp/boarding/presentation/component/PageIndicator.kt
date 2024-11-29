@@ -1,4 +1,4 @@
-package com.loc.newsapp.boarding.presentation.components
+package com.loc.newsapp.boarding.presentation.component
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.loc.newsapp.core.presentation.constants.Dimensions.IndicatorSize
+import com.loc.newsapp.core.presentation.constant.Dimensions.IndicatorSize
 import com.loc.newsapp.ui.theme.BlueGray
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
@@ -32,7 +32,10 @@ fun PageIndicator(
 
       Box(
           modifier =
-              Modifier.size(IndicatorSize).clip(CircleShape).background(color = backgroundColor))
+          Modifier
+              .size(IndicatorSize)
+              .clip(CircleShape)
+              .background(color = backgroundColor))
     }
   }
 }

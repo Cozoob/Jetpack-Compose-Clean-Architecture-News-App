@@ -24,19 +24,19 @@ import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
-import com.loc.newsapp.boarding.presentation.components.OnBoardingPage
-import com.loc.newsapp.boarding.presentation.components.PageIndicator
-import com.loc.newsapp.core.presentation.components.NewsButton
-import com.loc.newsapp.core.presentation.components.NewsCircularProgressIndicator
-import com.loc.newsapp.core.presentation.components.NewsTextButton
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding2
-import com.loc.newsapp.core.presentation.constants.Dimensions.PageIndicatorWidth
+import com.loc.newsapp.boarding.presentation.component.OnBoardingPage
+import com.loc.newsapp.boarding.presentation.component.PageIndicator
+import com.loc.newsapp.core.presentation.component.NewsButton
+import com.loc.newsapp.core.presentation.component.NewsCircularProgressIndicator
+import com.loc.newsapp.core.presentation.component.NewsTextButton
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.PageIndicatorWidth
 import com.loc.newsapp.ui.theme.NewsAppTheme
 import kotlinx.coroutines.launch
 
 @Composable
 fun OnBoardingScreenView(viewModel: OnBoardingScreenViewModel = hiltViewModel()) {
-    OnBoardingScreenViewContent(state = viewModel.state, onAction = viewModel::onAction)
+  OnBoardingScreenViewContent(state = viewModel.state, onAction = viewModel::onAction)
 }
 
 @Composable
@@ -65,10 +65,7 @@ private fun OnBoardingScreenViewContent(
       Spacer(modifier = Modifier.weight(1f))
       Row(
           modifier =
-          Modifier
-              .fillMaxWidth()
-              .padding(horizontal = MediumPadding2)
-              .navigationBarsPadding(),
+              Modifier.fillMaxWidth().padding(horizontal = MediumPadding2).navigationBarsPadding(),
           horizontalArrangement = Arrangement.SpaceBetween,
           verticalAlignment = Alignment.CenterVertically) {
             PageIndicator(
@@ -97,7 +94,7 @@ private fun OnBoardingScreenViewContent(
                       val isLastPage = pagerState.currentPage == state.pages.size - 1
 
                       if (isLastPage) {
-                          onAction.invoke(OnBoardingScreenAction.LogFirstAppEntry)
+                        onAction.invoke(OnBoardingScreenAction.LogFirstAppEntry)
                       } else {
                         pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                       }
@@ -121,9 +118,9 @@ private fun OnBoardingScreenViewContent(
 private fun OnBoardingScreenPreviewWithPages() {
   NewsAppTheme {
     Surface {
-        OnBoardingScreenViewContent(
+      OnBoardingScreenViewContent(
           state =
-          OnBoardingScreenState(
+              OnBoardingScreenState(
                   pages =
                       listOf(
                           Page(
@@ -167,9 +164,9 @@ private fun OnBoardingScreenPreviewWithPages() {
 private fun OnBoardingScreenPreviewWithLoading() {
   NewsAppTheme {
     Surface {
-        OnBoardingScreenViewContent(
+      OnBoardingScreenViewContent(
           state =
-          OnBoardingScreenState(
+              OnBoardingScreenState(
                   pages = emptyList(),
                   pageIndex = 0,
                   isLoading = true,

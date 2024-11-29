@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.loc.newsapp.core.domain.routes.ArticleDetailsRoute
-import com.loc.newsapp.core.presentation.components.ArticlesList
-import com.loc.newsapp.core.presentation.components.NewsSearchBar
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
+import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
+import com.loc.newsapp.core.presentation.component.ArticlesList
+import com.loc.newsapp.core.presentation.component.NewsSearchBar
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 
 @Composable
 fun SearchScreenView(
@@ -24,7 +24,7 @@ fun SearchScreenView(
     viewModel: SearchScreenViewModel = hiltViewModel()
 ) {
 
-    SearchScreenViewContent(
+  SearchScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
@@ -43,16 +43,9 @@ private fun SearchScreenViewContent(
     state: SearchScreenState,
     onAction: (SearchScreenAction) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .padding(top = MediumPadding1)
-            .statusBarsPadding()
-            .fillMaxSize()
-    ) {
+  Column(modifier = Modifier.padding(top = MediumPadding1).statusBarsPadding().fillMaxSize()) {
     NewsSearchBar(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = ExtraSmallPadding2),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = ExtraSmallPadding2),
         text = state.searchQuery,
         readOnly = false,
         focusSearchOnStart = true,

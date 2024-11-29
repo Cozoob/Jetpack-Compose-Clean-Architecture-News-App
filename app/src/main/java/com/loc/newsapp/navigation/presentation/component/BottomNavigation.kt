@@ -1,4 +1,4 @@
-package com.loc.newsapp.navigation.presentation.components
+package com.loc.newsapp.navigation.presentation.component
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
@@ -21,8 +21,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constants.Dimensions.IconSize
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.IconSize
 import com.loc.newsapp.navigation.domain.BottomNavigationItem
 import com.loc.newsapp.ui.theme.NewsAppTheme
 

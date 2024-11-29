@@ -24,9 +24,12 @@ import coil.request.ImageRequest
 import com.loc.newsapp.R
 import com.loc.newsapp.articleDetails.presentation.component.ArticleDetailsTopBar
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.presentation.constants.Dimensions.ArticleImageHeight
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
+import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
+import com.loc.newsapp.core.domain.model.Source
+import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
+import com.loc.newsapp.core.presentation.constant.Dimensions.ArticleImageHeight
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 
 @Composable
 fun ArticleDetailsScreenView(navController: NavController, article: Article) {
@@ -37,7 +40,7 @@ fun ArticleDetailsScreenView(navController: NavController, article: Article) {
             factory.create(article)
           })
 
-    ArticleDetailsScreenViewContent(
+  ArticleDetailsScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
@@ -54,14 +57,10 @@ private fun ArticleDetailsScreenViewContent(
     state: ArticleDetailsScreenState,
     onAction: (ArticleDetailsScreenAction) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding()
-    ) {
-        val context = LocalContext.current
+  Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+    val context = LocalContext.current
     if (state.toastMessage.isNotBlank()) {
-        Toast.makeText(context, state.toastMessage, Toast.LENGTH_SHORT).show()
+      Toast.makeText(context, state.toastMessage, Toast.LENGTH_SHORT).show()
     }
     ArticleDetailsTopBar(
         isBookmarked = state.isArticleBookmarked,
@@ -81,10 +80,9 @@ private fun ArticleDetailsScreenViewContent(
           item {
             AsyncImage(
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(ArticleImageHeight)
-                    .clip(MaterialTheme.shapes.medium),
+                    Modifier.fillMaxWidth()
+                        .height(ArticleImageHeight)
+                        .clip(MaterialTheme.shapes.medium),
                 model =
                     ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
                 contentDescription = null,
@@ -101,4 +99,26 @@ private fun ArticleDetailsScreenViewContent(
           }
         }
   }
+}
+
+@DayNightInSystemUiPreviews
+@Composable
+private fun ArticleDetailsScreenView_Default_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        ArticleDetailsScreenViewContent(
+            state =
+                ArticleDetailsScreenState(
+                    article =
+                        Article(
+                            author = "Marcin Kozub",
+                            content = "Lorem ipsum dolor sit",
+                            description = "Lorem ipsum dolor sit",
+                            publishedAt = "2024.11.09",
+                            source = Source(id = "google", name = "google"),
+                            title = "Wielki powrót",
+                            url = "",
+                            urlToImage = "")),
+            onAction = {})
+      })
 }

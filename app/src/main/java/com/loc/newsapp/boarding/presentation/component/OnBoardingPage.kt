@@ -1,4 +1,4 @@
-package com.loc.newsapp.boarding.presentation.components
+package com.loc.newsapp.boarding.presentation.component
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -20,15 +20,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding2
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
 fun OnBoardingPage(modifier: Modifier = Modifier, page: Page) {
   Column(modifier = modifier) {
     Image(
-        modifier = Modifier.fillMaxWidth().fillMaxHeight(fraction = 0.6f),
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(fraction = 0.6f),
         painter = painterResource(id = page.image),
         contentDescription = null,
         contentScale = ContentScale.Crop)

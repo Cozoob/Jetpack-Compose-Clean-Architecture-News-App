@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.presentation.components
+package com.loc.newsapp.core.presentation.component
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -14,10 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding1
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
-import com.loc.newsapp.core.presentation.extensions.noItems
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding1
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
+import com.loc.newsapp.core.presentation.extension.noItems
 import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable

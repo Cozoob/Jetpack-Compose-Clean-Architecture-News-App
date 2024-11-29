@@ -24,24 +24,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.loc.newsapp.R
-import com.loc.newsapp.core.domain.routes.ArticleDetailsRoute
-import com.loc.newsapp.core.domain.routes.SearchScreenRoute
-import com.loc.newsapp.core.presentation.components.ArticlesList
-import com.loc.newsapp.core.presentation.components.NewsCircularProgressIndicator
-import com.loc.newsapp.core.presentation.components.NewsSearchBar
-import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
+import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
+import com.loc.newsapp.core.domain.route.SearchScreenRoute
+import com.loc.newsapp.core.presentation.component.ArticlesList
+import com.loc.newsapp.core.presentation.component.NewsCircularProgressIndicator
+import com.loc.newsapp.core.presentation.component.NewsSearchBar
+import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 
 const val MAX_ARTICLES_PER_SCREEN = 10
 
 @Composable
 fun HomeScreenView(navController: NavController, viewModel: HomeScreenViewModel = hiltViewModel()) {
-    HomeScreenViewContent(
+  HomeScreenViewContent(
       state = viewModel.state,
       onAction = { action ->
         when (action) {
-            is HomeScreenAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
-            is HomeScreenAction.NavigateToArticleDetails ->
+          is HomeScreenAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
+          is HomeScreenAction.NavigateToArticleDetails ->
               navController.navigate(ArticleDetailsRoute(article = action.article))
         }
       })
@@ -67,25 +67,14 @@ private fun HomeScreenViewContent(state: HomeScreenState, onAction: (HomeScreenA
       }
     }
 
-      Column(
-          modifier = Modifier
-              .fillMaxSize()
-              .padding(top = MediumPadding1)
-              .statusBarsPadding()
-      ) {
+    Column(modifier = Modifier.fillMaxSize().padding(top = MediumPadding1).statusBarsPadding()) {
       Image(
           painter = painterResource(id = R.drawable.ic_logo),
           contentDescription = null,
-          modifier = Modifier
-              .width(150.dp)
-              .height(30.dp)
-              .padding(horizontal = MediumPadding1)
-      )
+          modifier = Modifier.width(150.dp).height(30.dp).padding(horizontal = MediumPadding1))
       Spacer(modifier = Modifier.height(MediumPadding1))
       NewsSearchBar(
-          modifier = Modifier
-              .fillMaxWidth()
-              .padding(horizontal = ExtraSmallPadding2),
+          modifier = Modifier.fillMaxWidth().padding(horizontal = ExtraSmallPadding2),
           text = "",
           readOnly = true,
           onValueChange = {},
@@ -94,9 +83,7 @@ private fun HomeScreenViewContent(state: HomeScreenState, onAction: (HomeScreenA
       Spacer(modifier = Modifier.height(MediumPadding1))
       Text(
           text = titles,
-          modifier = Modifier
-              .fillMaxWidth()
-              .basicMarquee(),
+          modifier = Modifier.fillMaxWidth().basicMarquee(),
           fontSize = 12.sp,
           color = colorResource(id = R.color.placeholder))
       Spacer(modifier = Modifier.height(MediumPadding1))

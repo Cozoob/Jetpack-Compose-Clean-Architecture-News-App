@@ -20,16 +20,16 @@ import com.loc.newsapp.articleDetails.presentation.ArticleDetailsScreenView
 import com.loc.newsapp.boarding.presentation.OnBoardingScreenView
 import com.loc.newsapp.bookmark.presentation.BookmarkScreenView
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.routes.ArticleDetailsRoute
-import com.loc.newsapp.core.domain.routes.BookmarkScreenRoute
-import com.loc.newsapp.core.domain.routes.HomeScreenRoute
-import com.loc.newsapp.core.domain.routes.IRoute
-import com.loc.newsapp.core.domain.routes.OnBoardingScreenRoute
-import com.loc.newsapp.core.domain.routes.SearchScreenRoute
+import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
+import com.loc.newsapp.core.domain.route.BookmarkScreenRoute
+import com.loc.newsapp.core.domain.route.HomeScreenRoute
+import com.loc.newsapp.core.domain.route.IRoute
+import com.loc.newsapp.core.domain.route.OnBoardingScreenRoute
+import com.loc.newsapp.core.domain.route.SearchScreenRoute
 import com.loc.newsapp.home.presentation.HomeScreenView
 import com.loc.newsapp.navigation.domain.BottomNavigationItem
 import com.loc.newsapp.navigation.domain.CustomNavType
-import com.loc.newsapp.navigation.presentation.components.BottomNavigation
+import com.loc.newsapp.navigation.presentation.component.BottomNavigation
 import com.loc.newsapp.search.presentation.SearchScreenView
 import kotlin.reflect.typeOf
 
