@@ -86,9 +86,12 @@ private fun ArticleCardPreview() {
       Article(
           author = "Joel Khalili",
           content =
-              "Peter Todd is standing on the upper floor of a dilapidated industrial building somewhere in Czechia, chuckling under his breath. He has just been accused on camera of being Satoshi Nakamoto, the Bitc… [+3043 chars]",
+              "Peter Todd is standing on the upper floor of a dilapidated industrial building somewhere" +
+                  " in Czechia, chuckling under his breath. He has just been accused on camera of " +
+                  "being Satoshi Nakamoto, the Bitc… [+3043 chars]",
           description =
-              "A new HBO documentary takes a swing at uncovering the real identity of Satoshi Nakamoto, inventor of Bitcoin. But without incontrovertible proof, the myth lives on.",
+              "A new HBO documentary takes a swing at uncovering the real identity of Satoshi Nakamoto," +
+                  " inventor of Bitcoin. But without incontrovertible proof, the myth lives on.",
           publishedAt = "2024-10-09T01:00:00Z",
           source = Source(id = "wired", name = "Wired"),
           title = "Unmasking Bitcoin Creator Satoshi Nakamoto—Again",

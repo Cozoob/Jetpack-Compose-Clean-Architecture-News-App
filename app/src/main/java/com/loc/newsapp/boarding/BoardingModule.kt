@@ -1,6 +1,5 @@
 package com.loc.newsapp.boarding
 
-import android.app.Application
 import com.loc.newsapp.boarding.data.PageRepository
 import com.loc.newsapp.boarding.data.dataSource.IPageDAO
 import com.loc.newsapp.boarding.data.dataSource.PageStaticService
@@ -27,7 +26,7 @@ object BoardingModule {
   @Provides
   @Singleton
   @Named("PageStaticService")
-  fun providePageStaticService(app: Application): IPageDAO {
+  fun providePageStaticService(): IPageDAO {
     return PageStaticService()
   }
 

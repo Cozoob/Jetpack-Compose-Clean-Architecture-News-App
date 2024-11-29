@@ -123,17 +123,23 @@ private fun OnBoardingScreenPreviewWithPages() {
                           Page(
                               title = "Stay Informed, Anytime, Anywhere",
                               description =
-                                  "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                                  "Get the latest news from trusted sources worldwide, delivered straight " +
+                                      "to your device. Stay updated with breaking stories, " +
+                                      "local updates, and global events, all in one place.",
                               image = R.drawable.onboarding1),
                           Page(
                               title = "Stay Informed, Anytime, Anywhere",
                               description =
-                                  "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                                  "Get the latest news from trusted sources worldwide, delivered " +
+                                      "straight to your device. Stay updated with breaking stories," +
+                                      " local updates, and global events, all in one place.",
                               image = R.drawable.onboarding1),
                           Page(
                               title = "Stay Informed, Anytime, Anywhere",
                               description =
-                                  "Get the latest news from trusted sources worldwide, delivered straight to your device. Stay updated with breaking stories, local updates, and global events, all in one place.",
+                                  "Get the latest news from trusted sources worldwide, delivered straight " +
+                                      "to your device. Stay updated with breaking stories, local updates," +
+                                      " and global events, all in one place.",
                               image = R.drawable.onboarding1)),
                   pageIndex = 0,
                   isLoading = false,
