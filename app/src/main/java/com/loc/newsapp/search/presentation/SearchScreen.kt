@@ -50,7 +50,7 @@ private fun SearchScreen(state: SearchScreenState, onAction: (SearchScreenAction
         onSearch = { onAction.invoke(SearchScreenAction.SearchNews) })
     Spacer(modifier = Modifier.height(MediumPadding1))
 
-    state.articles.let { it ->
+    state.articles.let {
       val articles = it.collectAsLazyPagingItems()
       ArticlesList(
           articles = articles,

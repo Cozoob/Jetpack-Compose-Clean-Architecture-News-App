@@ -100,7 +100,7 @@ fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
 @Composable
 private fun ShimmerEffect(modifier: Modifier = Modifier) {
   Column(verticalArrangement = Arrangement.spacedBy(MediumPadding1)) {
-    repeat(10) {
+    repeat(times = 10) {
       ArticleCardShimmerEffect(modifier = Modifier.padding(horizontal = ExtraSmallPadding1))
     }
   }

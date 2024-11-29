@@ -7,9 +7,9 @@ import com.loc.newsapp.core.data.remote.NewsRepository
 import com.loc.newsapp.core.domain.Constants.BASE_URL
 import com.loc.newsapp.core.domain.repository.ILocalDataRepository
 import com.loc.newsapp.core.domain.repository.INewsRepository
-import com.loc.newsapp.core.domain.use_case.news.GetNews
-import com.loc.newsapp.core.domain.use_case.news.NewsUseCases
-import com.loc.newsapp.core.domain.use_case.news.SearchNews
+import com.loc.newsapp.core.domain.useCase.news.GetNews
+import com.loc.newsapp.core.domain.useCase.news.NewsUseCases
+import com.loc.newsapp.core.domain.useCase.news.SearchNews
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

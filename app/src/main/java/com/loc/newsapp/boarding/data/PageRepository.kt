@@ -1,6 +1,6 @@
 package com.loc.newsapp.boarding.data
 
-import com.loc.newsapp.boarding.data.data_source.IPageDAO
+import com.loc.newsapp.boarding.data.dataSource.IPageDAO
 import com.loc.newsapp.boarding.domain.IPageRepository
 import com.loc.newsapp.boarding.domain.model.Page
 

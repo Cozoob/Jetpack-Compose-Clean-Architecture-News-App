@@ -40,7 +40,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
           Row(verticalAlignment = Alignment.CenterVertically) {
             Box(
                 modifier =
-                    Modifier.fillMaxWidth(0.6f)
+                    Modifier.fillMaxWidth(fraction = 0.6f)
                         .height(15.dp)
                         .padding(horizontal = ExtraSmallPadding1)
                         .clip(MaterialTheme.shapes.extraSmall)

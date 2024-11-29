@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.loc.newsapp.boarding.domain.model.OrderType
 import com.loc.newsapp.boarding.domain.model.PageOrder
-import com.loc.newsapp.boarding.domain.use_case.app_entry.AppEntryUseCases
-import com.loc.newsapp.boarding.domain.use_case.page.PageUseCases
+import com.loc.newsapp.boarding.domain.useCase.appEntry.AppEntryUseCases
+import com.loc.newsapp.boarding.domain.useCase.page.PageUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -42,7 +42,7 @@ constructor(
     viewModelScope.launch {
       state = state.copy(isLoading = true)
       // Fake delay to show loading state :)
-      delay(5000)
+      delay(timeMillis = 5000)
       val result = pageUseCases.getPages(PageOrder.Title(orderType))
       state = state.copy(pageIndex = 0, pages = result, isLoading = false)
     }

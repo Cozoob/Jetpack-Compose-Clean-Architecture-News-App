@@ -2,18 +2,17 @@ package com.loc.newsapp.boarding
 
 import android.app.Application
 import com.loc.newsapp.boarding.data.PageRepository
-import com.loc.newsapp.boarding.data.data_source.IPageDAO
-import com.loc.newsapp.boarding.data.data_source.PageService
-import com.loc.newsapp.boarding.data.data_source.PageStaticService
+import com.loc.newsapp.boarding.data.dataSource.IPageDAO
+import com.loc.newsapp.boarding.data.dataSource.PageStaticService
 import com.loc.newsapp.boarding.domain.IPageRepository
-import com.loc.newsapp.boarding.domain.use_case.app_entry.AppEntryUseCases
-import com.loc.newsapp.boarding.domain.use_case.app_entry.ReadAppEntry
-import com.loc.newsapp.boarding.domain.use_case.app_entry.WriteAppEntry
-import com.loc.newsapp.boarding.domain.use_case.page.AddPage
-import com.loc.newsapp.boarding.domain.use_case.page.DeletePage
-import com.loc.newsapp.boarding.domain.use_case.page.GetPage
-import com.loc.newsapp.boarding.domain.use_case.page.GetPages
-import com.loc.newsapp.boarding.domain.use_case.page.PageUseCases
+import com.loc.newsapp.boarding.domain.useCase.appEntry.AppEntryUseCases
+import com.loc.newsapp.boarding.domain.useCase.appEntry.ReadAppEntry
+import com.loc.newsapp.boarding.domain.useCase.appEntry.WriteAppEntry
+import com.loc.newsapp.boarding.domain.useCase.page.AddPage
+import com.loc.newsapp.boarding.domain.useCase.page.DeletePage
+import com.loc.newsapp.boarding.domain.useCase.page.GetPage
+import com.loc.newsapp.boarding.domain.useCase.page.GetPages
+import com.loc.newsapp.boarding.domain.useCase.page.PageUseCases
 import com.loc.newsapp.core.domain.repository.ILocalDataRepository
 import dagger.Module
 import dagger.Provides
@@ -30,13 +29,6 @@ object BoardingModule {
   @Named("PageStaticService")
   fun providePageStaticService(app: Application): IPageDAO {
     return PageStaticService()
-  }
-
-  @Provides
-  @Singleton
-  @Named("PageService")
-  fun providePageService(app: Application): IPageDAO {
-    return PageService()
   }
 
   @Provides

@@ -29,7 +29,7 @@ fun EmptyContent(modifier: Modifier = Modifier) {
             painter = painterResource(id = R.drawable.ic_logo),
             contentDescription = null,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            modifier = Modifier.size(120.dp).alpha(0.3f))
+            modifier = Modifier.size(120.dp).alpha(alpha = 0.3f))
         Text(
             modifier = Modifier.padding(10.dp),
             text = "No content.",

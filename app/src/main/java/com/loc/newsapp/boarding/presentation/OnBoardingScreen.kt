@@ -78,7 +78,6 @@ private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction
                 NewsTextButton(
                     text = backButtonMessage,
                     onClick = {
-                      // TODO Can i move it to view model?
                       coroutineScope.launch {
                         pagerState.animateScrollToPage(page = pagerState.currentPage - 1)
                       }
@@ -88,13 +87,11 @@ private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction
               NewsButton(
                   text = nextButtonMessage,
                   onClick = {
-                    // TODO Can i move it to view model?
                     coroutineScope.launch {
                       val isLastPage = pagerState.currentPage == state.pages.size - 1
 
                       if (isLastPage) {
                         onAction.invoke(OnBoardingAction.LogFirstAppEntry)
-                        // TODO: Navigate to Home Screen
                       } else {
                         pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                       }
@@ -102,7 +99,7 @@ private fun OnBoardingScreen(state: OnBoardingState, onAction: (OnBoardingAction
                   })
             }
           }
-      Spacer(modifier = Modifier.weight(0.5f))
+      Spacer(modifier = Modifier.weight(weight = 0.5f))
     }
   }
 }

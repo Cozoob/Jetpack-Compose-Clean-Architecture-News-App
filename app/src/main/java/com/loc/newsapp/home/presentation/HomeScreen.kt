@@ -32,6 +32,8 @@ import com.loc.newsapp.core.presentation.components.NewsSearchBar
 import com.loc.newsapp.core.presentation.constants.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constants.Dimensions.MediumPadding1
 
+const val MAX_ARTICLES_PER_SCREEN = 10
+
 @Composable
 fun HomeScreenRoot(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
   HomeScreen(
@@ -41,11 +43,7 @@ fun HomeScreenRoot(navController: NavController, viewModel: HomeViewModel = hilt
           is HomeAction.NavigateToSearchScreen -> navController.navigate(SearchScreenRoute)
           is HomeAction.NavigateToArticleDetails ->
               navController.navigate(ArticleDetailsRoute(article = action.article))
-
-          else -> Unit
         }
-
-        viewModel.onAction(action)
       })
 }
 
@@ -58,7 +56,7 @@ fun HomeScreen(state: HomeState, onAction: (HomeAction) -> Unit) {
 
     val titles by remember {
       derivedStateOf {
-        if (articles.itemCount > 10) {
+        if (articles.itemCount > MAX_ARTICLES_PER_SCREEN) {
           articles.itemSnapshotList.items.slice(IntRange(start = 0, endInclusive = 9)).joinToString(
               separator = " \uD83D\uDFE5 ") {
                 it.title

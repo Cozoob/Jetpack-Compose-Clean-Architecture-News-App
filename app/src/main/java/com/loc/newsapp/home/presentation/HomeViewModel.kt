@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.loc.newsapp.core.domain.use_case.news.NewsUseCases
+import com.loc.newsapp.core.domain.useCase.news.NewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -18,12 +18,6 @@ class HomeViewModel @Inject constructor(private val newsUseCases: NewsUseCases) 
 
   init {
     loadNews()
-  }
-
-  fun onAction(action: HomeAction) {
-    //        when(action) {
-    ////            is HomeAction.SomeAction -> { }
-    //        }
   }
 
   private fun loadNews() {

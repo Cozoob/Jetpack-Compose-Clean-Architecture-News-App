@@ -16,7 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.loc.newsapp.R
-import com.loc.newsapp.article_details.presentation.ArticleDetailsScreenRoot
+import com.loc.newsapp.articleDetails.presentation.ArticleDetailsScreenRoot
 import com.loc.newsapp.boarding.presentation.OnBoardingScreenRoot
 import com.loc.newsapp.bookmark.presentation.BookmarkScreenRoot
 import com.loc.newsapp.core.domain.model.Article
