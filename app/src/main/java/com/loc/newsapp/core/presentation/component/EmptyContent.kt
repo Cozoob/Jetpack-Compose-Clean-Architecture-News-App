@@ -23,7 +23,7 @@ import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 @Composable
 fun EmptyContent(modifier: Modifier = Modifier) {
   Column(
-      modifier = Modifier.fillMaxSize(),
+      modifier = modifier.fillMaxSize(),
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center) {
         Icon(

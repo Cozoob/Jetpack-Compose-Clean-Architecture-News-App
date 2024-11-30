@@ -15,6 +15,7 @@ import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 @Composable
 fun NewsButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
   Button(
+      modifier = modifier,
       onClick = onClick,
       colors =
           ButtonDefaults.buttonColors(

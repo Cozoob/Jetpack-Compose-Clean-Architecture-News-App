@@ -26,12 +26,13 @@ import com.loc.newsapp.navigation.domain.BottomNavigationItem
 
 @Composable
 fun BottomNavigation(
+    modifier: Modifier = Modifier,
     items: List<BottomNavigationItem>,
     selectedItem: Int,
     onItemClick: (Int) -> Unit
 ) {
   NavigationBar(
-      modifier = Modifier.fillMaxWidth(),
+      modifier = modifier.fillMaxWidth(),
       containerColor = MaterialTheme.colorScheme.background,
       tonalElevation = 10.dp) {
         items.forEachIndexed { index, item ->

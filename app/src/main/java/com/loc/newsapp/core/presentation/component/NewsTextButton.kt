@@ -11,7 +11,7 @@ import com.loc.newsapp.core.ui.theme.WhiteGray
 
 @Composable
 fun NewsTextButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
-  TextButton(onClick = onClick) {
+  TextButton(modifier = modifier, onClick = onClick) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),

@@ -10,7 +10,7 @@ import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 
 @Composable
 fun NewsCircularProgressIndicator(modifier: Modifier = Modifier) {
-  Box(modifier = Modifier.fillMaxSize().then(modifier), contentAlignment = Alignment.Center) {
+  Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
     CircularProgressIndicator()
   }
 }
