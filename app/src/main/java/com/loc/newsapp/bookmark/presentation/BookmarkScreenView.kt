@@ -82,7 +82,8 @@ private fun BookmarkScreenView_ThreeArticles_Preview() {
                             Article(
                                 author = "John Smith",
                                 content =
-                                    "Recent studies reveal that advancements in AI technology are transforming industries at an unprecedented rate.",
+                                    "Recent studies reveal that advancements in AI technology are " +
+                                        "transforming industries at an unprecedented rate.",
                                 description =
                                     "An in-depth look at how AI is reshaping the future of work and daily life.",
                                 publishedAt = "2024.11.20",
@@ -93,9 +94,11 @@ private fun BookmarkScreenView_ThreeArticles_Preview() {
                             Article(
                                 author = "Emily Johnson",
                                 content =
-                                    "NASA announces its ambitious plans for a new lunar base, aiming to support long-term exploration missions.",
+                                    "NASA announces its ambitious plans for a new lunar base, aiming" +
+                                        " to support long-term exploration missions.",
                                 description =
-                                    "NASA's latest project focuses on building a sustainable lunar base to advance space exploration.",
+                                    "NASA's latest project focuses on building a sustainable lunar " +
+                                        "base to advance space exploration.",
                                 publishedAt = "2024.12.01",
                                 source = Source(id = "nasa", name = "NASA"),
                                 title = "NASA Unveils Plans for Lunar Base",
@@ -104,9 +107,11 @@ private fun BookmarkScreenView_ThreeArticles_Preview() {
                             Article(
                                 author = "Michael Brown",
                                 content =
-                                    "Global markets respond positively to new economic policies introduced at the G20 summit, sparking optimism among investors.",
+                                    "Global markets respond positively to new economic policies " +
+                                        "introduced at the G20 summit, sparking optimism among investors.",
                                 description =
-                                    "The G20 summit brings promising economic reforms, boosting global market confidence.",
+                                    "The G20 summit brings promising economic reforms, boosting " +
+                                        "global market confidence.",
                                 publishedAt = "2024.11.28",
                                 source = Source(id = "financial-times", name = "Financial Times"),
                                 title = "G20 Summit: Economic Policies Drive Market Surge",

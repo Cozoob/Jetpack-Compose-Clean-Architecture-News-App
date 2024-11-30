@@ -113,7 +113,8 @@ private fun ArticleDetailsScreenView_SampleArticle_Preview() {
                         Article(
                             author = "John Smith",
                             content =
-                                "Recent studies reveal that advancements in AI technology are transforming industries at an unprecedented rate.",
+                                "Recent studies reveal that advancements in AI technology are " +
+                                    "transforming industries at an unprecedented rate.",
                             description =
                                 "An in-depth look at how AI is reshaping the future of work and daily life.",
                             publishedAt = "2024.11.20",
