@@ -103,7 +103,7 @@ private fun ArticleDetailsScreenViewContent(
 
 @DayNightInSystemUiPreviews
 @Composable
-private fun ArticleDetailsScreenView_Default_Preview() {
+private fun ArticleDetailsScreenView_SampleArticle_Preview() {
   NewsAppPreviewSurface(
       content = {
         ArticleDetailsScreenViewContent(
@@ -111,14 +111,16 @@ private fun ArticleDetailsScreenView_Default_Preview() {
                 ArticleDetailsScreenState(
                     article =
                         Article(
-                            author = "Marcin Kozub",
-                            content = "Lorem ipsum dolor sit",
-                            description = "Lorem ipsum dolor sit",
-                            publishedAt = "2024.11.09",
-                            source = Source(id = "google", name = "google"),
-                            title = "Wielki powrót",
-                            url = "",
-                            urlToImage = "")),
+                            author = "John Smith",
+                            content =
+                                "Recent studies reveal that advancements in AI technology are transforming industries at an unprecedented rate.",
+                            description =
+                                "An in-depth look at how AI is reshaping the future of work and daily life.",
+                            publishedAt = "2024.11.20",
+                            source = Source(id = "techcrunch", name = "TechCrunch"),
+                            title = "The Rise of AI: Opportunities and Challenges",
+                            url = "https://www.techcrunch.com/articles/rise-of-ai",
+                            urlToImage = "https://www.techcrunch.com/images/ai-article.jpg")),
             onAction = {})
       })
 }

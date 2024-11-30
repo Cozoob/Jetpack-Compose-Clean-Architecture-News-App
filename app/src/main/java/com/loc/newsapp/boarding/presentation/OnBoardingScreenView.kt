@@ -1,6 +1,5 @@
 package com.loc.newsapp.boarding.presentation
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,26 +11,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
 import com.loc.newsapp.boarding.presentation.component.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.component.PageIndicator
+import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
+import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsButton
 import com.loc.newsapp.core.presentation.component.NewsCircularProgressIndicator
 import com.loc.newsapp.core.presentation.component.NewsTextButton
 import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding2
 import com.loc.newsapp.core.presentation.constant.Dimensions.PageIndicatorWidth
-import com.loc.newsapp.ui.theme.NewsAppTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -107,71 +105,58 @@ private fun OnBoardingScreenViewContent(
   }
 }
 
-@Preview(name = "On Boarding Screen, 3 pages, light mode", group = "Pages", showBackground = true)
-@Preview(
-    name = "On Boarding Screen, 3 pages, dark mode",
-    group = "Pages",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightInSystemUiPreviews
 @PreviewScreenSizes
 @Composable
-private fun OnBoardingScreenPreviewWithPages() {
-  NewsAppTheme {
-    Surface {
-      OnBoardingScreenViewContent(
-          state =
-              OnBoardingScreenState(
-                  pages =
-                      listOf(
-                          Page(
-                              title = "Stay Informed, Anytime, Anywhere",
-                              description =
-                                  "Get the latest news from trusted sources worldwide, delivered straight " +
-                                      "to your device. Stay updated with breaking stories, " +
-                                      "local updates, and global events, all in one place.",
-                              image = R.drawable.onboarding1),
-                          Page(
-                              title = "Stay Informed, Anytime, Anywhere",
-                              description =
-                                  "Get the latest news from trusted sources worldwide, delivered " +
-                                      "straight to your device. Stay updated with breaking stories," +
-                                      " local updates, and global events, all in one place.",
-                              image = R.drawable.onboarding1),
-                          Page(
-                              title = "Stay Informed, Anytime, Anywhere",
-                              description =
-                                  "Get the latest news from trusted sources worldwide, delivered straight " +
-                                      "to your device. Stay updated with breaking stories, local updates," +
-                                      " and global events, all in one place.",
-                              image = R.drawable.onboarding1)),
-                  pageIndex = 0,
-                  isLoading = false,
-              ),
-          onAction = {})
-    }
-  }
+private fun OnBoardingScreenView_ThreePages_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        OnBoardingScreenViewContent(
+            state =
+                OnBoardingScreenState(
+                    pages =
+                        listOf(
+                            Page(
+                                title = "Stay Informed, Anytime, Anywhere",
+                                description =
+                                    "Get the latest news from trusted sources worldwide, delivered straight " +
+                                        "to your device. Stay updated with breaking stories, " +
+                                        "local updates, and global events, all in one place.",
+                                image = R.drawable.onboarding1),
+                            Page(
+                                title = "Stay Informed, Anytime, Anywhere",
+                                description =
+                                    "Get the latest news from trusted sources worldwide, delivered " +
+                                        "straight to your device. Stay updated with breaking stories," +
+                                        " local updates, and global events, all in one place.",
+                                image = R.drawable.onboarding1),
+                            Page(
+                                title = "Stay Informed, Anytime, Anywhere",
+                                description =
+                                    "Get the latest news from trusted sources worldwide, delivered straight " +
+                                        "to your device. Stay updated with breaking stories, local updates," +
+                                        " and global events, all in one place.",
+                                image = R.drawable.onboarding1)),
+                    pageIndex = 0,
+                    isLoading = false,
+                ),
+            onAction = {})
+      })
 }
 
-@Preview(
-    name = "On Boarding Screen, loading data, light mode", group = "Loading", showBackground = true)
-@Preview(
-    name = "On Boarding Screen, loading data, dark mode",
-    group = "Loading",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightInSystemUiPreviews
 @PreviewScreenSizes
 @Composable
-private fun OnBoardingScreenPreviewWithLoading() {
-  NewsAppTheme {
-    Surface {
-      OnBoardingScreenViewContent(
-          state =
-              OnBoardingScreenState(
-                  pages = emptyList(),
-                  pageIndex = 0,
-                  isLoading = true,
-              ),
-          onAction = {})
-    }
-  }
+private fun OnBoardingScreen_Loading_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        OnBoardingScreenViewContent(
+            state =
+                OnBoardingScreenState(
+                    pages = emptyList(),
+                    pageIndex = 0,
+                    isLoading = true,
+                ),
+            onAction = {})
+      })
 }

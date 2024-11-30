@@ -20,12 +20,14 @@ import com.loc.newsapp.articleDetails.presentation.ArticleDetailsScreenView
 import com.loc.newsapp.boarding.presentation.OnBoardingScreenView
 import com.loc.newsapp.bookmark.presentation.BookmarkScreenView
 import com.loc.newsapp.core.domain.model.Article
+import com.loc.newsapp.core.domain.model.DayNightPreviews
 import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
 import com.loc.newsapp.core.domain.route.BookmarkScreenRoute
 import com.loc.newsapp.core.domain.route.HomeScreenRoute
 import com.loc.newsapp.core.domain.route.IRoute
 import com.loc.newsapp.core.domain.route.OnBoardingScreenRoute
 import com.loc.newsapp.core.domain.route.SearchScreenRoute
+import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.home.presentation.HomeScreenView
 import com.loc.newsapp.navigation.domain.BottomNavigationItem
 import com.loc.newsapp.navigation.domain.CustomNavType
@@ -93,4 +95,10 @@ fun NavigationNewsApp(startRoute: IRoute) {
               composable<BookmarkScreenRoute> { BookmarkScreenView(navController = navController) }
             }
       }
+}
+
+@DayNightPreviews
+@Composable
+private fun NavigationNewsApp_StartHomeScreen_Preview() {
+  NewsAppPreviewSurface(content = { NavigationNewsApp(startRoute = HomeScreenRoute) })
 }

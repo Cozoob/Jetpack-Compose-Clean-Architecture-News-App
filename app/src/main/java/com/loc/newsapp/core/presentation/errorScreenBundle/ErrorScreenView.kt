@@ -1,6 +1,5 @@
 package com.loc.newsapp.core.presentation.errorScreenBundle
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,18 +22,18 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
-import com.loc.newsapp.ui.theme.NewsAppTheme
+import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
+import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
 fun ErrorScreenView(error: LoadState.Error? = null) {
-    val viewModel = ErrorScreenViewModel(error = error)
+  val viewModel = ErrorScreenViewModel(error = error)
 
-    ErrorScreenViewContent(state = viewModel.state)
+  ErrorScreenViewContent(state = viewModel.state)
 }
 
 @Composable
@@ -58,14 +56,9 @@ private fun ErrorScreenViewContent(state: ErrorScreenState) {
             painter = painterResource(id = state.icon),
             contentDescription = null,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            modifier = Modifier
-                .size(120.dp)
-                .alpha(alphaAnimationValue)
-        )
+            modifier = Modifier.size(120.dp).alpha(alphaAnimationValue))
         Text(
-            modifier = Modifier
-                .padding(10.dp)
-                .alpha(alphaAnimationValue),
+            modifier = Modifier.padding(10.dp).alpha(alphaAnimationValue),
             text = state.message,
             style = MaterialTheme.typography.bodyMedium,
             color = if (isSystemInDarkTheme()) LightGray else DarkGray,
@@ -73,55 +66,29 @@ private fun ErrorScreenViewContent(state: ErrorScreenState) {
       }
 }
 
-@Preview(
-    name = "Error Screen, server error, light mode", group = "Server Error", showBackground = true)
-@Preview(
-    name = "Error Screen, server error, dark mode",
-    group = "Server Error",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightInSystemUiPreviews
 @Composable
-private fun EmptyScreenPreviewServerError() {
-  NewsAppTheme {
-      Surface { ErrorScreenView(error = LoadState.Error(error = SocketTimeoutException())) }
-  }
+private fun ErrorScreenView_ServerError_Preview() {
+  NewsAppPreviewSurface(
+      content = { ErrorScreenView(error = LoadState.Error(error = SocketTimeoutException())) })
 }
 
-@Preview(
-    name = "Error Screen, internet error, light mode",
-    group = "Internet Error",
-    showBackground = true)
-@Preview(
-    name = "Error Screen, internet error, dark mode",
-    group = "Internet Error",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightInSystemUiPreviews
 @Composable
-private fun EmptyScreenPreviewInternetError() {
-    NewsAppTheme { Surface { ErrorScreenView(error = LoadState.Error(error = ConnectException())) } }
+private fun ErrorScreenView_InternetError_Preview() {
+  NewsAppPreviewSurface(
+      content = { ErrorScreenView(error = LoadState.Error(error = ConnectException())) })
 }
 
-@Preview(
-    name = "Error Screen, unknown error, light mode",
-    group = "Unknown Error",
-    showBackground = true)
-@Preview(
-    name = "Error Screen, unknown error, dark mode",
-    group = "Unknown Error",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightInSystemUiPreviews
 @Composable
-private fun EmptyScreenPreviewUnknownError() {
-    NewsAppTheme { Surface { ErrorScreenView(error = LoadState.Error(error = Exception("UnknownError"))) } }
+private fun ErrorScreenView_UnknownError_Preview() {
+  NewsAppPreviewSurface(
+      content = { ErrorScreenView(error = LoadState.Error(error = Exception("UnknownError"))) })
 }
 
-@Preview(name = "Error Screen, no error, light mode", group = "No Error", showBackground = true)
-@Preview(
-    name = "Error Screen, no error, dark mode",
-    group = "No Error",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightInSystemUiPreviews
 @Composable
-private fun EmptyScreenPreviewNoError() {
-    NewsAppTheme { Surface { ErrorScreenView(error = null) } }
+private fun ErrorScreenView_NoError_Preview() {
+  NewsAppPreviewSurface(content = { ErrorScreenView(error = null) })
 }

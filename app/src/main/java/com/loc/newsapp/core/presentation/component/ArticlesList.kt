@@ -1,24 +1,22 @@
 package com.loc.newsapp.core.presentation.component
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.loc.newsapp.core.domain.model.Article
+import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.domain.model.Source
 import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding1
 import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 import com.loc.newsapp.core.presentation.extension.noItems
-import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
 fun ArticlesList(
@@ -106,16 +104,47 @@ private fun ShimmerEffect(modifier: Modifier = Modifier) {
   }
 }
 
-@Preview(name = "Article Card Shimmer Effect, light mode", showBackground = true)
-@Preview(
-    name = "Article Card Shimmer Effect, dark mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightPreviews
 @Composable
-private fun ArticlesListPreview() {
-  NewsAppTheme {
-    Surface {
-      //            ArticlesList()
-    }
-  }
+private fun ArticlesList_ThreeArticles_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        ArticlesList(
+            articles =
+                listOf(
+                    Article(
+                        author = "John Smith",
+                        content =
+                            "Recent studies reveal that advancements in AI technology are transforming industries at an unprecedented rate.",
+                        description =
+                            "An in-depth look at how AI is reshaping the future of work and daily life.",
+                        publishedAt = "2024.11.20",
+                        source = Source(id = "techcrunch", name = "TechCrunch"),
+                        title = "The Rise of AI: Opportunities and Challenges",
+                        url = "https://www.techcrunch.com/articles/rise-of-ai",
+                        urlToImage = "https://www.techcrunch.com/images/ai-article.jpg"),
+                    Article(
+                        author = "Emily Johnson",
+                        content =
+                            "NASA announces its ambitious plans for a new lunar base, aiming to support long-term exploration missions.",
+                        description =
+                            "NASA's latest project focuses on building a sustainable lunar base to advance space exploration.",
+                        publishedAt = "2024.12.01",
+                        source = Source(id = "nasa", name = "NASA"),
+                        title = "NASA Unveils Plans for Lunar Base",
+                        url = "https://www.nasa.gov/articles/lunar-base-announcement",
+                        urlToImage = "https://www.nasa.gov/images/lunar-base.jpg"),
+                    Article(
+                        author = "Michael Brown",
+                        content =
+                            "Global markets respond positively to new economic policies introduced at the G20 summit, sparking optimism among investors.",
+                        description =
+                            "The G20 summit brings promising economic reforms, boosting global market confidence.",
+                        publishedAt = "2024.11.28",
+                        source = Source(id = "financial-times", name = "Financial Times"),
+                        title = "G20 Summit: Economic Policies Drive Market Surge",
+                        url = "https://www.ft.com/content/g20-summit-markets",
+                        urlToImage = "https://www.ft.com/images/g20-summit.jpg")),
+            onClick = {})
+      })
 }

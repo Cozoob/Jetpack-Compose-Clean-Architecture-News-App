@@ -13,6 +13,6 @@ fun NewsAppPreviewSurface(content: @Composable () -> Unit) {
 
 @DayNightPreviews
 @Composable
-private fun NewsAppPreviewSurface_Default_Preview() {
+private fun NewsAppPreviewSurface_HelloWorld_Preview() {
   NewsAppPreviewSurface(content = { Text(text = "Hello World!") })
 }

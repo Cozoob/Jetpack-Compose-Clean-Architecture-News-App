@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import com.loc.newsapp.R
-import kotlinx.coroutines.launch
 import java.net.ConnectException
 import java.net.SocketTimeoutException
+import kotlinx.coroutines.launch
 
 class ErrorScreenViewModel(error: LoadState.Error? = null) : ViewModel() {
   var state by mutableStateOf(ErrorScreenState(error = error))
@@ -42,7 +42,7 @@ class ErrorScreenViewModel(error: LoadState.Error? = null) : ViewModel() {
       }
     }
 
-    return "You have not saved news so far !"
+    return "No content."
   }
 
   private fun getIcon(): Int {

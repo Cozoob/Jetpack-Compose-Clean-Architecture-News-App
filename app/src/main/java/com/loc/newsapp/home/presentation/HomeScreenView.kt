@@ -22,15 +22,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.loc.newsapp.R
+import com.loc.newsapp.core.domain.model.Article
+import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
+import com.loc.newsapp.core.domain.model.Source
 import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
 import com.loc.newsapp.core.domain.route.SearchScreenRoute
 import com.loc.newsapp.core.presentation.component.ArticlesList
+import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsCircularProgressIndicator
 import com.loc.newsapp.core.presentation.component.NewsSearchBar
 import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
+import kotlinx.coroutines.flow.flowOf
 
 const val MAX_ARTICLES_PER_SCREEN = 10
 
@@ -93,4 +99,37 @@ private fun HomeScreenViewContent(state: HomeScreenState, onAction: (HomeScreenA
           onClick = { onAction.invoke(HomeScreenAction.NavigateToArticleDetails(article = it)) })
     }
   }
+}
+
+@DayNightInSystemUiPreviews
+@Composable
+private fun HomeScreenView_Loading_Preview() {
+  NewsAppPreviewSurface(
+      content = { HomeScreenViewContent(state = HomeScreenState(), onAction = {}) })
+}
+
+@DayNightInSystemUiPreviews
+@Composable
+private fun HomeScreenView_ShimmerArticles_Preview() {
+  val news =
+      flowOf(
+          PagingData.from(
+              listOf(
+                  Article(
+                      author = "John Smith",
+                      content =
+                          "Recent studies reveal that advancements in AI technology are transforming industries at an unprecedented rate.",
+                      description =
+                          "An in-depth look at how AI is reshaping the future of work and daily life.",
+                      publishedAt = "2024.11.20",
+                      source = Source(id = "techcrunch", name = "TechCrunch"),
+                      title = "The Rise of AI: Opportunities and Challenges",
+                      url = "https://www.techcrunch.com/articles/rise-of-ai",
+                      urlToImage = "https://www.techcrunch.com/images/ai-article.jpg"))))
+
+  NewsAppPreviewSurface(
+      content = {
+        HomeScreenViewContent(
+            state = HomeScreenState(isLoading = false, news = news), onAction = {})
+      })
 }

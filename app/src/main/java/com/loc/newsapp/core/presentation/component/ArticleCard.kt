@@ -1,6 +1,5 @@
 package com.loc.newsapp.core.presentation.component
 
-import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,17 +22,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
 import com.loc.newsapp.core.domain.model.Article
+import com.loc.newsapp.core.domain.model.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Source
 import com.loc.newsapp.core.presentation.constant.Dimensions.ArticleCardSize
 import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding1
 import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
 fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> Unit) {
@@ -42,17 +39,13 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
 
   Row(modifier = modifier.clickable { onClick() }) {
     AsyncImage(
-        modifier = Modifier
-            .size(ArticleCardSize)
-            .clip(MaterialTheme.shapes.medium),
+        modifier = Modifier.size(ArticleCardSize).clip(MaterialTheme.shapes.medium),
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(context).data(article.urlToImage).build(),
         contentDescription = null)
     Column(
         verticalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier
-            .padding(horizontal = ExtraSmallPadding2)
-            .height(ArticleCardSize)) {
+        modifier = Modifier.padding(horizontal = ExtraSmallPadding2).height(ArticleCardSize)) {
           Text(
               text = article.title,
               style = MaterialTheme.typography.bodyMedium,
@@ -79,28 +72,24 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
   }
 }
 
-@Preview(name = "Article Card, light mode", showBackground = true)
-@Preview(
-    name = "Article Card, dark mode",
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightPreviews
 @Composable
-private fun ArticleCardPreview() {
-  val article =
-      Article(
-          author = "Joel Khalili",
-          content =
-              "Peter Todd is standing on the upper floor of a dilapidated industrial building somewhere" +
-                  " in Czechia, chuckling under his breath. He has just been accused on camera of " +
-                  "being Satoshi Nakamoto, the Bitc… [+3043 chars]",
-          description =
-              "A new HBO documentary takes a swing at uncovering the real identity of Satoshi Nakamoto," +
-                  " inventor of Bitcoin. But without incontrovertible proof, the myth lives on.",
-          publishedAt = "2024-10-09T01:00:00Z",
-          source = Source(id = "wired", name = "Wired"),
-          title = "Unmasking Bitcoin Creator Satoshi Nakamoto—Again",
-          url = "",
-          urlToImage = "")
-
-  NewsAppTheme { Surface { ArticleCard(article = article, onClick = {}) } }
+private fun ArticleCard_SampleArticle_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        ArticleCard(
+            article =
+                Article(
+                    author = "John Smith",
+                    content =
+                        "Recent studies reveal that advancements in AI technology are transforming industries at an unprecedented rate.",
+                    description =
+                        "An in-depth look at how AI is reshaping the future of work and daily life.",
+                    publishedAt = "2024.11.20",
+                    source = Source(id = "techcrunch", name = "TechCrunch"),
+                    title = "The Rise of AI: Opportunities and Challenges",
+                    url = "https://www.techcrunch.com/articles/rise-of-ai",
+                    urlToImage = "https://www.techcrunch.com/images/ai-article.jpg"),
+            onClick = {})
+      })
 }

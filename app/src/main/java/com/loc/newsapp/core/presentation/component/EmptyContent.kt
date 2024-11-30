@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
+import com.loc.newsapp.core.domain.model.DayNightPreviews
 
 @Composable
 fun EmptyContent(modifier: Modifier = Modifier) {
@@ -29,9 +30,7 @@ fun EmptyContent(modifier: Modifier = Modifier) {
             painter = painterResource(id = R.drawable.ic_logo),
             contentDescription = null,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            modifier = Modifier
-                .size(120.dp)
-                .alpha(alpha = 0.3f))
+            modifier = Modifier.size(120.dp).alpha(alpha = 0.3f))
         Text(
             modifier = Modifier.padding(10.dp),
             text = "No content.",
@@ -39,4 +38,10 @@ fun EmptyContent(modifier: Modifier = Modifier) {
             color = if (isSystemInDarkTheme()) LightGray else DarkGray,
         )
       }
+}
+
+@DayNightPreviews
+@Composable
+private fun EmptyContent_Default_Preview() {
+  NewsAppPreviewSurface(content = { EmptyContent() })
 }

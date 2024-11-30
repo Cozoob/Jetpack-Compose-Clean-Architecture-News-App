@@ -12,8 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
 import com.loc.newsapp.core.presentation.component.ArticlesList
+import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsSearchBar
 import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
 import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
@@ -62,4 +64,31 @@ private fun SearchScreenViewContent(
           })
     }
   }
+}
+
+@DayNightInSystemUiPreviews
+@Composable
+private fun SearchScreenView_Default_Preview() {
+  NewsAppPreviewSurface(
+      content = { SearchScreenViewContent(state = SearchScreenState(), onAction = {}) })
+}
+
+@DayNightInSystemUiPreviews
+@Composable
+private fun SearchScreenView_SearchPolandShimmerEffect_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        SearchScreenViewContent(state = SearchScreenState(searchQuery = "Poland"), onAction = {})
+      })
+}
+
+@DayNightInSystemUiPreviews
+@Composable
+private fun SearchScreenView_SearchPolandNoResults_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        SearchScreenViewContent(
+            state = SearchScreenState(searchQuery = "Poland", isEmptyArticles = true),
+            onAction = {})
+      })
 }

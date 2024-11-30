@@ -1,6 +1,5 @@
 package com.loc.newsapp.core.presentation.component
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -11,7 +10,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -25,11 +23,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
 import com.loc.newsapp.R
+import com.loc.newsapp.core.domain.model.DayNightPreviews
 import com.loc.newsapp.core.presentation.constant.Dimensions.IconSize
 import com.loc.newsapp.core.presentation.extension.searchBar
-import com.loc.newsapp.ui.theme.NewsAppTheme
 
 @Composable
 fun NewsSearchBar(
@@ -58,10 +55,7 @@ fun NewsSearchBar(
 
   Box(modifier = modifier) {
     TextField(
-        modifier = Modifier
-            .focusRequester(focusRequester)
-            .fillMaxWidth()
-            .searchBar(),
+        modifier = Modifier.focusRequester(focusRequester).fillMaxWidth().searchBar(),
         value = text,
         onValueChange = onValueChange,
         readOnly = readOnly,
@@ -96,37 +90,19 @@ fun NewsSearchBar(
   }
 }
 
-@Preview(
-    name = "NewsSearchBar, no text, light mode",
-    group = "NewsSearchBarNoText",
-    showBackground = true)
-@Preview(
-    name = "NewsSearchBar, no text, dark mode",
-    group = "NewsSearchBarNoText",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightPreviews
 @Composable
-private fun NewsSearchBarNoTextPreview() {
-  NewsAppTheme {
-    Surface { NewsSearchBar(text = "", readOnly = false, onValueChange = {}, onSearch = {}) }
-  }
+private fun NewsSearchBar_NoText_Preview() {
+  NewsAppPreviewSurface(
+      content = { NewsSearchBar(text = "", readOnly = false, onValueChange = {}, onSearch = {}) })
 }
 
-@Preview(
-    name = "NewsSearchBar, with text, light mode",
-    group = "NewsSearchBarWithText",
-    showBackground = true)
-@Preview(
-    name = "NewsSearchBar, with text, dark mode",
-    group = "NewsSearchBarWithText",
-    uiMode = UI_MODE_NIGHT_YES,
-    showBackground = true)
+@DayNightPreviews
 @Composable
-private fun NewsSearchBarWithTextPreview() {
-  NewsAppTheme {
-    Surface {
-      NewsSearchBar(
-          text = "Lorem Ipsum Dolor Sit", readOnly = false, onValueChange = {}, onSearch = {})
-    }
-  }
+private fun NewsSearchBar_FilledText_Preview() {
+  NewsAppPreviewSurface(
+      content = {
+        NewsSearchBar(
+            text = "Lorem Ipsum Dolor Sit", readOnly = false, onValueChange = {}, onSearch = {})
+      })
 }
