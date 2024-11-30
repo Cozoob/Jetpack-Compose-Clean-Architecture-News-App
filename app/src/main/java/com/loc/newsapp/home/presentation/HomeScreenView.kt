@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -76,7 +77,7 @@ private fun HomeScreenViewContent(state: HomeScreenState, onAction: (HomeScreenA
     Column(modifier = Modifier.fillMaxSize().padding(top = BIG_PADDING).statusBarsPadding()) {
       Image(
           painter = painterResource(id = R.drawable.icon_logo),
-          contentDescription = "Logo Icon",
+          contentDescription = stringResource(id = R.string.common_icon_logo_contentDescription),
           modifier = Modifier.width(150.dp).height(30.dp).padding(horizontal = BIG_PADDING))
       Spacer(modifier = Modifier.height(BIG_PADDING))
       NewsSearchBar(

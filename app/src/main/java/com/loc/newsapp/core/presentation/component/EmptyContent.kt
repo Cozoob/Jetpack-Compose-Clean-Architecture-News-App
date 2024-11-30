@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
@@ -28,12 +29,12 @@ fun EmptyContent(modifier: Modifier = Modifier) {
       verticalArrangement = Arrangement.Center) {
         Icon(
             painter = painterResource(id = R.drawable.icon_logo),
-            contentDescription = "Logo Icon",
+            contentDescription = stringResource(id = R.string.common_icon_logo_contentDescription),
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
             modifier = Modifier.size(120.dp).alpha(alpha = 0.3f))
         Text(
             modifier = Modifier.padding(10.dp),
-            text = "No content.",
+            text = stringResource(id = R.string.core_text_noContent_text),
             style = MaterialTheme.typography.bodyMedium,
             color = if (isSystemInDarkTheme()) LightGray else DarkGray,
         )

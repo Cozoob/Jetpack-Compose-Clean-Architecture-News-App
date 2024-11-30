@@ -8,8 +8,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.loc.newsapp.R
 import com.loc.newsapp.bookmark.domain.ArticlesUseCases
 import com.loc.newsapp.core.domain.model.Article
+import com.loc.newsapp.core.presentation.util.UiText
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -61,12 +63,20 @@ constructor(
 
   private suspend fun upsertArticle() {
     articlesUseCases.upsertArticle(article = article)
-    state = state.copy(isArticleBookmarked = true, toastMessage = "Article saved!")
+    state =
+        state.copy(
+            isArticleBookmarked = true,
+            toastMessage =
+                UiText.StringResource(resId = R.string.articleDetails_toastMessage_articleSaved))
   }
 
   private suspend fun deleteArticle() {
     articlesUseCases.deleteArticle(article = article)
-    state = state.copy(isArticleBookmarked = false, toastMessage = "Article removed!")
+    state =
+        state.copy(
+            isArticleBookmarked = false,
+            toastMessage =
+                UiText.StringResource(resId = R.string.articleDetails_toastMessage_articleRemoved))
   }
 
   private fun shareArticle(context: Context) {

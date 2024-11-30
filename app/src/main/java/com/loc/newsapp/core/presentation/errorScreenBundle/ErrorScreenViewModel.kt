@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import com.loc.newsapp.R
+import com.loc.newsapp.core.presentation.util.UiText
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import kotlinx.coroutines.launch
@@ -25,24 +26,24 @@ class ErrorScreenViewModel(error: LoadState.Error? = null) : ViewModel() {
     }
   }
 
-  private fun getErrorMessage(): String {
+  private fun getErrorMessage(): UiText {
     if (state.error != null) {
       return when (state.error?.error) {
         is SocketTimeoutException -> {
-          "Server Unavailable."
+          UiText.StringResource(resId = R.string.core_text_serverUnavailable_errorMessage)
         }
 
         is ConnectException -> {
-          "Internet Unavailable."
+          UiText.StringResource(resId = R.string.core_text_internetUnavailable_errorMessage)
         }
 
         else -> {
-          "Unknown Error."
+          UiText.StringResource(resId = R.string.core_text_unknownError_errorMessage)
         }
       }
     }
 
-    return "No content."
+    return UiText.StringResource(resId = R.string.core_text_noContent_errorMessage)
   }
 
   private fun getIcon(): Int {

@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -60,8 +61,10 @@ private fun ArticleDetailsScreenViewContent(
 ) {
   Column(modifier = Modifier.fillMaxSize().statusBarsPadding()) {
     val context = LocalContext.current
-    if (state.toastMessage.isNotBlank()) {
-      Toast.makeText(context, state.toastMessage, Toast.LENGTH_SHORT).show()
+    val toastMessage = state.toastMessage.asString()
+
+    if (toastMessage.isNotBlank()) {
+      Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
     }
     ArticleDetailsTopBar(
         isBookmarked = state.isArticleBookmarked,
@@ -84,7 +87,9 @@ private fun ArticleDetailsScreenViewContent(
                     ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
                 contentDescription = state.article.title,
                 contentScale = ContentScale.Crop,
-                placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal))
+                placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal),
+                error = painterResource(id = R.drawable.image_no_image_available))
+
             Spacer(modifier = Modifier.height(BIG_PADDING))
             Text(
                 text = state.article.title,

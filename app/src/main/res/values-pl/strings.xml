@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appName">Wiadomości</string>
+    <string name="articleDetails_toastMessage_articleRemoved">Artykuł usunięty!</string>
+    <string name="articleDetails_toastMessage_articleSaved">Artykuł zapisany!</string>
+    <string name="boarding_button_back_label">Powrót</string>
+    <string name="boarding_button_getStarted_label">Zaczynajmy</string>
+    <string name="boarding_button_next_label">Następny</string>
+    <string name="bookmark_text_bookmarks_screenHeader">Zakładki</string>
+    <string name="common_icon_backArrow_contentDescription">Ikona strzałki wstecz.</string>
+    <string name="common_icon_bookmark_contentDescription">Ikona zakładki.</string>
+    <string name="common_icon_logo_contentDescription">Ikona logo.</string>
+    <string name="common_icon_network_contentDescription">Ikona sieci.</string>
+    <string name="common_icon_search_contentDescription">Ikona wyszukiwania.</string>
+    <string name="common_icon_share_contentDescription">Ikona udostępniania.</string>
+    <string name="common_icon_time_contentDescription">Ikona czasu.</string>
+    <string name="core_asyncImage_articleImage_contentDescription">Artykuł o tytule: %s . Artykuł o opisie: %s.</string>
+    <string name="core_text_internetUnavailable_errorMessage">Internet niedostępny.</string>
+    <string name="core_text_noContent_errorMessage">Brak treści.</string>
+    <string name="core_text_noContent_text">Brak treści.</string>
+    <string name="core_text_search_placeholder">Szukaj</string>
+    <string name="core_text_serverUnavailable_errorMessage">Serwer niedostępny.</string>
+    <string name="core_text_unknownError_errorMessage">Nieznany błąd.</string>
+    <string name="navigation_bottomNavigationItem_bookmarks_text">Zakładki</string>
+    <string name="navigation_bottomNavigationItem_home_text">Główna</string>
+    <string name="navigation_bottomNavigationItem_search_text">Wyszukiwarka</string>
+    <string name="navigation_icon_bottomNavigation_contentDescription">Ikona nawigacji dolnej.</string>
+</resources>

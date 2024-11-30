@@ -4,6 +4,8 @@ import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
 
 class PageStaticService : IPageDAO {
+  // I do not translate it since it should be done by this "external" service.
+  // I can pass in the future the language parameter to return proper strings.
   override fun getPages(): List<Page> {
     return listOf(
         Page(

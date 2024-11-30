@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loc.newsapp.R
@@ -29,6 +30,7 @@ import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsButton
 import com.loc.newsapp.core.presentation.component.NewsCircularProgressIndicator
 import com.loc.newsapp.core.presentation.component.NewsTextButton
+import com.loc.newsapp.core.presentation.util.UiText
 import kotlinx.coroutines.launch
 
 @Composable
@@ -42,12 +44,29 @@ private fun OnBoardingScreenViewContent(
     onAction: (OnBoardingScreenAction) -> Unit
 ) {
   val pagerState = rememberPagerState(initialPage = state.pageIndex) { state.pages.size }
+  val context = LocalContext.current
   val buttonState = remember {
     derivedStateOf {
       when (pagerState.currentPage) {
-        0 -> listOf("", "Next")
-        1 -> listOf("Back", "Next")
-        2 -> listOf("Back", "Get Started")
+        0 ->
+            listOf(
+                "",
+                UiText.StringResource(resId = R.string.boarding_button_next_label)
+                    .asString(context))
+
+        1 ->
+            listOf(
+                UiText.StringResource(resId = R.string.boarding_button_back_label)
+                    .asString(context),
+                UiText.StringResource(resId = R.string.boarding_button_next_label)
+                    .asString(context))
+
+        2 ->
+            listOf(
+                UiText.StringResource(resId = R.string.boarding_button_back_label)
+                    .asString(context),
+                UiText.StringResource(resId = R.string.boarding_button_getStarted_label)
+                    .asString(context))
         else -> listOf("", "")
       }
     }

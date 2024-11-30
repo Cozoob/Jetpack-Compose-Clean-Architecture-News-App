@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -28,6 +29,7 @@ import com.loc.newsapp.core.domain.route.IRoute
 import com.loc.newsapp.core.domain.route.OnBoardingScreenRoute
 import com.loc.newsapp.core.domain.route.SearchScreenRoute
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
+import com.loc.newsapp.core.presentation.util.UiText
 import com.loc.newsapp.home.presentation.HomeScreenView
 import com.loc.newsapp.navigation.domain.BottomNavigationItem
 import com.loc.newsapp.navigation.domain.CustomNavType
@@ -37,12 +39,26 @@ import kotlin.reflect.typeOf
 
 @Composable
 fun NavigationNewsApp(startRoute: IRoute) {
+  val context = LocalContext.current
 
   val bottomNavigationItems = remember {
     listOf(
-        BottomNavigationItem(icon = R.drawable.icon_home, text = "Home"),
-        BottomNavigationItem(icon = R.drawable.icon_search, text = "Search"),
-        BottomNavigationItem(icon = R.drawable.icon_bookmark, text = "Bookmark"))
+        BottomNavigationItem(
+            icon = R.drawable.icon_home,
+            text =
+                UiText.StringResource(resId = R.string.navigation_bottomNavigationItem_home_text)
+                    .asString(context)),
+        BottomNavigationItem(
+            icon = R.drawable.icon_search,
+            text =
+                UiText.StringResource(resId = R.string.navigation_bottomNavigationItem_search_text)
+                    .asString(context)),
+        BottomNavigationItem(
+            icon = R.drawable.icon_bookmark,
+            text =
+                UiText.StringResource(
+                        resId = R.string.navigation_bottomNavigationItem_bookmarks_text)
+                    .asString(context)))
   }
   val navController = rememberNavController()
   val backStackState = navController.currentBackStackEntryAsState().value

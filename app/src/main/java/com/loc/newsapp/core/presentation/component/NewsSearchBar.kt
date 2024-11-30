@@ -22,6 +22,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import com.loc.newsapp.R
 import com.loc.newsapp.core.constant.DimensionConstants.ICON_SIZE
@@ -62,13 +63,14 @@ fun NewsSearchBar(
         leadingIcon = {
           Icon(
               painter = painterResource(id = R.drawable.icon_search),
-              contentDescription = "Search Icon",
+              contentDescription =
+                  stringResource(id = R.string.common_icon_search_contentDescription),
               modifier = Modifier.size(ICON_SIZE),
               tint = colorResource(id = R.color.body))
         },
         placeholder = {
           Text(
-              text = "Search",
+              text = stringResource(id = R.string.core_text_search_placeholder),
               style = MaterialTheme.typography.bodySmall,
               color = colorResource(id = R.color.placeholder))
         },

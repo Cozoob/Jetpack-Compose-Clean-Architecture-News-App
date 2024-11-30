@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -44,8 +45,12 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(context).data(article.urlToImage).build(),
         contentDescription =
-            "Article of title: ${article.title}. Article of description: ${article.description}",
-        placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal))
+            stringResource(
+                id = R.string.core_asyncImage_articleImage_contentDescription,
+                article.title,
+                article.description),
+        placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal),
+        error = painterResource(id = R.drawable.image_no_image_available))
     Column(
         verticalArrangement = Arrangement.SpaceAround,
         modifier = Modifier.padding(horizontal = SMALL_PADDING).height(ARTICLE_CARD_SIZE)) {
@@ -63,7 +68,8 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
             Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))
             Icon(
                 painter = painterResource(id = R.drawable.icon_time),
-                contentDescription = "Time Icon",
+                contentDescription =
+                    stringResource(id = R.string.common_icon_time_contentDescription),
                 modifier = Modifier.size(11.dp))
             Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))
             Text(

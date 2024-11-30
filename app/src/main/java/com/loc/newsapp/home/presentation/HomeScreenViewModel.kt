@@ -8,12 +8,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.loc.newsapp.core.domain.useCase.news.NewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(private val newsUseCases: NewsUseCases) :
-  ViewModel() {
+    ViewModel() {
   var state by mutableStateOf(HomeScreenState())
     private set
 
@@ -25,7 +25,9 @@ class HomeScreenViewModel @Inject constructor(private val newsUseCases: NewsUseC
     viewModelScope.launch { state = state.copy(isLoading = true) }
 
     val news =
-        newsUseCases.getNews(sources = listOf("bbc-news", "abc-news")).cachedIn(viewModelScope)
+        newsUseCases
+            .getNews(sources = listOf("bbc-news", "abc-news", "tvp"))
+            .cachedIn(viewModelScope)
 
     viewModelScope.launch { state = state.copy(isLoading = false, news = news) }
   }

@@ -1,3 +1,27 @@
 <resources>
-    <string name="app_name">NewsApp</string>
+    <string name="appName">NewsApp</string>
+    <string name="articleDetails_toastMessage_articleRemoved">Article removed!</string>
+    <string name="articleDetails_toastMessage_articleSaved">Article saved!</string>
+    <string name="boarding_button_back_label">Back</string>
+    <string name="boarding_button_getStarted_label">Get Started</string>
+    <string name="boarding_button_next_label">Next</string>
+    <string name="bookmark_text_bookmarks_screenHeader">Bookmarks</string>
+    <string name="common_icon_backArrow_contentDescription">Back Arrow Icon.</string>
+    <string name="common_icon_bookmark_contentDescription">Bookmark Icon.</string>
+    <string name="common_icon_logo_contentDescription">Logo Icon.</string>
+    <string name="common_icon_network_contentDescription">Network Icon.</string>
+    <string name="common_icon_search_contentDescription">Search Icon.</string>
+    <string name="common_icon_share_contentDescription">Share Icon.</string>
+    <string name="common_icon_time_contentDescription">Time Icon.</string>
+    <string name="core_asyncImage_articleImage_contentDescription">Article of title: %s . Article of description: %s.</string>
+    <string name="core_text_internetUnavailable_errorMessage">Internet Unavailable.</string>
+    <string name="core_text_noContent_errorMessage">No content.</string>
+    <string name="core_text_noContent_text">No content.</string>
+    <string name="core_text_search_placeholder">Search</string>
+    <string name="core_text_serverUnavailable_errorMessage">Server Unavailable.</string>
+    <string name="core_text_unknownError_errorMessage">Unknown Error.</string>
+    <string name="navigation_bottomNavigationItem_bookmarks_text">Bookmarks</string>
+    <string name="navigation_bottomNavigationItem_home_text">Home</string>
+    <string name="navigation_bottomNavigationItem_search_text">Search</string>
+    <string name="navigation_icon_bottomNavigation_contentDescription">Bottom Navigation Icon.</string>
 </resources>

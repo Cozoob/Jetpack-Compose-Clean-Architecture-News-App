@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
 import com.loc.newsapp.core.constant.DimensionConstants.ICON_SIZE
@@ -43,7 +44,9 @@ fun BottomNavigation(
                 Column(horizontalAlignment = CenterHorizontally) {
                   Icon(
                       painter = painterResource(id = item.icon),
-                      contentDescription = "Bottom Navigation Icon",
+                      contentDescription =
+                          stringResource(
+                              id = R.string.navigation_icon_bottomNavigation_contentDescription),
                       modifier = Modifier.size(ICON_SIZE))
                   Spacer(modifier = Modifier.height(SMALL_PADDING))
                   Text(text = item.text, style = MaterialTheme.typography.labelSmall)

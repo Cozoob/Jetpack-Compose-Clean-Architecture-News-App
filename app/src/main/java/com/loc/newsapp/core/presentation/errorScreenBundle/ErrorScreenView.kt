@@ -59,7 +59,7 @@ private fun ErrorScreenViewContent(state: ErrorScreenState) {
             modifier = Modifier.size(120.dp).alpha(alphaAnimationValue))
         Text(
             modifier = Modifier.padding(10.dp).alpha(alphaAnimationValue),
-            text = state.message,
+            text = state.message.asString(),
             style = MaterialTheme.typography.bodyMedium,
             color = if (isSystemInDarkTheme()) LightGray else DarkGray,
         )

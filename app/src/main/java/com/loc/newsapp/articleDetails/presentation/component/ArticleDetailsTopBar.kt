@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.loc.newsapp.R
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
@@ -39,22 +40,30 @@ fun ArticleDetailsTopBar(
         IconButton(onClick = onBackClick) {
           Icon(
               painter = painterResource(id = R.drawable.icon_back_arrow),
-              contentDescription = "Back Arrow Icon")
+              contentDescription =
+                  stringResource(id = R.string.common_icon_backArrow_contentDescription))
         }
       },
       actions = {
         IconButton(onClick = onBookMarkClick) {
           val bookmarkIcon =
               if (isBookmarked) R.drawable.icon_bookmark_filled else R.drawable.icon_bookmark_border
-          Icon(painter = painterResource(id = bookmarkIcon), contentDescription = "Bookmark Icon")
+          Icon(
+              painter = painterResource(id = bookmarkIcon),
+              contentDescription =
+                  stringResource(id = R.string.common_icon_bookmark_contentDescription))
         }
         IconButton(onClick = onShareClick) {
-          Icon(imageVector = Icons.Default.Share, contentDescription = "Share Icon")
+          Icon(
+              imageVector = Icons.Default.Share,
+              contentDescription =
+                  stringResource(id = R.string.common_icon_share_contentDescription))
         }
         IconButton(onClick = onBrowsingClick) {
           Icon(
               painter = painterResource(id = R.drawable.icon_network),
-              contentDescription = "Network Icon")
+              contentDescription =
+                  stringResource(id = R.string.common_icon_network_contentDescription))
         }
       })
 }
