@@ -37,3 +37,4 @@ daemon
 
 # secrets file
 secrets.properties
+app/google-services.json
