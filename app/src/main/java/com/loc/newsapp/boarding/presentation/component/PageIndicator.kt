@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import com.loc.newsapp.core.constant.DimensionConstants.INDICATOR_SIZE
+import androidx.compose.ui.unit.dp
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.ui.theme.BlueGray
@@ -28,9 +28,7 @@ fun PageIndicator(
     repeat(numberOfPages) { pageIndex ->
       val backgroundColor = if (pageIndex == selectedPageIndex) selectedColor else unselectedColor
 
-      Box(
-          modifier =
-              Modifier.size(INDICATOR_SIZE).clip(CircleShape).background(color = backgroundColor))
+      Box(modifier = Modifier.size(14.dp).clip(CircleShape).background(color = backgroundColor))
     }
   }
 }

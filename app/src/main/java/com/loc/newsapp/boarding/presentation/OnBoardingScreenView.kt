@@ -18,13 +18,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
 import com.loc.newsapp.boarding.presentation.component.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.component.PageIndicator
 import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_BIG_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.PAGE_INDICATOR_WIDTH
 import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsButton
@@ -69,7 +69,7 @@ private fun OnBoardingScreenViewContent(
           horizontalArrangement = Arrangement.SpaceBetween,
           verticalAlignment = Alignment.CenterVertically) {
             PageIndicator(
-                modifier = Modifier.width(PAGE_INDICATOR_WIDTH),
+                modifier = Modifier.width(52.dp),
                 numberOfPages = state.pages.size,
                 selectedPageIndex = pagerState.currentPage)
             Row(verticalAlignment = Alignment.CenterVertically) {

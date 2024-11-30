@@ -6,13 +6,14 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import com.loc.newsapp.core.constant.LocalDatabaseConstants.DATA_STORE_NAME
-import com.loc.newsapp.core.constant.LocalDatabaseConstants.KEY_APP_ENTRY
 import com.loc.newsapp.core.domain.repository.ILocalDataRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class LocalLiteDataRepository(private val context: Context) : ILocalDataRepository {
+const val DATA_STORE_NAME = "userSettings"
+const val KEY_APP_ENTRY = "appEntry"
+
+class LocalDataRepository(private val context: Context) : ILocalDataRepository {
   override suspend fun saveAppEntry() {
     context.dataStore.edit { settings -> settings[PreferencesKeys.APP_ENTRY] = true }
   }

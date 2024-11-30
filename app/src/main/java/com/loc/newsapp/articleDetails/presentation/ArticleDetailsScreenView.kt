@@ -17,13 +17,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
 import com.loc.newsapp.articleDetails.presentation.component.ArticleDetailsTopBar
-import com.loc.newsapp.core.constant.DimensionConstants.ARTICLE_IMAGE_HEIGHT
 import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
 import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
@@ -78,10 +78,7 @@ private fun ArticleDetailsScreenViewContent(
             PaddingValues(top = BIG_PADDING, start = SMALL_PADDING, end = SMALL_PADDING)) {
           item {
             AsyncImage(
-                modifier =
-                    Modifier.fillMaxWidth()
-                        .height(ARTICLE_IMAGE_HEIGHT)
-                        .clip(MaterialTheme.shapes.medium),
+                modifier = Modifier.fillMaxWidth().height(248.dp).clip(MaterialTheme.shapes.medium),
                 model =
                     ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
                 contentDescription = null,

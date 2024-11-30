@@ -1,7 +1,7 @@
 package com.loc.newsapp.core
 
 import android.app.Application
-import com.loc.newsapp.core.data.local.LocalLiteDataRepository
+import com.loc.newsapp.core.data.local.LocalDataRepository
 import com.loc.newsapp.core.data.remote.INewsApi
 import com.loc.newsapp.core.data.remote.NewsRepository
 import com.loc.newsapp.core.domain.Constants.BASE_URL
@@ -24,7 +24,7 @@ object CoreModule {
   @Provides
   @Singleton
   fun provideLocalDataService(app: Application): ILocalDataRepository {
-    return LocalLiteDataRepository(app)
+    return LocalDataRepository(app)
   }
 
   @Provides
