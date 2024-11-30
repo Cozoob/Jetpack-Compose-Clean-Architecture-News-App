@@ -26,12 +26,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
+import com.loc.newsapp.core.constant.DimensionConstants.ARTICLE_CARD_SIZE
+import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.model.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Source
-import com.loc.newsapp.core.presentation.constant.Dimensions.ArticleCardSize
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding1
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
 
 @Composable
 fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> Unit) {
@@ -39,13 +39,13 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
 
   Row(modifier = modifier.clickable { onClick() }) {
     AsyncImage(
-        modifier = Modifier.size(ArticleCardSize).clip(MaterialTheme.shapes.medium),
+        modifier = Modifier.size(ARTICLE_CARD_SIZE).clip(MaterialTheme.shapes.medium),
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(context).data(article.urlToImage).build(),
         contentDescription = null)
     Column(
         verticalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier.padding(horizontal = ExtraSmallPadding2).height(ArticleCardSize)) {
+        modifier = Modifier.padding(horizontal = SMALL_PADDING).height(ARTICLE_CARD_SIZE)) {
           Text(
               text = article.title,
               style = MaterialTheme.typography.bodyMedium,
@@ -57,12 +57,12 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
                 text = article.source.name,
                 style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                 color = colorResource(id = R.color.body))
-            Spacer(modifier = Modifier.width(ExtraSmallPadding1))
+            Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))
             Icon(
                 painter = painterResource(id = R.drawable.ic_time),
                 contentDescription = null,
                 modifier = Modifier.size(11.dp))
-            Spacer(modifier = Modifier.width(ExtraSmallPadding1))
+            Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))
             Text(
                 text = article.publishedAt,
                 style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),

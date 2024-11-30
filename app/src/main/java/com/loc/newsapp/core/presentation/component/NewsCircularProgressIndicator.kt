@@ -6,7 +6,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 
 @Composable
 fun NewsCircularProgressIndicator(modifier: Modifier = Modifier) {

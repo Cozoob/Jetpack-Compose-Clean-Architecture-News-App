@@ -24,8 +24,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import com.loc.newsapp.R
-import com.loc.newsapp.core.domain.model.DayNightPreviews
-import com.loc.newsapp.core.presentation.constant.Dimensions.IconSize
+import com.loc.newsapp.core.constant.DimensionConstants.ICON_SIZE
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.extension.searchBar
 
 @Composable
@@ -63,7 +63,7 @@ fun NewsSearchBar(
           Icon(
               painter = painterResource(id = R.drawable.ic_search),
               contentDescription = null,
-              modifier = Modifier.size(IconSize),
+              modifier = Modifier.size(ICON_SIZE),
               tint = colorResource(id = R.color.body))
         },
         placeholder = {

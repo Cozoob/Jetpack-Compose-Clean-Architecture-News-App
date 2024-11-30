@@ -11,7 +11,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.loc.newsapp.core.presentation.initialLoadingScreenBundle.InitialLoadingScreenView
-import com.loc.newsapp.ui.theme.NewsAppTheme
+import com.loc.newsapp.core.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

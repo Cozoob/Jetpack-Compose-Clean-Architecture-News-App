@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
+import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
 import com.loc.newsapp.core.presentation.component.ArticlesList
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsSearchBar
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 
 @Composable
 fun SearchScreenView(
@@ -45,15 +45,15 @@ private fun SearchScreenViewContent(
     state: SearchScreenState,
     onAction: (SearchScreenAction) -> Unit
 ) {
-  Column(modifier = Modifier.padding(top = MediumPadding1).statusBarsPadding().fillMaxSize()) {
+  Column(modifier = Modifier.padding(top = BIG_PADDING).statusBarsPadding().fillMaxSize()) {
     NewsSearchBar(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = ExtraSmallPadding2),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = SMALL_PADDING),
         text = state.searchQuery,
         readOnly = false,
         focusSearchOnStart = true,
         onValueChange = { onAction.invoke(SearchScreenAction.UpdateSearchQuery(it)) },
         onSearch = { onAction.invoke(SearchScreenAction.SearchNews) })
-    Spacer(modifier = Modifier.height(MediumPadding1))
+    Spacer(modifier = Modifier.height(BIG_PADDING))
 
     state.articles.let {
       val articles = it.collectAsLazyPagingItems()

@@ -23,13 +23,13 @@ import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
 import com.loc.newsapp.boarding.presentation.component.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.component.PageIndicator
-import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
+import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.PAGE_INDICATOR_WIDTH
+import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsButton
 import com.loc.newsapp.core.presentation.component.NewsCircularProgressIndicator
 import com.loc.newsapp.core.presentation.component.NewsTextButton
-import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding2
-import com.loc.newsapp.core.presentation.constant.Dimensions.PageIndicatorWidth
 import kotlinx.coroutines.launch
 
 @Composable
@@ -63,11 +63,13 @@ private fun OnBoardingScreenViewContent(
       Spacer(modifier = Modifier.weight(1f))
       Row(
           modifier =
-              Modifier.fillMaxWidth().padding(horizontal = MediumPadding2).navigationBarsPadding(),
+              Modifier.fillMaxWidth()
+                  .padding(horizontal = EXTRA_BIG_PADDING)
+                  .navigationBarsPadding(),
           horizontalArrangement = Arrangement.SpaceBetween,
           verticalAlignment = Alignment.CenterVertically) {
             PageIndicator(
-                modifier = Modifier.width(PageIndicatorWidth),
+                modifier = Modifier.width(PAGE_INDICATOR_WIDTH),
                 numberOfPages = state.pages.size,
                 selectedPageIndex = pagerState.currentPage)
             Row(verticalAlignment = Alignment.CenterVertically) {

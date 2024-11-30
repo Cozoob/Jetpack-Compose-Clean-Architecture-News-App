@@ -7,9 +7,6 @@ import com.loc.newsapp.boarding.domain.IPageRepository
 import com.loc.newsapp.boarding.domain.useCase.appEntry.AppEntryUseCases
 import com.loc.newsapp.boarding.domain.useCase.appEntry.ReadAppEntry
 import com.loc.newsapp.boarding.domain.useCase.appEntry.WriteAppEntry
-import com.loc.newsapp.boarding.domain.useCase.page.AddPage
-import com.loc.newsapp.boarding.domain.useCase.page.DeletePage
-import com.loc.newsapp.boarding.domain.useCase.page.GetPage
 import com.loc.newsapp.boarding.domain.useCase.page.GetPages
 import com.loc.newsapp.boarding.domain.useCase.page.PageUseCases
 import com.loc.newsapp.core.domain.repository.ILocalDataRepository
@@ -39,11 +36,7 @@ object BoardingModule {
   @Provides
   @Singleton
   fun providePageUseCases(repository: IPageRepository): PageUseCases {
-    return PageUseCases(
-        getPages = GetPages(repository),
-        getPage = GetPage(repository),
-        deletePage = DeletePage(repository),
-        addPage = AddPage(repository))
+    return PageUseCases(getPages = GetPages(repository))
   }
 
   @Provides

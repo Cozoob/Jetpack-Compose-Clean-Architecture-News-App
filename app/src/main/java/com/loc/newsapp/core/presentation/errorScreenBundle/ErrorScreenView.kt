@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
-import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
+import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import java.net.ConnectException
 import java.net.SocketTimeoutException

@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
-import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 
 @Composable
 fun EmptyContent(modifier: Modifier = Modifier) {

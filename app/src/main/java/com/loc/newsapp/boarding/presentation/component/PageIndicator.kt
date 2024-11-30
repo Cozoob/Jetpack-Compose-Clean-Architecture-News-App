@@ -11,10 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.constant.DimensionConstants.INDICATOR_SIZE
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
-import com.loc.newsapp.core.presentation.constant.Dimensions.IndicatorSize
-import com.loc.newsapp.ui.theme.BlueGray
+import com.loc.newsapp.core.ui.theme.BlueGray
 
 @Composable
 fun PageIndicator(
@@ -30,7 +30,7 @@ fun PageIndicator(
 
       Box(
           modifier =
-              Modifier.size(IndicatorSize).clip(CircleShape).background(color = backgroundColor))
+              Modifier.size(INDICATOR_SIZE).clip(CircleShape).background(color = backgroundColor))
     }
   }
 }

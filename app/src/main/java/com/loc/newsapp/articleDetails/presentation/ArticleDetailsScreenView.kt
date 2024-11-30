@@ -23,13 +23,13 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
 import com.loc.newsapp.articleDetails.presentation.component.ArticleDetailsTopBar
+import com.loc.newsapp.core.constant.DimensionConstants.ARTICLE_IMAGE_HEIGHT
+import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.model.Source
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
-import com.loc.newsapp.core.presentation.constant.Dimensions.ArticleImageHeight
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 
 @Composable
 fun ArticleDetailsScreenView(navController: NavController, article: Article) {
@@ -75,19 +75,18 @@ private fun ArticleDetailsScreenViewContent(
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         contentPadding =
-            PaddingValues(
-                top = MediumPadding1, start = ExtraSmallPadding2, end = ExtraSmallPadding2)) {
+            PaddingValues(top = BIG_PADDING, start = SMALL_PADDING, end = SMALL_PADDING)) {
           item {
             AsyncImage(
                 modifier =
                     Modifier.fillMaxWidth()
-                        .height(ArticleImageHeight)
+                        .height(ARTICLE_IMAGE_HEIGHT)
                         .clip(MaterialTheme.shapes.medium),
                 model =
                     ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop)
-            Spacer(modifier = Modifier.height(MediumPadding1))
+            Spacer(modifier = Modifier.height(BIG_PADDING))
             Text(
                 text = state.article.title,
                 style = MaterialTheme.typography.displaySmall,

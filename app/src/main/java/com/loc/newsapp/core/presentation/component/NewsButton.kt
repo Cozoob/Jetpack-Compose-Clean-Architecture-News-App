@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 
 @Composable
 fun NewsButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {

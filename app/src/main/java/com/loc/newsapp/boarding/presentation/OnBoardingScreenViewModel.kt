@@ -10,9 +10,9 @@ import com.loc.newsapp.boarding.domain.model.PageOrder
 import com.loc.newsapp.boarding.domain.useCase.appEntry.AppEntryUseCases
 import com.loc.newsapp.boarding.domain.useCase.page.PageUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingScreenViewModel
@@ -41,10 +41,13 @@ constructor(
   private fun loadPages(orderType: OrderType = OrderType.Ascending) {
     viewModelScope.launch {
       state = state.copy(isLoading = true)
-      // Fake delay to show loading state :)
-      delay(timeMillis = 5000)
+      fakeDelay()
       val result = pageUseCases.getPages(PageOrder.Title(orderType))
       state = state.copy(pageIndex = 0, pages = result, isLoading = false)
     }
+  }
+
+  private suspend fun fakeDelay() {
+    delay(timeMillis = 5000)
   }
 }

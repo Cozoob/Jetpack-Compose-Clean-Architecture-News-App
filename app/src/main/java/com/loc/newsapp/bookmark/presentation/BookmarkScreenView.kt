@@ -12,17 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.loc.newsapp.R
+import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.model.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.model.Source
 import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
 import com.loc.newsapp.core.presentation.component.ArticlesList
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
-import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 
 @Composable
 fun BookmarkScreenView(
@@ -48,12 +47,12 @@ private fun BookmarkScreenViewContent(
       modifier =
           Modifier.fillMaxWidth()
               .statusBarsPadding()
-              .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)) {
+              .padding(top = BIG_PADDING, start = BIG_PADDING, end = BIG_PADDING)) {
         Text(
             text = "Bookmark",
             style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold),
             color = colorResource(id = R.color.text_title))
-        Spacer(modifier = Modifier.height(MediumPadding1))
+        Spacer(modifier = Modifier.height(BIG_PADDING))
         ArticlesList(
             articles = state.articles,
             onClick = { onAction.invoke(BookmarkScreenAction.NavigateToArticleDetails(it)) })
@@ -61,7 +60,6 @@ private fun BookmarkScreenViewContent(
 }
 
 @DayNightInSystemUiPreviews
-@PreviewScreenSizes
 @Composable
 private fun BookmarkScreenView_NoContent_Preview() {
   NewsAppPreviewSurface(
@@ -69,7 +67,6 @@ private fun BookmarkScreenView_NoContent_Preview() {
 }
 
 @DayNightInSystemUiPreviews
-@PreviewScreenSizes
 @Composable
 private fun BookmarkScreenView_ThreeArticles_Preview() {
   NewsAppPreviewSurface(

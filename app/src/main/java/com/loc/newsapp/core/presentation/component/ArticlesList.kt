@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.model.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Source
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding1
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
 import com.loc.newsapp.core.presentation.extension.noItems
 
 @Composable
@@ -29,8 +29,8 @@ fun ArticlesList(
   }
   LazyColumn(
       modifier = modifier.fillMaxSize(),
-      verticalArrangement = Arrangement.spacedBy(MediumPadding1),
-      contentPadding = PaddingValues(all = ExtraSmallPadding2)) {
+      verticalArrangement = Arrangement.spacedBy(BIG_PADDING),
+      contentPadding = PaddingValues(all = SMALL_PADDING)) {
         items(
             count = articles.size,
         ) {
@@ -55,8 +55,8 @@ fun ArticlesList(
     } else {
       LazyColumn(
           modifier = modifier.fillMaxSize(),
-          verticalArrangement = Arrangement.spacedBy(MediumPadding1),
-          contentPadding = PaddingValues(all = ExtraSmallPadding2)) {
+          verticalArrangement = Arrangement.spacedBy(BIG_PADDING),
+          contentPadding = PaddingValues(all = SMALL_PADDING)) {
             items(count = articles.itemCount) { index ->
               articles[index]?.let { article ->
                 ArticleCard(article = article, onClick = { onClick(article) })
@@ -97,9 +97,9 @@ private fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
 
 @Composable
 private fun ShimmerEffect(modifier: Modifier = Modifier) {
-  Column(verticalArrangement = Arrangement.spacedBy(MediumPadding1)) {
+  Column(verticalArrangement = Arrangement.spacedBy(BIG_PADDING)) {
     repeat(times = 10) {
-      ArticleCardShimmerEffect(modifier = Modifier.padding(horizontal = ExtraSmallPadding1))
+      ArticleCardShimmerEffect(modifier = Modifier.padding(horizontal = EXTRA_SMALL_PADDING))
     }
   }
 }

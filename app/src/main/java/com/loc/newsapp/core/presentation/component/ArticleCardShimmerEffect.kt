@@ -14,24 +14,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.loc.newsapp.core.domain.model.DayNightPreviews
-import com.loc.newsapp.core.presentation.constant.Dimensions.ArticleCardSize
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding1
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
+import com.loc.newsapp.core.constant.DimensionConstants.ARTICLE_CARD_SIZE
+import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.extension.shimmerEffect
 
 @Composable
 fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
   Row(modifier = modifier) {
-    Box(modifier = Modifier.size(ArticleCardSize).clip(MaterialTheme.shapes.medium).shimmerEffect())
+    Box(
+        modifier =
+            Modifier.size(ARTICLE_CARD_SIZE).clip(MaterialTheme.shapes.medium).shimmerEffect())
     Column(
         verticalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier.padding(horizontal = ExtraSmallPadding2).height(ArticleCardSize)) {
+        modifier = Modifier.padding(horizontal = SMALL_PADDING).height(ARTICLE_CARD_SIZE)) {
           Box(
               modifier =
                   Modifier.fillMaxWidth()
                       .height(30.dp)
-                      .padding(horizontal = ExtraSmallPadding1)
+                      .padding(horizontal = EXTRA_SMALL_PADDING)
                       .clip(MaterialTheme.shapes.extraSmall)
                       .shimmerEffect())
           Row(verticalAlignment = Alignment.CenterVertically) {
@@ -39,7 +41,7 @@ fun ArticleCardShimmerEffect(modifier: Modifier = Modifier) {
                 modifier =
                     Modifier.fillMaxWidth(fraction = 0.6f)
                         .height(15.dp)
-                        .padding(horizontal = ExtraSmallPadding1)
+                        .padding(horizontal = EXTRA_SMALL_PADDING)
                         .clip(MaterialTheme.shapes.extraSmall)
                         .shimmerEffect())
           }

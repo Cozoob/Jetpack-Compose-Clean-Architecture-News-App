@@ -1,4 +1,4 @@
-package com.loc.newsapp.core.domain.model
+package com.loc.newsapp.core.domain.annotation
 
 import android.content.res.Configuration
 import androidx.compose.ui.tooling.preview.Preview

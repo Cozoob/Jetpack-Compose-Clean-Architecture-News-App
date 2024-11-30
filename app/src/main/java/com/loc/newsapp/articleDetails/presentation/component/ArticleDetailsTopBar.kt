@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import com.loc.newsapp.R
-import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 
 @OptIn(ExperimentalMaterial3Api::class)

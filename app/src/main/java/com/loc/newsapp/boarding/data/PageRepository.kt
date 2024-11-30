@@ -8,16 +8,4 @@ class PageRepository(private val dao: IPageDAO) : IPageRepository {
   override fun getPages(): List<Page> {
     return dao.getPages()
   }
-
-  override suspend fun getPageById(id: Int): Page? {
-    return dao.getPageById(id)
-  }
-
-  override suspend fun insertPage(page: Page) {
-    dao.insertPage(page)
-  }
-
-  override suspend fun deletePage(page: Page) {
-    dao.deletePage(page)
-  }
 }

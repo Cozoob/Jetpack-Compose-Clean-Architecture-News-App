@@ -6,8 +6,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.loc.newsapp.core.domain.model.DayNightPreviews
-import com.loc.newsapp.ui.theme.WhiteGray
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
+import com.loc.newsapp.core.ui.theme.WhiteGray
 
 @Composable
 fun NewsTextButton(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {

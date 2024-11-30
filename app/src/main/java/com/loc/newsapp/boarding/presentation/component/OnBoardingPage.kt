@@ -17,10 +17,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
-import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_BIG_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
-import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding1
-import com.loc.newsapp.core.presentation.constant.Dimensions.MediumPadding2
 
 @Composable
 fun OnBoardingPage(modifier: Modifier = Modifier, page: Page) {
@@ -30,15 +30,15 @@ fun OnBoardingPage(modifier: Modifier = Modifier, page: Page) {
         painter = painterResource(id = page.image),
         contentDescription = null,
         contentScale = ContentScale.Crop)
-    Spacer(modifier = Modifier.height(MediumPadding1))
+    Spacer(modifier = Modifier.height(BIG_PADDING))
     Text(
         text = page.title,
-        modifier = Modifier.padding(horizontal = MediumPadding2),
+        modifier = Modifier.padding(horizontal = EXTRA_BIG_PADDING),
         style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
         color = colorResource(id = R.color.display_small))
     Text(
         text = page.description,
-        modifier = Modifier.padding(horizontal = MediumPadding2),
+        modifier = Modifier.padding(horizontal = EXTRA_BIG_PADDING),
         style = MaterialTheme.typography.bodyMedium,
         color = colorResource(id = R.color.text_medium))
   }

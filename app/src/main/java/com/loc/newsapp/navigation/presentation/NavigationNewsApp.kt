@@ -19,8 +19,8 @@ import com.loc.newsapp.R
 import com.loc.newsapp.articleDetails.presentation.ArticleDetailsScreenView
 import com.loc.newsapp.boarding.presentation.OnBoardingScreenView
 import com.loc.newsapp.bookmark.presentation.BookmarkScreenView
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.model.DayNightPreviews
 import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
 import com.loc.newsapp.core.domain.route.BookmarkScreenRoute
 import com.loc.newsapp.core.domain.route.HomeScreenRoute

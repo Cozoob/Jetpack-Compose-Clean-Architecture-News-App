@@ -1,4 +1,4 @@
-package com.loc.newsapp.ui.theme
+package com.loc.newsapp.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -17,9 +17,6 @@ val Poppins =
                 Font(R.font.poppins_semibold, FontWeight.SemiBold),
             ))
 
-// Set of Material typography styles to start with
-// body is "Text" in the Figma Design
-// label small is xsmall in Figma Design
 val Typography =
     Typography(
         displaySmall =

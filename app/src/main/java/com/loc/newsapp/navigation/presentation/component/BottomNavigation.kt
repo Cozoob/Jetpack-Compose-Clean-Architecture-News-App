@@ -18,10 +18,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
-import com.loc.newsapp.core.domain.model.DayNightPreviews
+import com.loc.newsapp.core.constant.DimensionConstants.ICON_SIZE
+import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
-import com.loc.newsapp.core.presentation.constant.Dimensions.ExtraSmallPadding2
-import com.loc.newsapp.core.presentation.constant.Dimensions.IconSize
 import com.loc.newsapp.navigation.domain.BottomNavigationItem
 
 @Composable
@@ -43,8 +43,8 @@ fun BottomNavigation(
                   Icon(
                       painter = painterResource(id = item.icon),
                       contentDescription = null,
-                      modifier = Modifier.size(IconSize))
-                  Spacer(modifier = Modifier.height(ExtraSmallPadding2))
+                      modifier = Modifier.size(ICON_SIZE))
+                  Spacer(modifier = Modifier.height(SMALL_PADDING))
                   Text(text = item.text, style = MaterialTheme.typography.labelSmall)
                 }
               },
