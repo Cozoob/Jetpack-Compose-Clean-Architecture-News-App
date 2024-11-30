@@ -27,7 +27,7 @@ fun EmptyContent(modifier: Modifier = Modifier) {
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_logo),
+            painter = painterResource(id = R.drawable.icon_logo),
             contentDescription = null,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
             modifier = Modifier.size(120.dp).alpha(alpha = 0.3f))

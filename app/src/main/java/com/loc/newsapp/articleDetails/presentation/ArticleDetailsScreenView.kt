@@ -30,6 +30,7 @@ import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
+import com.loc.newsapp.core.presentation.util.debugPlaceholder
 
 @Composable
 fun ArticleDetailsScreenView(navController: NavController, article: Article) {
@@ -82,7 +83,8 @@ private fun ArticleDetailsScreenViewContent(
                 model =
                     ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
                 contentDescription = null,
-                contentScale = ContentScale.Crop)
+                contentScale = ContentScale.Crop,
+                placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal))
             Spacer(modifier = Modifier.height(BIG_PADDING))
             Text(
                 text = state.article.title,

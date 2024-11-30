@@ -40,9 +40,9 @@ fun NavigationNewsApp(startRoute: IRoute) {
 
   val bottomNavigationItems = remember {
     listOf(
-        BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-        BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
-        BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "Bookmark"))
+        BottomNavigationItem(icon = R.drawable.icon_home, text = "Home"),
+        BottomNavigationItem(icon = R.drawable.icon_search, text = "Search"),
+        BottomNavigationItem(icon = R.drawable.icon_bookmark, text = "Bookmark"))
   }
   val navController = rememberNavController()
   val backStackState = navController.currentBackStackEntryAsState().value

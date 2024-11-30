@@ -67,9 +67,9 @@ private fun BottomNavigation_ThreeItems_Preview() {
         BottomNavigation(
             items =
                 listOf(
-                    BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-                    BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
-                    BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "Bookmark")),
+                    BottomNavigationItem(icon = R.drawable.icon_home, text = "Home"),
+                    BottomNavigationItem(icon = R.drawable.icon_search, text = "Search"),
+                    BottomNavigationItem(icon = R.drawable.icon_bookmark, text = "Bookmark")),
             selectedItem = 0,
             onItemClick = {})
       })

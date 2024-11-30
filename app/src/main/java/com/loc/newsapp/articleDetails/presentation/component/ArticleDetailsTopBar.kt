@@ -37,20 +37,21 @@ fun ArticleDetailsTopBar(
       title = {},
       navigationIcon = {
         IconButton(onClick = onBackClick) {
-          Icon(painter = painterResource(id = R.drawable.ic_back_arrow), contentDescription = null)
+          Icon(
+              painter = painterResource(id = R.drawable.icon_back_arrow), contentDescription = null)
         }
       },
       actions = {
         IconButton(onClick = onBookMarkClick) {
           val bookmarkIcon =
-              if (isBookmarked) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_border
+              if (isBookmarked) R.drawable.icon_bookmark_filled else R.drawable.icon_bookmark_border
           Icon(painter = painterResource(id = bookmarkIcon), contentDescription = null)
         }
         IconButton(onClick = onShareClick) {
           Icon(imageVector = Icons.Default.Share, contentDescription = null)
         }
         IconButton(onClick = onBrowsingClick) {
-          Icon(painter = painterResource(id = R.drawable.ic_network), contentDescription = null)
+          Icon(painter = painterResource(id = R.drawable.icon_network), contentDescription = null)
         }
       })
 }

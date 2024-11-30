@@ -6,6 +6,6 @@ import com.loc.newsapp.R
 data class ErrorScreenState(
     val error: LoadState.Error? = null,
     val message: String = "",
-    val icon: Int = R.drawable.ic_network_error,
+    val icon: Int = R.drawable.icon_network_error,
     val startAnimation: Boolean = false
 )

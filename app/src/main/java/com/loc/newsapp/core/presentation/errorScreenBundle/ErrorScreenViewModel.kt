@@ -47,8 +47,8 @@ class ErrorScreenViewModel(error: LoadState.Error? = null) : ViewModel() {
 
   private fun getIcon(): Int {
     if (state.error == null) {
-      return R.drawable.ic_search_document
+      return R.drawable.icon_search_document
     }
-    return R.drawable.ic_network_error
+    return R.drawable.icon_network_error
   }
 }

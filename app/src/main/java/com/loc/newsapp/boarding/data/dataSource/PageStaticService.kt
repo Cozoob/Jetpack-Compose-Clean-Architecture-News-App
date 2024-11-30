@@ -11,18 +11,18 @@ class PageStaticService : IPageDAO {
             description =
                 "Get the latest news from trusted sources worldwide, delivered straight to your " +
                     "device. Stay updated with breaking stories, local updates, and global events, all in one place.",
-            image = R.drawable.onboarding1),
+            image = R.drawable.image_onboarding_bitcoin),
         Page(
             title = "Personalized News, Just for You",
             description =
                 "Customize your news feed by selecting topics and regions that matter most to you." +
                     " Receive tailored content, from sports to politics, based on your preferences.",
-            image = R.drawable.onboarding2),
+            image = R.drawable.image_onboarding_japan),
         Page(
             title = "Real-Time Alerts & Updates",
             description =
                 "Never miss an important update! Enable notifications to get real-time alerts on" +
                     " major news, live events, and stories that impact you directly.",
-            image = R.drawable.onboarding3))
+            image = R.drawable.image_onboarding_jar))
   }
 }

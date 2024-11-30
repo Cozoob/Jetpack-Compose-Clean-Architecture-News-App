@@ -61,7 +61,7 @@ fun NewsSearchBar(
         readOnly = readOnly,
         leadingIcon = {
           Icon(
-              painter = painterResource(id = R.drawable.ic_search),
+              painter = painterResource(id = R.drawable.icon_search),
               contentDescription = null,
               modifier = Modifier.size(ICON_SIZE),
               tint = colorResource(id = R.color.body))

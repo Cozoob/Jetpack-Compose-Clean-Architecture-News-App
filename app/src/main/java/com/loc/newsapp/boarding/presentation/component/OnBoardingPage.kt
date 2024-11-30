@@ -59,6 +59,6 @@ private fun OnBoardingPage_SamplePage_Preview() {
                             " from trusted sources, ensuring you’re always in the know. " +
                             "Whether it's world news, local stories, or trending topics," +
                             " we've got you covered 24/7.",
-                    image = R.drawable.onboarding1))
+                    image = R.drawable.image_placeholder_horizontal))
       })
 }

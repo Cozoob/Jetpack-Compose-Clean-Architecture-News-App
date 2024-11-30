@@ -32,6 +32,7 @@ import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source
+import com.loc.newsapp.core.presentation.util.debugPlaceholder
 
 @Composable
 fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> Unit) {
@@ -42,7 +43,8 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
         modifier = Modifier.size(ARTICLE_CARD_SIZE).clip(MaterialTheme.shapes.medium),
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(context).data(article.urlToImage).build(),
-        contentDescription = null)
+        contentDescription = null,
+        placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal))
     Column(
         verticalArrangement = Arrangement.SpaceAround,
         modifier = Modifier.padding(horizontal = SMALL_PADDING).height(ARTICLE_CARD_SIZE)) {
@@ -59,7 +61,7 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
                 color = colorResource(id = R.color.body))
             Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))
             Icon(
-                painter = painterResource(id = R.drawable.ic_time),
+                painter = painterResource(id = R.drawable.icon_time),
                 contentDescription = null,
                 modifier = Modifier.size(11.dp))
             Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))

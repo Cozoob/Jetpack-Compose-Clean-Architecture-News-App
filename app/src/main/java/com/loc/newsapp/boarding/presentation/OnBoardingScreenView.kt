@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.loc.newsapp.R
@@ -108,7 +107,6 @@ private fun OnBoardingScreenViewContent(
 }
 
 @DayNightInSystemUiPreviews
-@PreviewScreenSizes
 @Composable
 private fun OnBoardingScreenView_ThreePages_Preview() {
   NewsAppPreviewSurface(
@@ -124,21 +122,21 @@ private fun OnBoardingScreenView_ThreePages_Preview() {
                                     "Get the latest news from trusted sources worldwide, delivered straight " +
                                         "to your device. Stay updated with breaking stories, " +
                                         "local updates, and global events, all in one place.",
-                                image = R.drawable.onboarding1),
+                                image = R.drawable.image_placeholder_vertical),
                             Page(
                                 title = "Stay Informed, Anytime, Anywhere",
                                 description =
                                     "Get the latest news from trusted sources worldwide, delivered " +
                                         "straight to your device. Stay updated with breaking stories," +
                                         " local updates, and global events, all in one place.",
-                                image = R.drawable.onboarding1),
+                                image = R.drawable.image_placeholder_vertical),
                             Page(
                                 title = "Stay Informed, Anytime, Anywhere",
                                 description =
                                     "Get the latest news from trusted sources worldwide, delivered straight " +
                                         "to your device. Stay updated with breaking stories, local updates," +
                                         " and global events, all in one place.",
-                                image = R.drawable.onboarding1)),
+                                image = R.drawable.image_placeholder_vertical)),
                     pageIndex = 0,
                     isLoading = false,
                 ),
@@ -147,7 +145,6 @@ private fun OnBoardingScreenView_ThreePages_Preview() {
 }
 
 @DayNightInSystemUiPreviews
-@PreviewScreenSizes
 @Composable
 private fun OnBoardingScreen_Loading_Preview() {
   NewsAppPreviewSurface(
