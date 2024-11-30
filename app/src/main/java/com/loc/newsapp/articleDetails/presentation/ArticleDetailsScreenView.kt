@@ -82,7 +82,7 @@ private fun ArticleDetailsScreenViewContent(
                 modifier = Modifier.fillMaxWidth().height(248.dp).clip(MaterialTheme.shapes.medium),
                 model =
                     ImageRequest.Builder(context = context).data(state.article.urlToImage).build(),
-                contentDescription = null,
+                contentDescription = state.article.title,
                 contentScale = ContentScale.Crop,
                 placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal))
             Spacer(modifier = Modifier.height(BIG_PADDING))

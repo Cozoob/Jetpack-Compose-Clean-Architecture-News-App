@@ -54,7 +54,7 @@ private fun ErrorScreenViewContent(state: ErrorScreenState) {
       verticalArrangement = Arrangement.Center) {
         Icon(
             painter = painterResource(id = state.icon),
-            contentDescription = null,
+            contentDescription = "Icon with message: " + state.message,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
             modifier = Modifier.size(120.dp).alpha(alphaAnimationValue))
         Text(

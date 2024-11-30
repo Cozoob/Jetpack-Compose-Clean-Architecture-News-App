@@ -38,20 +38,23 @@ fun ArticleDetailsTopBar(
       navigationIcon = {
         IconButton(onClick = onBackClick) {
           Icon(
-              painter = painterResource(id = R.drawable.icon_back_arrow), contentDescription = null)
+              painter = painterResource(id = R.drawable.icon_back_arrow),
+              contentDescription = "Back Arrow Icon")
         }
       },
       actions = {
         IconButton(onClick = onBookMarkClick) {
           val bookmarkIcon =
               if (isBookmarked) R.drawable.icon_bookmark_filled else R.drawable.icon_bookmark_border
-          Icon(painter = painterResource(id = bookmarkIcon), contentDescription = null)
+          Icon(painter = painterResource(id = bookmarkIcon), contentDescription = "Bookmark Icon")
         }
         IconButton(onClick = onShareClick) {
-          Icon(imageVector = Icons.Default.Share, contentDescription = null)
+          Icon(imageVector = Icons.Default.Share, contentDescription = "Share Icon")
         }
         IconButton(onClick = onBrowsingClick) {
-          Icon(painter = painterResource(id = R.drawable.icon_network), contentDescription = null)
+          Icon(
+              painter = painterResource(id = R.drawable.icon_network),
+              contentDescription = "Network Icon")
         }
       })
 }

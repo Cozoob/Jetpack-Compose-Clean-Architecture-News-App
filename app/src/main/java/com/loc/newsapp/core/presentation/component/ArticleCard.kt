@@ -43,7 +43,8 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
         modifier = Modifier.size(ARTICLE_CARD_SIZE).clip(MaterialTheme.shapes.medium),
         contentScale = ContentScale.Crop,
         model = ImageRequest.Builder(context).data(article.urlToImage).build(),
-        contentDescription = null,
+        contentDescription =
+            "Article of title: ${article.title}. Article of description: ${article.description}",
         placeholder = debugPlaceholder(R.drawable.image_placeholder_horizontal))
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -62,7 +63,7 @@ fun ArticleCard(modifier: Modifier = Modifier, article: Article, onClick: () -> 
             Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))
             Icon(
                 painter = painterResource(id = R.drawable.icon_time),
-                contentDescription = null,
+                contentDescription = "Time Icon",
                 modifier = Modifier.size(11.dp))
             Spacer(modifier = Modifier.width(EXTRA_SMALL_PADDING))
             Text(

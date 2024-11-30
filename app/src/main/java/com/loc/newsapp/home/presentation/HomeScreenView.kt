@@ -76,7 +76,7 @@ private fun HomeScreenViewContent(state: HomeScreenState, onAction: (HomeScreenA
     Column(modifier = Modifier.fillMaxSize().padding(top = BIG_PADDING).statusBarsPadding()) {
       Image(
           painter = painterResource(id = R.drawable.icon_logo),
-          contentDescription = null,
+          contentDescription = "Logo Icon",
           modifier = Modifier.width(150.dp).height(30.dp).padding(horizontal = BIG_PADDING))
       Spacer(modifier = Modifier.height(BIG_PADDING))
       NewsSearchBar(

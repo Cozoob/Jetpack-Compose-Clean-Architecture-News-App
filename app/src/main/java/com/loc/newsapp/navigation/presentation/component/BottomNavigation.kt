@@ -42,7 +42,7 @@ fun BottomNavigation(
                 Column(horizontalAlignment = CenterHorizontally) {
                   Icon(
                       painter = painterResource(id = item.icon),
-                      contentDescription = null,
+                      contentDescription = "Bottom Navigation Icon",
                       modifier = Modifier.size(ICON_SIZE))
                   Spacer(modifier = Modifier.height(SMALL_PADDING))
                   Text(text = item.text, style = MaterialTheme.typography.labelSmall)

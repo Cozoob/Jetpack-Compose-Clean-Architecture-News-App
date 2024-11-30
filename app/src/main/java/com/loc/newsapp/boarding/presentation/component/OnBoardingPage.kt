@@ -28,7 +28,8 @@ fun OnBoardingPage(modifier: Modifier = Modifier, page: Page) {
     Image(
         modifier = Modifier.fillMaxWidth().fillMaxHeight(fraction = 0.6f),
         painter = painterResource(id = page.image),
-        contentDescription = null,
+        contentDescription =
+            "Page of title: ${page.title}. Page of description: ${page.description}",
         contentScale = ContentScale.Crop)
     Spacer(modifier = Modifier.height(BIG_PADDING))
     Text(
