@@ -17,6 +17,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ktfmt)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 android {
@@ -126,6 +128,11 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    // *** FIREBASE ***
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 }
 
 detekt {

@@ -2,6 +2,8 @@ package com.loc.newsapp.core.data.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.google.gson.JsonParseException
 import com.loc.newsapp.core.domain.model.Article
 import kotlinx.serialization.SerializationException
@@ -34,14 +36,19 @@ class SearchNewsPagingSource(
           nextKey = if (totalNewsCount == newsResponse.totalResults) null else page + 1,
           prevKey = null)
     } catch (e: HttpException) {
+      Firebase.crashlytics.recordException(e)
       LoadResult.Error(throwable = Throwable("HTTP error occurred: ${e.message}"))
     } catch (e: JsonParseException) {
+      Firebase.crashlytics.recordException(e)
       LoadResult.Error(throwable = Throwable("Failed to parse JSON response: ${e.message}"))
     } catch (e: SerializationException) {
+      Firebase.crashlytics.recordException(e)
       LoadResult.Error(throwable = Throwable("Serialization error: ${e.message}"))
     } catch (e: IllegalArgumentException) {
+      Firebase.crashlytics.recordException(e)
       LoadResult.Error(throwable = Throwable("Invalid arguments: ${e.message}"))
     } catch (e: IllegalStateException) {
+      Firebase.crashlytics.recordException(e)
       LoadResult.Error(throwable = Throwable("Illegal state: ${e.message}"))
     }
   }
