@@ -25,6 +25,7 @@ constructor(
     private set
 
   init {
+    OnBoardingScreenLogger.logScreenView()
     loadPages()
   }
 
@@ -35,7 +36,10 @@ constructor(
   }
 
   private fun logFirstEntry() {
-    viewModelScope.launch { appEntryUseCases.writeAppEntry() }
+    viewModelScope.launch {
+      OnBoardingScreenLogger.logFirstEntry()
+      appEntryUseCases.writeAppEntry()
+    }
   }
 
   private fun loadPages(orderType: OrderType = OrderType.Ascending) {

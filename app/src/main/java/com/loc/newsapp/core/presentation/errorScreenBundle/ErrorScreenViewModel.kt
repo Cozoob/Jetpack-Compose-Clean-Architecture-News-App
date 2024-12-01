@@ -17,6 +17,7 @@ class ErrorScreenViewModel(error: LoadState.Error? = null) : ViewModel() {
     private set
 
   init {
+    ErrorScreenLogger.logScreenView()
     initState()
   }
 

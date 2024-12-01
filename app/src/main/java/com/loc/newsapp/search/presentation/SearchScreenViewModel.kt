@@ -18,6 +18,7 @@ class SearchScreenViewModel @Inject constructor(private val newsUseCase: NewsUse
     private set
 
   init {
+    SearchScreenLogger.logScreenView()
     searchNews()
   }
 
@@ -34,6 +35,7 @@ class SearchScreenViewModel @Inject constructor(private val newsUseCase: NewsUse
   }
 
   private fun searchNews() {
+    SearchScreenLogger.logSearch(state.searchQuery)
     val articles =
         newsUseCase
             .searchNews(searchQuery = state.searchQuery, sources = listOf("bbc-news", "abc-news"))

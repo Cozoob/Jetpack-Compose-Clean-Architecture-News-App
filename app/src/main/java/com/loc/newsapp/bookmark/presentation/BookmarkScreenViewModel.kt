@@ -18,6 +18,7 @@ class BookmarkScreenViewModel @Inject constructor(private val articlesUseCases: 
     private set
 
   init {
+    BookmarkScreenLogger.logScreenView()
     loadArticles()
   }
 

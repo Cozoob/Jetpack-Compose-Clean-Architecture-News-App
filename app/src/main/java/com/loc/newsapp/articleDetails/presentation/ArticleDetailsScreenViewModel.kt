@@ -36,6 +36,7 @@ constructor(
     private set
 
   init {
+    ArticleDetailsScreenLogger.logScreenView()
     checkIsArticleBookmarked()
   }
 
@@ -53,6 +54,7 @@ constructor(
       val article = articlesUseCases.findByUrlArticle(url = article.url)
       val isNotFoundArticleInLocalDatabase = article == null
 
+      ArticleDetailsScreenLogger.logBookmark(isBookmarked = !isNotFoundArticleInLocalDatabase)
       if (isNotFoundArticleInLocalDatabase) {
         upsertArticle()
       } else {
@@ -80,6 +82,7 @@ constructor(
   }
 
   private fun shareArticle(context: Context) {
+    ArticleDetailsScreenLogger.logShare()
     Intent(Intent.ACTION_SEND).also {
       it.putExtra(Intent.EXTRA_TEXT, state.article.url)
       it.type = "text/plain"
@@ -90,6 +93,7 @@ constructor(
   }
 
   private fun browseArticle(context: Context) {
+    ArticleDetailsScreenLogger.logOpenArticleInBrowser()
     Intent(Intent.ACTION_VIEW).also {
       it.data = Uri.parse(state.article.url)
       if (it.resolveActivity(context.packageManager) != null) {
