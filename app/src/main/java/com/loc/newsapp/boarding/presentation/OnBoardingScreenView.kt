@@ -165,7 +165,7 @@ private fun OnBoardingScreenView_ThreePages_Preview() {
 
 @DayNightInSystemUiPreviews
 @Composable
-private fun OnBoardingScreen_Loading_Preview() {
+private fun OnBoardingScreenView_Loading_Preview() {
   NewsAppPreviewSurface(
       content = {
         OnBoardingScreenViewContent(
