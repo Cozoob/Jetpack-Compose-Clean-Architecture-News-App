@@ -8,14 +8,18 @@ appcompat = "1.7.0"
 coilCompose = "2.4.0"
 composeNavigation = "2.8.3"
 converterGson = "2.9.0"
+core = "1.6.1"
 coreKtx = "1.13.1"
 coreSplashscreen = "1.0.1"
+coreTesting = "2.2.0"
 datastorePreferences = "1.1.1"
 detekt = "1.23.7"
+dexmakerMockito = "2.28.4"
 espressoCore = "3.6.1"
 firebaseBom = "33.6.0"
 gmsGoogleServies = "4.4.2"
 googleFirebaseCrashlytics = "3.0.2"
+hamcrestAll = "1.3"
 hiltVersion = "2.51.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -23,24 +27,31 @@ kotlin = "2.0.20"
 kotlinBom = "1.9.20"
 kotlinCompose = "2.0.20"
 kotlinSerialization = "2.0.0"
+kotlinxCoroutinesTest = "1.2.1"
 kspVersion = "2.0.20-1.0.24"
 ktfmt = "0.21.0"
 lifecycleRuntimeKtx = "2.8.6"
 material = "1.12.0"
 material3 = "1.3.0"
+mockitoCore = "2.25.0"
 pagingComposeAndroid = "3.3.2"
 pagingRuntime = "3.3.2"
 retrofit = "2.9.0"
+robolectric = "4.3.1"
 roomVersion = "2.6.1"
 serialization = "1.6.3"
+junitJupiter = "5.8.1"
+truth = "1.0.1"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidxHiltCompiler" }
@@ -60,19 +71,26 @@ androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+dexmaker-mockito = { module = "com.linkedin.dexmaker:dexmaker-mockito", version.ref = "dexmakerMockito" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+hamcrest-all = { module = "org.hamcrest:hamcrest-all", version.ref = "hamcrestAll" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinBom" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization"}
 androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

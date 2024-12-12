@@ -1,5 +1,6 @@
 package com.loc.newsapp.core.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -24,4 +25,6 @@ interface IArticleDao {
 
   @Query("SELECT * FROM Article WHERE title IN (:titles)")
   fun findByTitles(titles: List<String>): Flow<List<Article>>
+
+  @Query("SELECT * FROM Article") fun observeAllArticles(): LiveData<List<Article>>
 }
