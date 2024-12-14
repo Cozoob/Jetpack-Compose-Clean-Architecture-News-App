@@ -4,15 +4,14 @@ import androidx.datastore.core.IOException
 import androidx.paging.PagingSource
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.loc.newsapp.core.data.remote.dto.NewsResponse
+import com.loc.newsapp.core.domain.factory.ArticleTestFactory
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.model.Source
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkStatic
-import io.mockk.slot
 import kotlinx.coroutines.test.runTest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
@@ -29,25 +28,54 @@ class NewsPagingSourceTest {
   private lateinit var result: PagingSource.LoadResult<Int, Article>
 
   @Test
-  fun `Return single article`() = runTest {
+  fun `Return 1 article`() = runTest {
     givenNewsPagingSourceWithNArticles(numberOfArticles = 1)
     whenNewsPagingSourceLoadNElements(loadSize = 10)
     thenResultIsNPages(numberOfPages = 1)
   }
 
   @Test
-  fun `Return single article when two articles have the same title`() = runTest {
+  fun `Return 0 articles`() = runTest {
+    givenNewsPagingSourceWithNArticles(numberOfArticles = 0)
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsNPages(numberOfPages = 0)
+  }
+
+  @Test
+  fun `Return 1 article WHEN 2 articles have the same title`() = runTest {
     givenNewsPagingSourceWithNArticlesOfTheSameTitle(numberOfArticles = 2)
     whenNewsPagingSourceLoadNElements(loadSize = 10)
     thenResultIsNPages(numberOfPages = 1)
   }
 
   @Test
-  fun `Return two articles when two articles do not have the same title`() = runTest {
+  fun `Return 1 article WHEN 10 articles have the same title`() = runTest {
+    givenNewsPagingSourceWithNArticlesOfTheSameTitle(numberOfArticles = 10)
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsNPages(numberOfPages = 1)
+  }
+
+  @Test
+  fun `Return 2 articles WHEN 2 articles do not have the same title`() = runTest {
     givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles = 2)
     whenNewsPagingSourceLoadNElements(loadSize = 10)
     thenResultIsNPages(numberOfPages = 2)
   }
+
+  @Test
+  fun `Return 10 articles WHEN 10 articles do not have the same title`() = runTest {
+    givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles = 10)
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsNPages(numberOfPages = 10)
+  }
+
+  @Test
+  fun `Return 10 articles WHEN 15 articles do not have the same title AND load size is 10`() =
+      runTest {
+        givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles = 10)
+        whenNewsPagingSourceLoadNElements(loadSize = 10)
+        thenResultIsNPages(numberOfPages = 10)
+      }
 
   @Test
   fun `Throw HTTP exception`() = runTest {
@@ -67,11 +95,10 @@ class NewsPagingSourceTest {
     thenResultIsError()
   }
 
-  // TODO maybe i can make it more readable?
   private fun givenNewsPagingSourceWithNArticles(numberOfArticles: Int) {
     val articles = mutableListOf<Article>()
 
-    repeat(numberOfArticles) { articles.add(getSampleArticle()) }
+    repeat(numberOfArticles) { articles.add(ArticleTestFactory.createArticle()) }
 
     coEvery { newsApi.getNews(page = any(), sources = any(), apiKey = any()) } returns
         NewsResponse(articles = articles, status = "ok", totalResults = numberOfArticles)
@@ -79,23 +106,12 @@ class NewsPagingSourceTest {
     newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "sourceTest")
   }
 
-  private suspend fun whenNewsPagingSourceLoadNElements(loadSize: Int) {
-    result =
-        newsPagingSource.load(
-            PagingSource.LoadParams.Refresh(
-                key = 1, loadSize = loadSize, placeholdersEnabled = false))
-  }
-
-  private fun thenResultIsNPages(numberOfPages: Int) {
-    assertTrue(result is PagingSource.LoadResult.Page)
-    val page = result as PagingSource.LoadResult.Page
-    assertEquals(numberOfPages, page.data.size)
-  }
-
   private fun givenNewsPagingSourceWithNArticlesOfTheSameTitle(numberOfArticles: Int) {
     val articles = mutableListOf<Article>()
 
-    repeat(numberOfArticles) { articles.add(getSampleArticle(title = "Wiedźmin")) }
+    repeat(numberOfArticles) {
+      articles.add(ArticleTestFactory.createArticleWithTitle(title = "Wiedźmin"))
+    }
 
     coEvery { newsApi.getNews(page = any(), sources = any(), apiKey = any()) } returns
         NewsResponse(articles = articles, status = "ok", totalResults = numberOfArticles)
@@ -106,7 +122,9 @@ class NewsPagingSourceTest {
   private fun givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles: Int) {
     val articles = mutableListOf<Article>()
 
-    repeat(numberOfArticles) { articles.add(getSampleArticle(title = "Wiedźmin$it")) }
+    repeat(numberOfArticles) {
+      articles.add(ArticleTestFactory.createArticleWithTitle(title = "Wiedźmin$it"))
+    }
 
     coEvery { newsApi.getNews(page = any(), sources = any(), apiKey = any()) } returns
         NewsResponse(articles = articles, status = "ok", totalResults = numberOfArticles)
@@ -125,38 +143,20 @@ class NewsPagingSourceTest {
     newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "sourceTest")
   }
 
+  private suspend fun whenNewsPagingSourceLoadNElements(loadSize: Int) {
+    result =
+        newsPagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = 1, loadSize = loadSize, placeholdersEnabled = false))
+  }
+
+  private fun thenResultIsNPages(numberOfPages: Int) {
+    assertTrue(result is PagingSource.LoadResult.Page)
+    val page = result as PagingSource.LoadResult.Page
+    assertEquals(numberOfPages, page.data.size)
+  }
+
   private fun thenResultIsError() {
     assertTrue(result is PagingSource.LoadResult.Error)
-  }
-
-  // TODO to data (randomization) factory?
-  private fun setNewsApiGetNewsResponse(
-      articles: List<Article>,
-      status: String,
-      totalResults: Int
-  ) {
-    coEvery {
-      newsApi.getNews(
-          page = capture(slot<Int>()),
-          sources = capture(slot<String>()),
-          apiKey = capture(slot<String>()))
-    } returns NewsResponse(articles = articles, status = status, totalResults = totalResults)
-  }
-
-  // TODO to data (randomization) factory?
-  private fun getSampleArticle(
-      title: String = "The Rise of AI: Opportunities and Challenges"
-  ): Article {
-    return Article(
-        author = "John Smith",
-        content =
-            "Recent studies reveal that advancements in AI technology are " +
-                "transforming industries at an unprecedented rate.",
-        description = "An in-depth look at how AI is reshaping the future of work and daily life.",
-        publishedAt = "2024.11.20",
-        source = Source(id = "techcrunch", name = "TechCrunch"),
-        title = title,
-        url = "https://www.techcrunch.com/articles/rise-of-ai",
-        urlToImage = "https://www.techcrunch.com/images/ai-article.jpg")
   }
 }
