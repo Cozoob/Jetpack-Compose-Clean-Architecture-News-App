@@ -3,6 +3,7 @@ package com.loc.newsapp.core.data.remote
 import androidx.datastore.core.IOException
 import androidx.paging.PagingSource
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.gson.JsonParseException
 import com.loc.newsapp.core.data.remote.dto.NewsResponse
 import com.loc.newsapp.core.domain.factory.ArticleTestFactory
 import com.loc.newsapp.core.domain.model.Article
@@ -13,6 +14,7 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.SerializationException
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -78,7 +80,7 @@ class NewsPagingSourceTest {
       }
 
   @Test
-  fun `Throw HTTP exception`() = runTest {
+  fun `Throw HTTPException`() = runTest {
     givenNewsPagingSourceWithException(
         ex =
             HttpException(
@@ -89,8 +91,22 @@ class NewsPagingSourceTest {
   }
 
   @Test
-  fun `Throw IO exception`() = runTest {
+  fun `Throw IOException`() = runTest {
     givenNewsPagingSourceWithException(ex = IOException("error"))
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsError()
+  }
+
+  @Test
+  fun `Throw JsonParseException`() = runTest {
+    givenNewsPagingSourceWithException(ex = JsonParseException("error"))
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsError()
+  }
+
+  @Test
+  fun `Throw SerializationException`() = runTest {
+    givenNewsPagingSourceWithException(ex = SerializationException("error"))
     whenNewsPagingSourceLoadNElements(loadSize = 10)
     thenResultIsError()
   }
