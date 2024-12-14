@@ -25,123 +25,111 @@ import retrofit2.Response
 
 class NewsPagingSourceTest {
   private val newsApi = mockk<INewsApi>()
+  private lateinit var newsPagingSource: NewsPagingSource
+  private lateinit var result: PagingSource.LoadResult<Int, Article>
 
   @Test
   fun `Return single article`() = runTest {
-    // GIVEN
-    coEvery {
-      newsApi.getNews(
-          page = capture(slot<Int>()),
-          sources = capture(slot<String>()),
-          apiKey = capture(slot<String>()))
-    } returns NewsResponse(listOf(getSampleArticle()), status = "ok", totalResults = 1)
-    val newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "source1")
-
-    // WHEN
-    val result =
-        newsPagingSource.load(
-            PagingSource.LoadParams.Refresh(key = 1, loadSize = 10, placeholdersEnabled = false))
-
-    // THEN
-    assertTrue(result is PagingSource.LoadResult.Page)
-    val page = result as PagingSource.LoadResult.Page
-    assertEquals(1, page.data.size)
+    givenNewsPagingSourceWithNArticles(numberOfArticles = 1)
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsNPages(numberOfPages = 1)
   }
 
   @Test
   fun `Return single article when two articles have the same title`() = runTest {
-    // GIVEN
-    setNewsApiGetNewsResponse(
-        articles = listOf(getSampleArticle(), getSampleArticle()), status = "ok", totalResults = 2)
-    val newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "source1")
-
-    // WHEN
-    val result =
-        newsPagingSource.load(
-            PagingSource.LoadParams.Refresh(key = 1, loadSize = 10, placeholdersEnabled = false))
-
-    // THEN
-    assertTrue(result is PagingSource.LoadResult.Page)
-    val page = result as PagingSource.LoadResult.Page
-    assertEquals(1, page.data.size)
+    givenNewsPagingSourceWithNArticlesOfTheSameTitle(numberOfArticles = 2)
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsNPages(numberOfPages = 1)
   }
 
   @Test
   fun `Return two articles when two articles do not have the same title`() = runTest {
-    // GIVEN
-    setNewsApiGetNewsResponse(
-        articles = listOf(getSampleArticle(title = "title1"), getSampleArticle(title = "title2")),
-        status = "ok",
-        totalResults = 2)
-    val newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "source1")
-
-    // WHEN
-    val result =
-        newsPagingSource.load(
-            PagingSource.LoadParams.Refresh(key = 1, loadSize = 10, placeholdersEnabled = false))
-
-    // THEN
-    assertTrue(result is PagingSource.LoadResult.Page)
-    val page = result as PagingSource.LoadResult.Page
-    assertEquals(2, page.data.size)
+    givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles = 2)
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsNPages(numberOfPages = 2)
   }
 
   @Test
   fun `Throw HTTP exception`() = runTest {
-    // GIVEN
-    // setup mockk for firebase crashlytics
-    mockkStatic(FirebaseCrashlytics::class)
-    val firebaseCrashlytics = mockk<FirebaseCrashlytics>()
-    every { FirebaseCrashlytics.getInstance() } returns firebaseCrashlytics
-    every { firebaseCrashlytics.recordException(capture(slot<Throwable>())) } just Runs
-    // setup the rest...
-    coEvery {
-      newsApi.getNews(
-          page = capture(slot<Int>()),
-          sources = capture(slot<String>()),
-          apiKey = capture(slot<String>()))
-    } throws
-        HttpException(
-            Response.error<ResponseBody>(
-                500, "some content".toResponseBody("plain/text".toMediaTypeOrNull())))
-    val newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "source1")
-
-    // WHEN
-    val result =
-        newsPagingSource.load(
-            PagingSource.LoadParams.Refresh(key = 1, loadSize = 10, placeholdersEnabled = false))
-
-    // THEN
-    assertTrue(result is PagingSource.LoadResult.Error)
+    givenNewsPagingSourceWithException(
+        ex =
+            HttpException(
+                Response.error<ResponseBody>(
+                    500, "some content".toResponseBody("plain/text".toMediaTypeOrNull()))))
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsError()
   }
 
   @Test
   fun `Throw IO exception`() = runTest {
-    // GIVEN
-    // setup mockk for firebase crashlytics
+    givenNewsPagingSourceWithException(ex = IOException("error"))
+    whenNewsPagingSourceLoadNElements(loadSize = 10)
+    thenResultIsError()
+  }
+
+  // TODO maybe i can make it more readable?
+  private fun givenNewsPagingSourceWithNArticles(numberOfArticles: Int) {
+    val articles = mutableListOf<Article>()
+
+    repeat(numberOfArticles) { articles.add(getSampleArticle()) }
+
+    coEvery { newsApi.getNews(page = any(), sources = any(), apiKey = any()) } returns
+        NewsResponse(articles = articles, status = "ok", totalResults = numberOfArticles)
+
+    newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "sourceTest")
+  }
+
+  private suspend fun whenNewsPagingSourceLoadNElements(loadSize: Int) {
+    result =
+        newsPagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = 1, loadSize = loadSize, placeholdersEnabled = false))
+  }
+
+  private fun thenResultIsNPages(numberOfPages: Int) {
+    assertTrue(result is PagingSource.LoadResult.Page)
+    val page = result as PagingSource.LoadResult.Page
+    assertEquals(numberOfPages, page.data.size)
+  }
+
+  private fun givenNewsPagingSourceWithNArticlesOfTheSameTitle(numberOfArticles: Int) {
+    val articles = mutableListOf<Article>()
+
+    repeat(numberOfArticles) { articles.add(getSampleArticle(title = "Wiedźmin")) }
+
+    coEvery { newsApi.getNews(page = any(), sources = any(), apiKey = any()) } returns
+        NewsResponse(articles = articles, status = "ok", totalResults = numberOfArticles)
+
+    newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "sourceTest")
+  }
+
+  private fun givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles: Int) {
+    val articles = mutableListOf<Article>()
+
+    repeat(numberOfArticles) { articles.add(getSampleArticle(title = "Wiedźmin$it")) }
+
+    coEvery { newsApi.getNews(page = any(), sources = any(), apiKey = any()) } returns
+        NewsResponse(articles = articles, status = "ok", totalResults = numberOfArticles)
+
+    newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "sourceTest")
+  }
+
+  private fun givenNewsPagingSourceWithException(ex: Throwable) {
     mockkStatic(FirebaseCrashlytics::class)
     val firebaseCrashlytics = mockk<FirebaseCrashlytics>()
     every { FirebaseCrashlytics.getInstance() } returns firebaseCrashlytics
-    every { firebaseCrashlytics.recordException(capture(slot<Throwable>())) } just Runs
-    // setup the rest...
-    coEvery {
-      newsApi.getNews(
-          page = capture(slot<Int>()),
-          sources = capture(slot<String>()),
-          apiKey = capture(slot<String>()))
-    } throws IOException("error")
-    val newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "source1")
+    every { firebaseCrashlytics.recordException(any()) } just Runs
 
-    // WHEN
-    val result =
-        newsPagingSource.load(
-            PagingSource.LoadParams.Refresh(key = 1, loadSize = 10, placeholdersEnabled = false))
+    coEvery { newsApi.getNews(page = any(), sources = any(), apiKey = any()) } throws ex
 
-    // THEN
+    newsPagingSource = NewsPagingSource(newsApi = newsApi, sources = "sourceTest")
+  }
+
+  private fun thenResultIsError() {
     assertTrue(result is PagingSource.LoadResult.Error)
   }
 
-  // TODO to data factory?
+  // TODO to data (randomization) factory?
   private fun setNewsApiGetNewsResponse(
       articles: List<Article>,
       status: String,
@@ -155,7 +143,7 @@ class NewsPagingSourceTest {
     } returns NewsResponse(articles = articles, status = status, totalResults = totalResults)
   }
 
-  // TODO to data factory?
+  // TODO to data (randomization) factory?
   private fun getSampleArticle(
       title: String = "The Rise of AI: Opportunities and Challenges"
   ): Article {
