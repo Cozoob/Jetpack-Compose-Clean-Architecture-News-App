@@ -151,6 +151,10 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.core.testing)
     androidTestImplementation(libs.truth)
+
+    // Shared test for unit and intrumanted tests
+    testImplementation(project(":sharedTest"))
+    androidTestImplementation(project(":sharedTest"))
 }
 
 detekt {

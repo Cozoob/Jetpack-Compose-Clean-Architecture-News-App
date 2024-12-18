@@ -1,12 +1,13 @@
 package com.loc.newsapp.core.data.remote
 
 import androidx.datastore.core.IOException
-import androidx.paging.PagingSource
+import androidx.paging.PagingSource.LoadParams
+import androidx.paging.PagingSource.LoadResult
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.gson.JsonParseException
 import com.loc.newsapp.core.data.remote.dto.NewsResponse
-import com.loc.newsapp.core.domain.factory.ArticleTestFactory
 import com.loc.newsapp.core.domain.model.Article
+import com.loc.newsapp.sharedtest.core.domain.ArticleTestFactory
 import io.mockk.Runs
 import io.mockk.coEvery
 import io.mockk.every
@@ -27,7 +28,7 @@ import retrofit2.Response
 class NewsPagingSourceTest {
   private val newsApi = mockk<INewsApi>()
   private lateinit var newsPagingSource: NewsPagingSource
-  private lateinit var result: PagingSource.LoadResult<Int, Article>
+  private lateinit var result: LoadResult<Int, Article>
 
   @Test
   fun `Return 1 article`() = runTest {
@@ -74,18 +75,20 @@ class NewsPagingSourceTest {
   @Test
   fun `Return 10 articles WHEN 15 articles do not have the same title AND load size is 10`() =
       runTest {
-        givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles = 10)
+        givenNewsPagingSourceWithNArticlesOfDifferentTitle(numberOfArticles = 15)
         whenNewsPagingSourceLoadNElements(loadSize = 10)
         thenResultIsNPages(numberOfPages = 10)
       }
 
   @Test
   fun `Throw HTTPException`() = runTest {
-    givenNewsPagingSourceWithException(
-        ex =
-            HttpException(
-                Response.error<ResponseBody>(
-                    500, "some content".toResponseBody("plain/text".toMediaTypeOrNull()))))
+    val ex =
+      HttpException(
+        Response.error<ResponseBody>(
+          500, "some content".toResponseBody("plain/text".toMediaTypeOrNull())
+        )
+      )
+    givenNewsPagingSourceWithException(ex = ex)
     whenNewsPagingSourceLoadNElements(loadSize = 10)
     thenResultIsError()
   }
@@ -162,17 +165,17 @@ class NewsPagingSourceTest {
   private suspend fun whenNewsPagingSourceLoadNElements(loadSize: Int) {
     result =
         newsPagingSource.load(
-            PagingSource.LoadParams.Refresh(
-                key = 1, loadSize = loadSize, placeholdersEnabled = false))
+          LoadParams.Refresh(key = 1, loadSize = loadSize, placeholdersEnabled = false)
+        )
   }
 
   private fun thenResultIsNPages(numberOfPages: Int) {
-    assertTrue(result is PagingSource.LoadResult.Page)
-    val page = result as PagingSource.LoadResult.Page
+    assertTrue(result is LoadResult.Page)
+    val page = result as LoadResult.Page
     assertEquals(numberOfPages, page.data.size)
   }
 
   private fun thenResultIsError() {
-    assertTrue(result is PagingSource.LoadResult.Error)
+    assertTrue(result is LoadResult.Error)
   }
 }

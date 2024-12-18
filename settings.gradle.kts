@@ -18,4 +18,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "NewsApp"
 include(":app")
+include(":sharedTest")
  

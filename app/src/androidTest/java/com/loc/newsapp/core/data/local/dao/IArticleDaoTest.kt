@@ -10,7 +10,7 @@ import com.google.common.truth.Truth.assertThat
 import com.loc.newsapp.core.data.local.LocalDatabase
 import com.loc.newsapp.core.data.local.NewsTypeConvertor
 import com.loc.newsapp.core.domain.model.Article
-import com.loc.newsapp.core.domain.model.Source
+import com.loc.newsapp.sharedtest.core.domain.ArticleTestFactory
 import com.loc.newsapp.util.getOrAwaitValue
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -30,7 +30,7 @@ class IArticleDaoTest {
 
   @Before
   fun setup() {
-    article = getSampleArticle()
+    article = ArticleTestFactory.createArticle()
     database =
         Room.inMemoryDatabaseBuilder(
                 ApplicationProvider.getApplicationContext(), LocalDatabase::class.java)
@@ -57,8 +57,8 @@ class IArticleDaoTest {
 
   @Test
   fun getAllArticle() = runTest {
-    val article1 = getSampleArticle()
-    val article2 = getSampleArticle()
+    val article1 = ArticleTestFactory.createArticle()
+    val article2 = ArticleTestFactory.createArticle()
     dao.upsert(article)
     dao.upsert(article1)
     dao.upsert(article2)
@@ -124,19 +124,5 @@ class IArticleDaoTest {
 
     val allArticles = dao.observeAllArticles().getOrAwaitValue()
     assertThat(allArticles).contains(article)
-  }
-
-  private fun getSampleArticle(): Article {
-    return Article(
-        author = "John Smith",
-        content =
-            "Recent studies reveal that advancements in AI technology are " +
-                "transforming industries at an unprecedented rate.",
-        description = "An in-depth look at how AI is reshaping the future of work and daily life.",
-        publishedAt = "2024.11.20",
-        source = Source(id = "techcrunch", name = "TechCrunch"),
-        title = "The Rise of AI: Opportunities and Challenges",
-        url = "https://www.techcrunch.com/articles/rise-of-ai",
-        urlToImage = "https://www.techcrunch.com/images/ai-article.jpg")
   }
 }
