@@ -32,7 +32,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.loc.newsapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -151,6 +151,8 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.core.testing)
     androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.hilt.android.test)
+    kspAndroidTest(libs.hilt.compiler)
 
     // Shared test for unit and intrumanted tests
     testImplementation(project(":sharedTest"))

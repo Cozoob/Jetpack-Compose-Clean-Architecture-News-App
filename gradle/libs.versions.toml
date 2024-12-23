@@ -76,6 +76,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 hamcrest-all = { module = "org.hamcrest:hamcrest-all", version.ref = "hamcrestAll" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
+hilt-android-test = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hiltVersion" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinBom" }

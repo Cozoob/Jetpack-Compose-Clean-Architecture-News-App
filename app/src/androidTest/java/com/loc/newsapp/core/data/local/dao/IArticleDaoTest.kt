@@ -2,41 +2,37 @@ package com.loc.newsapp.core.data.local.dao
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.asLiveData
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.loc.newsapp.core.data.local.LocalDatabase
-import com.loc.newsapp.core.data.local.NewsTypeConvertor
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.sharedtest.core.domain.ArticleTestFactory
 import com.loc.newsapp.util.getOrAwaitValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import javax.inject.Inject
+import javax.inject.Named
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 @SmallTest
+@HiltAndroidTest
 class IArticleDaoTest {
+  @get:Rule var hiltRule = HiltAndroidRule(this)
+
   @get:Rule var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-  private lateinit var database: LocalDatabase
+  @Inject @Named("TestDatabase") lateinit var database: LocalDatabase
   private lateinit var dao: IArticleDao
   private lateinit var article: Article
 
   @Before
   fun setup() {
+    hiltRule.inject()
     article = ArticleTestFactory.createArticle()
-    database =
-        Room.inMemoryDatabaseBuilder(
-                ApplicationProvider.getApplicationContext(), LocalDatabase::class.java)
-            .addTypeConverter(NewsTypeConvertor())
-            .allowMainThreadQueries()
-            .build()
     dao = database.articleDao()
   }
 
