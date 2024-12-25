@@ -17,8 +17,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
-import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.EXTRA_BIG_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 

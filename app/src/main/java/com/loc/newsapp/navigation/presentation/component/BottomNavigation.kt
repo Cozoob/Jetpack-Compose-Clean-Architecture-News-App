@@ -19,8 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.loc.newsapp.R
-import com.loc.newsapp.core.constant.DimensionConstants.ICON_SIZE
-import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.ICON_SIZE
+import com.loc.newsapp.core.constant.DimensionConstant.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.navigation.domain.BottomNavigationItem

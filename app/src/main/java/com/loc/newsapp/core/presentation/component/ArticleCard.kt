@@ -27,9 +27,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
-import com.loc.newsapp.core.constant.DimensionConstants.ARTICLE_CARD_SIZE
-import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_SMALL_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.ARTICLE_CARD_SIZE
+import com.loc.newsapp.core.constant.DimensionConstant.EXTRA_SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source

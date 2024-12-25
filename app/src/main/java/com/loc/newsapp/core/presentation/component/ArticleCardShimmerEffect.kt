@@ -14,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.loc.newsapp.core.constant.DimensionConstants.ARTICLE_CARD_SIZE
-import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_SMALL_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.ARTICLE_CARD_SIZE
+import com.loc.newsapp.core.constant.DimensionConstant.EXTRA_SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.presentation.extension.shimmerEffect
 

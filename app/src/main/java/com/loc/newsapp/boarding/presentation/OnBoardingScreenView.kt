@@ -24,7 +24,7 @@ import com.loc.newsapp.R
 import com.loc.newsapp.boarding.domain.model.Page
 import com.loc.newsapp.boarding.presentation.component.OnBoardingPage
 import com.loc.newsapp.boarding.presentation.component.PageIndicator
-import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.EXTRA_BIG_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.presentation.component.NewsAppPreviewSurface
 import com.loc.newsapp.core.presentation.component.NewsButton

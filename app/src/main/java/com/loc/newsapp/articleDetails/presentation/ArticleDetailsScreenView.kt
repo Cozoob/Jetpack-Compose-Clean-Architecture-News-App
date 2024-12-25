@@ -25,8 +25,8 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.loc.newsapp.R
 import com.loc.newsapp.articleDetails.presentation.component.ArticleDetailsTopBar
-import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source

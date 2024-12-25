@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.route.ArticleDetailsRoute
 import com.loc.newsapp.core.presentation.component.ArticlesList

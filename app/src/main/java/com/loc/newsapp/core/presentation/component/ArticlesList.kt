@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.loc.newsapp.core.constant.DimensionConstants.BIG_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.EXTRA_SMALL_PADDING
-import com.loc.newsapp.core.constant.DimensionConstants.SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.BIG_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.EXTRA_SMALL_PADDING
+import com.loc.newsapp.core.constant.DimensionConstant.SMALL_PADDING
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source

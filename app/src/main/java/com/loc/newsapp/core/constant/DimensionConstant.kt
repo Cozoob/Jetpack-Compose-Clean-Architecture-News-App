@@ -2,7 +2,7 @@ package com.loc.newsapp.core.constant
 
 import androidx.compose.ui.unit.dp
 
-object DimensionConstants {
+object DimensionConstant {
   val EXTRA_SMALL_PADDING = 3.dp
   val SMALL_PADDING = 6.dp
   val BIG_PADDING = 24.dp
