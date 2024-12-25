@@ -2,7 +2,6 @@ package com.loc.newsapp.core.data.local.dao
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.asLiveData
-import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.loc.newsapp.core.data.local.LocalDatabase
 import com.loc.newsapp.core.domain.model.Article
@@ -18,7 +17,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@SmallTest
 @HiltAndroidTest
 class IArticleDaoTest {
   @get:Rule var hiltRule = HiltAndroidRule(this)

@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -17,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.loc.newsapp.R
 import com.loc.newsapp.core.constant.DimensionConstant.BIG_PADDING
+import com.loc.newsapp.core.constant.TestTag
 import com.loc.newsapp.core.domain.annotation.DayNightInSystemUiPreviews
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source
@@ -55,6 +57,7 @@ private fun BookmarkScreenViewContent(
             color = colorResource(id = R.color.text_title))
         Spacer(modifier = Modifier.height(BIG_PADDING))
         ArticlesList(
+            modifier = Modifier.testTag(TestTag.ARTICLES_LIST),
             articles = state.articles,
             onClick = { onAction.invoke(BookmarkScreenAction.NavigateToArticleDetails(it)) })
       }

@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.loc.newsapp.core.constant.DimensionConstant.BIG_PADDING
 import com.loc.newsapp.core.constant.DimensionConstant.EXTRA_SMALL_PADDING
 import com.loc.newsapp.core.constant.DimensionConstant.SMALL_PADDING
+import com.loc.newsapp.core.constant.TestTag
 import com.loc.newsapp.core.domain.annotation.DayNightPreviews
 import com.loc.newsapp.core.domain.model.Article
 import com.loc.newsapp.core.domain.model.Source
@@ -59,7 +61,10 @@ fun ArticlesList(
           contentPadding = PaddingValues(all = SMALL_PADDING)) {
             items(count = articles.itemCount) { index ->
               articles[index]?.let { article ->
-                ArticleCard(article = article, onClick = { onClick(article) })
+                ArticleCard(
+                    modifier = Modifier.testTag(TestTag.ARTICLE_CARD),
+                    article = article,
+                    onClick = { onClick(article) })
               }
             }
           }
