@@ -27,12 +27,11 @@ class IArticleDaoTest {
 
   @Inject @Named("TestDatabase") lateinit var database: LocalDatabase
   private lateinit var dao: IArticleDao
-  private lateinit var article: Article
+  private val articles = mutableListOf<Article>()
 
   @Before
   fun setup() {
     hiltRule.inject()
-    article = ArticleTestFactory.createArticle()
     dao = database.articleDao()
   }
 
@@ -42,83 +41,141 @@ class IArticleDaoTest {
   }
 
   @Test
-  fun deleteArticle() = runTest {
-    dao.upsert(article)
+  fun delete_1_Article() = runTest {
+    givenNArticlesInDatabase(numberOfArticles = 1)
+    whenDeleteArticles(articles = articles)
+    thenDatabaseShouldNotHaveArticles(articles = articles)
+  }
 
-    dao.delete(article)
+  @Test
+  fun get_3_Articles() = runTest {
+    givenNArticlesInDatabase(numberOfArticles = 3)
+    whenDeleteArticles(articles = articles)
+    thenDatabaseShouldNotHaveArticles(articles = articles)
+  }
 
+  @Test
+  fun find_1_Article_By_Url() = runTest {
+    givenNArticlesInDatabase(numberOfArticles = 1)
+    val foundArticle = whenFindArticleByUrl(url = articles[0].url)
+    thenArticleIsNotNull(article = foundArticle)
+  }
+
+  @Test
+  fun not_Found_Article_By_Url_WHEN_Empty_Database() = runTest {
+    val notSavedArticle = givenArticleNotSavedInDatabase()
+    val foundArticle = whenFindArticleByUrl(url = notSavedArticle.url)
+    thenArticleIsNull(article = foundArticle)
+  }
+
+  @Test
+  fun found_1_Article_By_Urls() = runTest {
+    givenNArticlesInDatabase(numberOfArticles = 1)
+    val foundArticles = whenFindArticlesByUrls(articles = articles)
+    thenArticlesHasSizeN(articles = foundArticles, size = 1)
+  }
+
+  @Test
+  fun not_Found_Article_By_Urls_WHEN_Empty_Database() = runTest {
+    givenNArticlesNotInDatabase(numberOfArticles = 1)
+    val foundArticles = whenFindArticlesByUrls(articles = articles)
+    thenArticlesHasSizeN(articles = foundArticles, size = 0)
+  }
+
+  @Test
+  fun found_1_Article_By_Titles() = runTest {
+    givenNArticlesInDatabase(numberOfArticles = 1)
+    val foundArticles = whenFindArticlesByTitles(articles = articles)
+    thenArticlesHasSizeN(articles = foundArticles, size = 1)
+  }
+
+  @Test
+  fun not_Found_Article_By_Titles_WHEN_Empty_Database() = runTest {
+    givenNArticlesNotInDatabase(numberOfArticles = 1)
+    val foundArticles = whenFindArticlesByTitles(articles = articles)
+    thenArticlesHasSizeN(articles = foundArticles, size = 0)
+  }
+
+  @Test
+  fun upsert_1_Article() = runTest {
+    givenNArticlesInDatabase(numberOfArticles = 1)
+    val allArticles = whenObserveAllArticles()
+    thenArticlesContainsOtherArticles(articles = allArticles, otherArticles = articles)
+  }
+
+  private suspend fun givenNArticlesInDatabase(numberOfArticles: Int) {
+    articles.clear()
+
+    repeat(numberOfArticles) {
+      val article = ArticleTestFactory.createArticle()
+      articles.add(article)
+      dao.upsert(article)
+    }
+  }
+
+  private fun givenArticleNotSavedInDatabase(): Article {
+    return ArticleTestFactory.createArticle()
+  }
+
+  private fun givenNArticlesNotInDatabase(numberOfArticles: Int) {
+    articles.clear()
+
+    repeat(numberOfArticles) {
+      val article = ArticleTestFactory.createArticle()
+      articles.add(article)
+    }
+  }
+
+  private suspend fun whenDeleteArticles(articles: MutableList<Article>) {
+    repeat(articles.size) {
+      val article = articles[it]
+      dao.delete(article)
+    }
+  }
+
+  private suspend fun whenFindArticleByUrl(url: String): Article? {
+    return dao.findByUrl(url)
+  }
+
+  private fun whenObserveAllArticles(): List<Article> {
+    return dao.observeAllArticles().getOrAwaitValue()
+  }
+
+  private fun whenFindArticlesByUrls(articles: List<Article>): List<Article> {
+    val urls: MutableList<String> = mutableListOf()
+    repeat(articles.size) { urls.add(articles[it].url) }
+
+    return dao.findByUrls(urls = urls).asLiveData().getOrAwaitValue()
+  }
+
+  private fun whenFindArticlesByTitles(articles: List<Article>): List<Article> {
+    val titles: MutableList<String> = mutableListOf()
+    repeat(articles.size) { titles.add(articles[it].title) }
+
+    return dao.findByTitles(titles = titles).asLiveData().getOrAwaitValue()
+  }
+
+  private fun thenDatabaseShouldNotHaveArticles(articles: MutableList<Article>) {
     val allArticles = dao.observeAllArticles().getOrAwaitValue()
-    assertThat(allArticles).doesNotContain(article)
+    repeat(articles.size) { assertThat(allArticles).doesNotContain(articles[it]) }
   }
 
-  @Test
-  fun getAllArticle() = runTest {
-    val article1 = ArticleTestFactory.createArticle()
-    val article2 = ArticleTestFactory.createArticle()
-    dao.upsert(article)
-    dao.upsert(article1)
-    dao.upsert(article2)
-
-    val articles = dao.getAll().asLiveData().getOrAwaitValue()
-
-    assertThat(articles).contains(article)
-    assertThat(articles).contains(article1)
-    assertThat(articles).contains(article2)
+  private fun thenArticleIsNotNull(article: Article?) {
+    assertThat(article).isNotNull()
   }
 
-  @Test
-  fun foundByUrl() = runTest {
-    dao.upsert(article)
-
-    val foundArticle = dao.findByUrl(article.url)
-
-    assertThat(foundArticle).isNotNull()
+  private fun thenArticlesContainsOtherArticles(
+      articles: List<Article>,
+      otherArticles: List<Article>
+  ) {
+    assertThat(articles).containsExactlyElementsIn(otherArticles)
   }
 
-  @Test
-  fun notFoundByUrl() = runTest {
-    val foundArticle = dao.findByUrl(article.url)
-
-    assertThat(foundArticle).isNull()
+  private fun thenArticleIsNull(article: Article?) {
+    assertThat(article).isNull()
   }
 
-  @Test
-  fun foundByUrls() = runTest {
-    dao.upsert(article)
-
-    val foundArticles = dao.findByUrls(listOf(article.url)).asLiveData().getOrAwaitValue()
-
-    assertThat(foundArticles).hasSize(1)
-  }
-
-  @Test
-  fun notFoundByUrls() = runTest {
-    val foundArticles = dao.findByUrls(listOf(article.url)).asLiveData().getOrAwaitValue()
-
-    assertThat(foundArticles).hasSize(0)
-  }
-
-  @Test
-  fun foundByTitles() = runTest {
-    dao.upsert(article)
-
-    val foundArticles = dao.findByTitles(listOf(article.title)).asLiveData().getOrAwaitValue()
-
-    assertThat(foundArticles).hasSize(1)
-  }
-
-  @Test
-  fun notFoundByTitles() = runTest {
-    val foundArticles = dao.findByTitles(listOf(article.title)).asLiveData().getOrAwaitValue()
-
-    assertThat(foundArticles).hasSize(0)
-  }
-
-  @Test
-  fun upsertArticle() = runTest {
-    dao.upsert(article)
-
-    val allArticles = dao.observeAllArticles().getOrAwaitValue()
-    assertThat(allArticles).contains(article)
+  private fun thenArticlesHasSizeN(articles: List<Article>, size: Int) {
+    assertThat(articles).hasSize(size)
   }
 }

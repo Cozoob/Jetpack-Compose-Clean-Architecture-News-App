@@ -61,6 +61,11 @@ android {
         buildConfig = true
     }
 
+    packaging {
+        resources.excludes.add("META-INF/LICENSE.md")
+        resources.excludes.add("META-INF/LICENSE-notice.md")
+    }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.1.1"
     }
@@ -145,12 +150,15 @@ dependencies {
 
     // Instrumented Unit Tests
     androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.androidx.ui.test.junit4.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.core.testing)
     androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.mockk.agent)
     androidTestImplementation(libs.hilt.android.test)
     kspAndroidTest(libs.hilt.compiler)
 
