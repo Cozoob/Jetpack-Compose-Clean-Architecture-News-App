@@ -1,5 +1,6 @@
 package com.loc.newsapp.bookmark.presentation
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,7 +43,8 @@ fun BookmarkScreenView(
 }
 
 @Composable
-private fun BookmarkScreenViewContent(
+@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+fun BookmarkScreenViewContent(
     state: BookmarkScreenState,
     onAction: (BookmarkScreenAction) -> Unit
 ) {

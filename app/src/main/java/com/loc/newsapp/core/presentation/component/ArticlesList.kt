@@ -37,7 +37,10 @@ fun ArticlesList(
             count = articles.size,
         ) {
           articles[it].let { article ->
-            ArticleCard(article = article, onClick = { onClick(article) })
+            ArticleCard(
+                modifier = Modifier.testTag(TestTag.ARTICLE_CARD),
+                article = article,
+                onClick = { onClick(article) })
           }
         }
       }
