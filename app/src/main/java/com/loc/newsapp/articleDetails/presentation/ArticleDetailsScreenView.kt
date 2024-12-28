@@ -35,11 +35,13 @@ import com.loc.newsapp.core.presentation.util.debugPlaceholder
 
 @Composable
 fun ArticleDetailsScreenView(navController: NavController, article: Article) {
+  val context = LocalContext.current
   val viewModel =
       hiltViewModel(
           creationCallback = {
               factory: ArticleDetailsScreenViewModel.ArticleDetailsScreenViewModelFactory ->
-            factory.create(article)
+            factory.create(
+                article = article, articleDetailsScreenIntent = ArticleDetailsScreenIntent(context))
           })
 
   ArticleDetailsScreenViewContent(
@@ -68,12 +70,8 @@ private fun ArticleDetailsScreenViewContent(
     }
     ArticleDetailsTopBar(
         isBookmarked = state.isArticleBookmarked,
-        onBrowsingClick = {
-          onAction.invoke(ArticleDetailsScreenAction.BrowseArticle(context = context))
-        },
-        onShareClick = {
-          onAction.invoke(ArticleDetailsScreenAction.ShareArticle(context = context))
-        },
+        onBrowsingClick = { onAction.invoke(ArticleDetailsScreenAction.BrowseArticle) },
+        onShareClick = { onAction.invoke(ArticleDetailsScreenAction.ShareArticle) },
         onBookMarkClick = { onAction.invoke(ArticleDetailsScreenAction.SaveArticle) },
         onBackClick = { onAction.invoke(ArticleDetailsScreenAction.NavigateUp) })
     LazyColumn(

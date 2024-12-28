@@ -1,8 +1,5 @@
 package com.loc.newsapp.articleDetails.presentation
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -24,12 +21,16 @@ class ArticleDetailsScreenViewModel
 @AssistedInject
 constructor(
     @Assisted private val article: Article,
+    @Assisted private val articleDetailsScreenIntent: ArticleDetailsScreenIntent,
     private val articlesUseCases: ArticlesUseCases
 ) : ViewModel() {
 
   @AssistedFactory
   interface ArticleDetailsScreenViewModelFactory {
-    fun create(article: Article): ArticleDetailsScreenViewModel
+    fun create(
+        article: Article,
+        articleDetailsScreenIntent: ArticleDetailsScreenIntent
+    ): ArticleDetailsScreenViewModel
   }
 
   var state by mutableStateOf(ArticleDetailsScreenState(article = article))
@@ -43,8 +44,8 @@ constructor(
   fun onAction(action: ArticleDetailsScreenAction) {
     when (action) {
       is ArticleDetailsScreenAction.SaveArticle -> saveArticle()
-      is ArticleDetailsScreenAction.ShareArticle -> shareArticle(action.context)
-      is ArticleDetailsScreenAction.BrowseArticle -> browseArticle(action.context)
+      is ArticleDetailsScreenAction.ShareArticle -> shareArticle()
+      is ArticleDetailsScreenAction.BrowseArticle -> browseArticle()
       else -> Unit
     }
   }
@@ -81,25 +82,14 @@ constructor(
                 UiText.StringResource(resId = R.string.articleDetails_toastMessage_articleRemoved))
   }
 
-  private fun shareArticle(context: Context) {
+  private fun shareArticle() {
     ArticleDetailsScreenLogger.logShare()
-    Intent(Intent.ACTION_SEND).also {
-      it.putExtra(Intent.EXTRA_TEXT, state.article.url)
-      it.type = "text/plain"
-      if (it.resolveActivity(context.packageManager) != null) {
-        context.startActivity(it)
-      }
-    }
+    articleDetailsScreenIntent.actionSend(state.article.url)
   }
 
-  private fun browseArticle(context: Context) {
+  private fun browseArticle() {
     ArticleDetailsScreenLogger.logOpenArticleInBrowser()
-    Intent(Intent.ACTION_VIEW).also {
-      it.data = Uri.parse(state.article.url)
-      if (it.resolveActivity(context.packageManager) != null) {
-        context.startActivity(it)
-      }
-    }
+    articleDetailsScreenIntent.actionView(state.article.url)
   }
 
   private fun checkIsArticleBookmarked() {
